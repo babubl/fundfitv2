@@ -95,7 +95,7 @@ for (const l of SEBI_LISTINGS) {
     const rows = parseSebiListing(html, l.type);
     console.log(`SEBI ${l.type}s: ${rows.length} rows, ${rows.filter((r) => r.mf).length} MF-related`);
     fresh.push(...rows);
-    sources['sebi' + l.type] = { ok: true, bytes: html.length, rows: rows.length, mf: rows.filter((r) => r.mf).length, sample: html.length && !rows.length ? html.slice(0, 300) : undefined };
+    sources['sebi' + l.type] = { ok: true, bytes: html.length, rows: rows.length, mf: rows.filter((r) => r.mf).length, debug: rows.length ? undefined : { hasLinks: html.includes('legal/circulars'), ajax: [...new Set(html.match(/[\w\/.-]*ajax[\w\/.-]*/gi) || [])].slice(0, 10), tableSnippet: (html.match(/<table[\s\S]{0,1200}/i) || [''])[0] } };
   } else { sources['sebi' + l.type] = { ok: false }; problems.push('SEBI ' + l.type + 's page unreachable'); }
 }
 if (fresh.length) {
