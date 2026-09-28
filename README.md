@@ -6,14 +6,17 @@ A free, static site on GitHub Pages. No backend, no API keys, no tracking. A Git
 
 ## What's in it
 
+FundFit is for everyday investors who want to understand mutual funds and pick the kind of fund that suits them. It's built like a game.
+
 | Section | What it does |
 |---|---|
-| Learn | Mutual fund basics from the NISM Series V-A workbook: structure, NAV, plans, options, SIP/SWP/STP, costs, riskometer, documents, tax basics. Plus the latest MF circulars from SEBI. |
-| Categories | All 40 categories under SEBI's circular of 26 Feb 2026 (13 equity, 17 debt, 7 hybrid, 1 life cycle, 2 other), the 2 discontinued solution-oriented ones, and where the NISM workbook (2017 framework) differs. Other scheme types (FMP, TMF, IDF, REMF, SIF strategies and more). Each category links to the AMCs offering it. |
-| Find my fit | Asks purpose, SIP or lumpsum and amount, horizon, risk comfort, emergency fund, and tax regime (for tax saving). Suggests a primary category with reasons, up to 3 alternatives, and warnings. Then shows the AMCs offering it and their schemes. |
-| AMCs | Every AMC in AMFI's daily NAV file and the categories it offers. |
+| Learn | 10 bite-size lessons on a path, each ending with a one-question check. |
+| Fund types | All 40 SEBI fund types as collectible cards, each with its key rule, time horizon and risk. Open a card to see which fund houses offer it and their schemes. |
+| Play | Fund Match: 10 quick questions (real-life situations, "name that fund", myth or fact) with a review of every answer. |
+| Find my fit | Purpose, SIP or lumpsum and amount, horizon, risk comfort, emergency fund and tax regime lead to a suggested fund type, alternatives, warnings, and the fund houses that offer it. |
+| Fund houses | Every AMC in AMFI's daily file, with a strip showing which fund types it offers. |
 
-English and Tanglish toggle. Copyable share card.
+XP, levels, badges and a daily streak are saved only in the visitor's browser. English and Tanglish toggle. Fonts are self-hosted (Bricolage Grotesque and Figtree, SIL Open Font License), so the site makes no third-party requests.
 
 ## How the live data works
 
@@ -64,4 +67,3 @@ To preview on your computer, run a local server from this folder (`python3 -m ht
 - AMFI NAV file: https://www.amfiindia.com/spages/NAVAll.txt
 - SEBI RSS: https://www.sebi.gov.in/sebirss.xml
 - SEBI circular HO/24/13/15(2)2026-IMD-RAC4/I/5764/2026, 26 Feb 2026: Categorisation and Rationalisation of Mutual Fund Schemes
-- NISM Series V-A: Mutual Fund Distributors workbook, Nov 2025 edition

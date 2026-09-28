@@ -2,371 +2,455 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FundFit – Mutual fund categories, made clear</title>
-<meta name="description" content="Learn how SEBI classifies mutual funds, find the category that fits your money and timeline, and see which AMCs offer it. Data refreshed daily from AMFI and SEBI.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 24a12 12 0 0 1 24 0' fill='none' stroke='%23e8a317' stroke-width='5'/%3E%3Cpath d='M16 24 23 12' stroke='%230e3b43' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FundFit – Mutual funds, minus the jargon</title>
+<meta name="description" content="Learn mutual funds in 10 bite-size lessons, collect all 40 fund types, play Fund Match, and find the kind of fund that suits your money. Live data from AMFI and SEBI.">
+<meta name="theme-color" content="#3d2bff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233d2bff'/%3E%3Cpath d='M7 22a9 9 0 0 1 18 0' fill='none' stroke='%23ffb400' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M16 22l5-8' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Bricolage";src:url(fonts/bricolage.woff2) format("woff2-variations");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fonts/figtree.woff2) format("woff2-variations");font-weight:300 900;font-display:swap}
+
 :root{
-  --bg:#f5f7f6; --surface:#ffffff; --sunk:#eaeeec; --ink:#10282c; --ink-2:#44585b; --ink-3:#6b7c7e;
-  --line:#d5dddb; --brand:#0e3b43; --brand-ink:#ffffff; --accent:#e8a317; --accent-soft:#fbf0d6;
-  --good:#1f7a4d; --warn:#b85c00; --warn-soft:#fdf0e3; --bad:#b3261e;
+  --bg:#eef1f8; --bg-2:#e3e7f3; --card:#ffffff; --ink:#121430; --ink-2:#474c6b; --ink-3:#7b8099; --line:#d9deec;
+  --brand:#3d2bff; --brand-dk:#2a1cc4; --brand-soft:#e7e4ff; --on-brand:#ffffff;
+  --gold:#ffb400; --gold-dk:#d18e00; --gold-soft:#fff3d1;
+  --ok:#12b76a; --ok-dk:#0b8a4f; --ok-soft:#dcf7ea; --no:#f0445a; --no-dk:#c02338; --no-soft:#fde3e7;
+  --eq:#ff6a3d; --debt:#1a8fe3; --hyb:#c243d6; --life:#10b39a; --oth:#6f7891; --sol:#a7adbf;
   --r1:#2e7d32; --r2:#8bc34a; --r3:#f2c200; --r4:#f39200; --r5:#e4572e; --r6:#a51c1c;
-  --radius:10px; --focus:0 0 0 3px color-mix(in srgb,var(--accent) 55%,transparent);
+  --radius:18px; --shadow:0 1px 0 rgba(18,20,48,.04), 0 8px 24px -12px rgba(18,20,48,.18);
+  --display:"Bricolage",ui-sans-serif,system-ui,sans-serif; --body:"Figtree",ui-sans-serif,system-ui,sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e1719; --surface:#152225; --sunk:#1c2c2f; --ink:#e6eeec; --ink-2:#b3c2c0; --ink-3:#8a9c9a;
-    --line:#2a3d40; --brand:#7fc4c9; --brand-ink:#0e1719; --accent:#f2b634; --accent-soft:#3a2f14;
-    --good:#6cc596; --warn:#f0a35c; --warn-soft:#3a2915; --bad:#f08b83; color-scheme:dark;
-  }
-}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0f24; --bg-2:#15183a; --card:#1a1d42; --ink:#eef0ff; --ink-2:#b9bcdb; --ink-3:#8c90b3; --line:#2c3063;
+  --brand:#7a6cff; --brand-dk:#5443ea; --brand-soft:#26245a; --on-brand:#ffffff;
+  --gold-soft:#3b3014; --ok-soft:#10352a; --no-soft:#3d1621; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e1719; --surface:#152225; --sunk:#1c2c2f; --ink:#e6eeec; --ink-2:#b3c2c0; --ink-3:#8a9c9a;
-  --line:#2a3d40; --brand:#7fc4c9; --brand-ink:#0e1719; --accent:#f2b634; --accent-soft:#3a2f14;
-  --good:#6cc596; --warn:#f0a35c; --warn-soft:#3a2915; --bad:#f08b83; color-scheme:dark;
-}
+  --bg:#0d0f24; --bg-2:#15183a; --card:#1a1d42; --ink:#eef0ff; --ink-2:#b9bcdb; --ink-3:#8c90b3; --line:#2c3063;
+  --brand:#7a6cff; --brand-dk:#5443ea; --brand-soft:#26245a; --on-brand:#ffffff;
+  --gold-soft:#3b3014; --ok-soft:#10352a; --no-soft:#3d1621; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}
+
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;font-variant-numeric:tabular-nums}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--body);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em;font-weight:760;font-variation-settings:"opsz" 96}
+h1{font-size:clamp(2.3rem,6vw,3.8rem);letter-spacing:-.035em;font-weight:800}
+h2{font-size:clamp(1.7rem,4vw,2.4rem)}
+h3{font-size:1.25rem;letter-spacing:-.01em}
+p{margin:.45em 0}
 a{color:var(--brand)}
-button,input,select{font:inherit;color:inherit}
-:focus-visible{outline:none;box-shadow:var(--focus);border-radius:6px}
-.wrap{max-width:900px;margin:0 auto;padding:0 16px}
-h1,h2,h3{line-height:1.2;letter-spacing:-.01em;margin:0}
-h2{font-size:1.6rem;font-weight:750}
-h3{font-size:1.1rem;font-weight:700}
-p{margin:.5em 0}
-.muted{color:var(--ink-2)} .small{font-size:.875rem} .tiny{font-size:.8rem;color:var(--ink-3)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+.narrow{max-width:760px}
+.muted{color:var(--ink-2)} .dim{color:var(--ink-3)} .small{font-size:.9rem} .tiny{font-size:.8rem;color:var(--ink-3)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 
-/* Top bar */
-header.top{background:var(--brand);color:var(--brand-ink)}
-.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem;text-decoration:none;color:inherit}
-.logo svg{width:30px;height:22px}
-.top .spacer{flex:1}
-.langbtn{border:1px solid color-mix(in srgb,var(--brand-ink) 40%,transparent);background:transparent;border-radius:999px;padding:4px 10px;cursor:pointer;font-size:.85rem}
-nav.tabs{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-nav.tabs a{padding:12px 12px 10px;text-decoration:none;color:var(--ink-2);font-weight:600;white-space:nowrap;border-bottom:3px solid transparent}
-nav.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.03em}
+.logo i{width:32px;height:32px;border-radius:10px;background:var(--brand);display:grid;place-items:center}
+.logo svg{width:22px;height:16px}
+.nav{display:flex;gap:2px;margin-left:10px}
+.nav a{padding:8px 12px;border-radius:12px;text-decoration:none;color:var(--ink-2);font-weight:650;font-size:.95rem}
+.nav a[aria-current="page"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.spacer{flex:1}
+.player{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.streak{font-weight:800;display:flex;align-items:center;gap:3px;font-size:.95rem}
+.streak svg{width:18px;height:18px}
+.xpchip{white-space:nowrap;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 4px;font-weight:750;font-size:.88rem}
+.lvl{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#3a2800;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.9rem}
+.xpbar{width:70px;height:7px;border-radius:9px;background:var(--bg-2);overflow:hidden}
+.xpbar b{display:block;height:100%;background:var(--gold);border-radius:9px;transition:width .5s}
+.lang{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 11px;font-weight:700;font-size:.8rem}
+@media (max-width:880px){.nav{display:none}.xpbar{display:none}}
 
-/* Data strip */
-.datastrip{font-size:.82rem;color:var(--ink-2);padding:8px 0;display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--good);display:inline-block;margin-right:6px}
-.dot.stale{background:var(--warn)} .dot.none{background:var(--ink-3)}
+/* Bottom tab bar (mobile) */
+.tabbar{display:none}
+@media (max-width:880px){
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--ink-3);font-size:.7rem;font-weight:700;padding:4px 0;border-radius:12px}
+  .tabbar svg{width:24px;height:24px}
+  .tabbar a[aria-current="page"]{color:var(--brand)}
+  body{padding-bottom:78px}
+}
 
-main{padding:8px 0 48px}
-section.view{display:none} section.view.on{display:block}
-.lede{font-size:1.1rem;color:var(--ink-2);max-width:62ch}
+/* ---------- Buttons ---------- */
+.btn{--c:var(--brand);--d:var(--brand-dk);--t:var(--on-brand);display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:16px;padding:14px 22px;font-weight:800;font-size:1rem;letter-spacing:.01em;text-decoration:none;background:var(--c);color:var(--t);box-shadow:0 5px 0 var(--d);transform:translateY(0);transition:transform .08s,box-shadow .08s;user-select:none}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--d)}
+.btn.gold{--c:var(--gold);--d:var(--gold-dk);--t:#3a2800}
+.btn.ok{--c:var(--ok);--d:var(--ok-dk);--t:#fff}
+.btn.plain{--c:var(--card);--d:var(--line);--t:var(--ink);border:2px solid var(--line)}
+.btn.small{padding:9px 14px;font-size:.9rem;border-radius:12px;box-shadow:0 4px 0 var(--d)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.btn.block{width:100%}
+.linkbtn{background:none;border:0;padding:0;color:var(--brand);font-weight:750;text-decoration:underline;text-underline-offset:3px}
 
-/* Hero */
-.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:center;padding:24px 0 8px}
-.hero h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:800;letter-spacing:-.02em}
-.hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-@media (max-width:700px){.hero{grid-template-columns:1fr}.hero .meter-demo{max-width:260px}}
+/* ---------- Generic ---------- */
+main{padding:22px 0 60px}
+.view{display:none;animation:none}
+.view.on{display:block}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line)}
+.pad{padding:22px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:6px 0 18px}
+.section-head p{max-width:60ch;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:800;background:var(--bg-2);color:var(--ink-2)}
+.pill.new{background:var(--gold-soft);color:#8a5a00}
+.pill.closed{background:var(--no-soft);color:var(--no-dk)}
+.bar{height:10px;border-radius:9px;background:var(--bg-2);overflow:hidden}
+.bar b{display:block;height:100%;border-radius:9px;background:var(--brand);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.g-equity{--g:var(--eq)} .g-debt{--g:var(--debt)} .g-hybrid{--g:var(--hyb)} .g-lifecycle{--g:var(--life)} .g-other{--g:var(--oth)} .g-solution{--g:var(--sol)}
 
-.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:var(--radius);padding:11px 18px;font-weight:700;cursor:pointer;text-decoration:none}
-.btn.primary{background:var(--accent);color:#1b1400}
-.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
-.btn.link{background:none;padding:6px 0;color:var(--brand);text-decoration:underline}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+/* ---------- Home ---------- */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center;padding:18px 0 28px}
+.hero h1 .swap{color:var(--brand)}
+.hero .lede{font-size:1.2rem;color:var(--ink-2);max-width:34ch;margin:16px 0 22px}
+.hero-art{position:relative}
+.stack{position:relative;height:340px}
+.stack .fcard{position:absolute;width:210px;left:50%;top:50%;box-shadow:0 20px 40px -18px rgba(18,20,48,.45)}
+.stack .fcard:nth-child(1){transform:translate(-95%,-52%) rotate(-10deg)}
+.stack .fcard:nth-child(2){transform:translate(-50%,-56%) rotate(1deg);z-index:2}
+.stack .fcard:nth-child(3){transform:translate(-5%,-48%) rotate(11deg)}
+@media (max-width:880px){.hero{grid-template-columns:1fr}.stack{height:260px;transform:scale(.8)}}
+.quests{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:980px){.quests{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.quests{gap:10px}.quest{padding:14px;gap:8px}.quest .ic{width:38px;height:38px;border-radius:12px}.quest .ic svg{width:22px;height:22px}.quest h3{font-size:1.02rem}.quest>.muted{display:none}}
+.quest{display:flex;flex-direction:column;gap:10px;padding:18px;text-decoration:none;color:var(--ink);transition:transform .15s}
+.quest:hover{transform:translateY(-3px)}
+.quest .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff}
+.quest .ic svg{width:26px;height:26px}
+.quest h3{font-size:1.2rem}
+.quest .bar{height:8px;margin-top:auto}
+.livebar{display:flex;gap:10px 24px;flex-wrap:wrap;align-items:center;margin:26px 0 12px;font-size:.92rem;color:var(--ink-2)}
+.livebar b{color:var(--ink);font-family:var(--display);font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-right:4px}
+.pulse{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.news{display:grid;gap:0}
+.news a{display:block;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:650}
+.news a:hover{color:var(--brand)}
+.news .tt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news .tiny{font-weight:500}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start}
+@media (max-width:820px){.twocol{grid-template-columns:1fr}}
 
-/* Learn */
-.topics{margin-top:18px;border-top:1px solid var(--line)}
-details.topic{border-bottom:1px solid var(--line)}
-details.topic>summary{list-style:none;cursor:pointer;padding:14px 4px;display:flex;justify-content:space-between;gap:12px;font-weight:650;font-size:1.03rem}
-details.topic>summary::-webkit-details-marker{display:none}
-details.topic>summary::after{content:"+";color:var(--ink-3);font-weight:400;font-size:1.3rem;line-height:1}
-details.topic[open]>summary::after{content:"–"}
-.topic .body{padding:0 4px 16px;max-width:70ch}
-.topic .body ul{padding-left:1.2em;margin:.4em 0}
-.topic .body li{margin:.25em 0}
-.kv{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:.6em 0}
-.kv dt{font-weight:650} .kv dd{margin:0;color:var(--ink-2)}
+/* ---------- Learn path ---------- */
+.path{position:relative;display:grid;gap:18px;margin:10px auto 0;max-width:560px;padding:10px 0 20px}
+.node{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:center;background:none;border:0;text-align:left;padding:0;color:var(--ink)}
+.node:not(.done):not(.next) b{color:var(--ink-2)}
+.node:nth-child(4n+2){transform:translateX(34px)} .node:nth-child(4n+3){transform:translateX(58px)} .node:nth-child(4n+4){transform:translateX(24px)}
+.node .disc{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:3px solid var(--line);box-shadow:0 6px 0 var(--line);font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--ink-3);transition:transform .1s}
+.node:active .disc{transform:translateY(4px);box-shadow:0 2px 0 var(--line)}
+.node.next .disc{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 6px 0 var(--brand-dk)}
+.node.done .disc{background:var(--gold);border-color:var(--gold);color:#3a2800;box-shadow:0 6px 0 var(--gold-dk)}
+.node .disc svg{width:34px;height:34px}
+.node b{display:block;font-family:var(--display);font-size:1.15rem;font-weight:750;letter-spacing:-.01em}
+.node span{color:var(--ink-3);font-size:.88rem}
+.lesson{max-width:720px;margin:0 auto}
+.lesson .body{font-size:1.08rem}
+.lesson .body h3{margin:22px 0 6px}
+.lesson .body ul{padding-left:1.2em} .lesson .body li{margin:.3em 0}
+.big-idea{background:var(--brand-soft);border-radius:16px;padding:16px 18px;margin:16px 0;font-weight:650}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:10px 18px;margin:12px 0}
+.kv dt{font-weight:800} .kv dd{margin:0;color:var(--ink-2)}
+@media (max-width:520px){.kv{grid-template-columns:1fr;gap:2px}.kv dd{margin-bottom:10px}}
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.who div{border-radius:14px;padding:12px;background:var(--bg-2)}
+.who b{display:block;font-family:var(--display)}
+.who .you{grid-column:1/-1;background:var(--gold-soft)}
+@media (max-width:560px){.who{grid-template-columns:1fr 1fr}}
 
-/* Structure diagram */
-.structure{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
-.structure div{border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)}
-.structure b{display:block}
-.structure .inv{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent)}
-@media (max-width:560px){.structure{grid-template-columns:1fr 1fr}}
+/* ---------- Quiz UI (lesson check + Fund Match) ---------- */
+.qcard{padding:24px}
+.qhead{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.qhead .bar{flex:1;height:14px}
+.qhead .bar b{background:var(--ok)}
+.combo{font-family:var(--display);font-weight:800;color:var(--gold-dk);min-width:3.5em;text-align:right}
+.qkind{font-size:.8rem;font-weight:800;color:var(--brand);margin-bottom:6px}
+.qtext{font-family:var(--display);font-size:clamp(1.3rem,3vw,1.7rem);font-weight:720;letter-spacing:-.015em;line-height:1.2;margin-bottom:18px}
+.answers{display:grid;gap:10px}
+.answers.two{grid-template-columns:1fr 1fr}
+.ans{display:flex;align-items:center;gap:12px;text-align:left;border:2px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--card);box-shadow:0 4px 0 var(--line);font-weight:650;transition:transform .06s}
+.ans:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.ans kbd{font:800 .8rem var(--body);width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;color:var(--ink-3);flex:none}
+.ans.sel{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 4px 0 var(--brand)}
+.ans.right{border-color:var(--ok);background:var(--ok-soft);box-shadow:0 4px 0 var(--ok)}
+.ans.wrong{border-color:var(--no);background:var(--no-soft);box-shadow:0 4px 0 var(--no)}
+.feedback{margin-top:16px;border-radius:16px;padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.good{background:var(--ok-soft)} .feedback.bad{background:var(--no-soft)}
+.feedback b{display:block;font-family:var(--display);font-size:1.15rem;margin-bottom:2px}
+.feedback.good b{color:var(--ok-dk)} .feedback.bad b{color:var(--no-dk)}
+.qfoot{display:flex;justify-content:flex-end;margin-top:18px}
+.score-big{font-family:var(--display);font-size:5rem;font-weight:800;letter-spacing:-.05em;line-height:1}
+.dots{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.dots i{width:14px;height:14px;border-radius:5px;background:var(--bg-2)}
+.dots i.r{background:var(--ok)} .dots i.w{background:var(--no)}
 
-/* Counts table */
-.counts{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:.95rem}
-.counts th,.counts td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
-.counts th{font-size:.82rem;color:var(--ink-3);font-weight:600}
-.counts td.num{font-weight:750;font-size:1.05rem}
-.counts tr.total td{border-bottom:0;font-weight:750}
+/* ---------- Fund cards (deck) ---------- */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-weight:750;font-size:.9rem;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--g,var(--ink-3))}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.search{width:100%;max-width:360px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 14px;font-weight:600}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.fcard{position:relative;display:flex;flex-direction:column;border-radius:20px;background:var(--card);border:2px solid color-mix(in srgb,var(--g) 45%,var(--line));overflow:hidden;text-align:left;padding:0;min-height:236px;transition:transform .15s,box-shadow .15s}
+button.fcard:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 18px 30px -18px color-mix(in srgb,var(--g) 70%,black)}
+.fcard .top{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--g);color:#fff;padding:9px 14px;font-size:.75rem;font-weight:800}
+.fcard .top .ic{width:18px;height:18px;display:inline-flex;margin-right:6px;vertical-align:-4px}
+.fcard .top .ic svg{width:18px;height:18px}
+.fcard .top .num{font-family:var(--display);opacity:.85}
+.fcard .mid{padding:14px 16px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.fcard .stat{font-family:var(--display);font-weight:800;font-size:2.1rem;line-height:1;letter-spacing:-.035em;color:var(--g)}
+.fcard .statl{font-size:.8rem;font-weight:700;color:var(--ink-3);margin-bottom:8px}
+.fcard .name{font-family:var(--display);font-weight:780;font-size:1.18rem;letter-spacing:-.015em;line-height:1.12;color:var(--ink)}
+.fcard .good{font-size:.84rem;color:var(--ink-2)}
+.fcard .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 16px 14px;font-size:.76rem;color:var(--ink-3);font-weight:700}
+.meterline{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:auto;padding-top:10px}
+.meterline i{height:7px;border-radius:3px;background:var(--bg-2)}
+.fcard.locked .top{background:var(--card);color:var(--g);border-bottom:2px dashed color-mix(in srgb,var(--g) 40%,var(--line))}
+.fcard.locked .stat{opacity:.9}
+.fcard .got{width:22px;height:22px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:#3a2800;flex:none}
+.fcard .got svg{width:14px;height:14px}
+.fcard .lock{display:none;font-size:.72rem;font-weight:800;color:var(--ink-3)}
+.fcard.locked .got{display:none}
+.fcard.locked .lock{display:inline}
+.grouptitle{display:flex;align-items:baseline;gap:4px 12px;margin:34px 0 14px;flex-wrap:wrap}
+.grouptitle h3{font-size:1.6rem}
+.grouptitle .dot{width:14px;height:14px;border-radius:5px;background:var(--g);align-self:center}
+.grouptitle p{flex:1 0 100%;margin:0;color:var(--ink-2)}
 
-/* Category list */
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
-.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;cursor:pointer;font-weight:600;font-size:.88rem}
-.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
-.search{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--surface)}
-.grouphead{margin:26px 0 6px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.grouphead h3{font-size:1.25rem}
-.catrow{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:22px 1fr auto;gap:4px 12px;align-items:start}
-.catrow .band{width:10px;height:100%;min-height:36px;border-radius:4px}
-.catrow .name{font-weight:700}
-.catrow .rule{color:var(--ink-2);font-size:.93rem}
-.catrow .side{text-align:right;font-size:.85rem;color:var(--ink-3);white-space:nowrap}
-.catrow .more{grid-column:2/-1;font-size:.9rem;color:var(--ink-2)}
-.badge{display:inline-block;font-size:.72rem;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:2px}
-.badge.new{background:var(--accent-soft);color:var(--warn)}
-.badge.gone{background:var(--sunk);color:var(--bad)}
-.badge.was{background:var(--sunk);color:var(--ink-2);font-weight:600}
-.nism{font-size:.85rem;color:var(--ink-3);margin-top:2px}
-.nism::before{content:"NISM workbook: ";font-weight:700;color:var(--ink-2)}
-.offerbtn{border:0;background:none;color:var(--brand);text-decoration:underline;cursor:pointer;padding:0;font-size:.88rem}
+/* ---------- Sheet (modal) ---------- */
+.scrim{position:fixed;inset:0;background:rgba(10,12,30,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+.scrim.on{display:flex}
+.sheet{width:min(720px,100%);max-height:88vh;overflow:auto;border-radius:24px;background:var(--card);box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.sheet .shead{position:sticky;top:0;z-index:2;background:var(--g,var(--brand));color:#fff;padding:20px 22px 22px}
+.sheet .shead h2{color:#fff}
+.sheet .close{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:12px;border:0;background:rgba(255,255,255,.22);color:#fff;font-size:1.3rem;font-weight:800}
+.sheet .sbody{padding:20px 22px 26px}
+@media (max-width:640px){.scrim{align-items:flex-end;padding:0}.sheet{border-radius:24px 24px 0 0;max-height:92vh}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.facts div{background:var(--bg-2);border-radius:14px;padding:12px}
+.facts small{display:block;font-size:.75rem;font-weight:800;color:var(--ink-3)}
+.facts b{font-family:var(--display);font-size:1.05rem}
+@media (max-width:520px){.facts{grid-template-columns:1fr 1fr}}
 
-/* Wizard */
-.wiz{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:20px;margin-top:16px}
-.progress{height:6px;background:var(--sunk);border-radius:99px;overflow:hidden;margin-bottom:18px}
-.progress i{display:block;height:100%;background:var(--accent);transition:width .3s}
-.q h3{font-size:1.3rem;margin-bottom:4px}
-.opts{display:grid;gap:8px;margin:14px 0}
-.opts.two{grid-template-columns:1fr 1fr}
-.opt{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px 14px;cursor:pointer;background:var(--bg);text-align:left}
-.opt:hover{border-color:var(--ink-3)}
-.opt[aria-pressed="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--surface))}
-.opt b{display:block}
-.opt span{font-size:.88rem;color:var(--ink-2)}
-.amount{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:var(--radius);padding:4px 12px;background:var(--bg);max-width:320px}
-.amount input{border:0;background:transparent;padding:8px 0;width:100%;font-size:1.2rem;font-weight:700}
-.amount input:focus{outline:none}
-.wiznav{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
-
-/* Result */
-.result{margin-top:18px}
-.fitcard{display:grid;grid-template-columns:1fr 220px;gap:20px;align-items:center;background:var(--surface);border:2px solid var(--brand);border-radius:14px;padding:20px}
-.fitcard h2{font-size:1.7rem;margin:4px 0}
-@media (max-width:640px){.fitcard{grid-template-columns:1fr}.fitcard .meterbox{max-width:240px}}
-.label{font-size:.85rem;color:var(--ink-3);font-weight:600}
-.reasons{padding-left:1.2em;margin:.6em 0}
-.note{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
-.note.warn{border-color:var(--warn);background:var(--warn-soft)}
-.note b{display:block}
-.alts{margin:18px 0}
-.alt{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center}
-.alt .band{width:10px;height:36px;border-radius:4px}
-.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-
-/* Offerings */
-.panel{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:18px;margin-top:18px}
-.amclist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;margin:12px 0}
-.amcbtn{display:flex;justify-content:space-between;gap:8px;border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 12px;cursor:pointer;text-align:left;font-weight:600;font-size:.92rem}
-.amcbtn[aria-pressed="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--surface))}
-.amcbtn small{color:var(--ink-3);font-weight:500}
-.schemes{margin-top:10px}
-.scheme{border-top:1px solid var(--line);padding:12px 0}
-.scheme .sn{font-weight:700}
-.scheme .meta{font-size:.86rem;color:var(--ink-2);display:flex;gap:4px 14px;flex-wrap:wrap;margin-top:2px}
-.checklist{font-size:.9rem;color:var(--ink-2);columns:2;column-gap:24px;padding-left:1.1em}
+/* AMC pickers & schemes */
+.amcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0}
+.amcbtn{display:flex;justify-content:space-between;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:10px 12px;font-weight:700;font-size:.9rem;text-align:left}
+.amcbtn small{color:var(--ink-3);font-weight:700}
+.amctools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.amctools .search{max-width:260px;padding:8px 12px}
+.amcbtn[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.scheme{border-top:1px solid var(--line);padding:14px 0}
+.scheme .sn{font-weight:800}
+.scheme .meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.87rem;color:var(--ink-2);margin-top:3px}
+.checklist{columns:2;column-gap:28px;padding-left:1.1em;font-size:.92rem;color:var(--ink-2)}
 @media (max-width:560px){.checklist{columns:1}}
 
-/* Riskometer */
-.meter{width:100%;height:auto;display:block}
-.meter .needle{transform-origin:100px 100px;transition:transform .9s cubic-bezier(.3,1.3,.5,1)}
-@media (prefers-reduced-motion:reduce){.meter .needle{transition:none}.progress i{transition:none}}
-.meterlabel{text-align:center;font-weight:750;margin-top:-4px}
+/* ---------- Fit wizard ---------- */
+.wiz{max-width:760px;margin:0 auto}
+.step-dots{display:flex;gap:6px;margin-bottom:18px}
+.step-dots i{flex:1;height:8px;border-radius:9px;background:var(--bg-2)}
+.step-dots i.on{background:var(--brand)}
+.opts{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.opts.one{grid-template-columns:1fr}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;border:2px solid var(--line);border-radius:18px;padding:16px;background:var(--card);box-shadow:0 5px 0 var(--line);transition:transform .06s}
+.opt:active{transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
+.opt .emo{font-size:1.8rem;width:48px;height:48px;border-radius:14px;background:var(--bg-2);display:grid;place-items:center;flex:none}
+.opt b{display:block;font-size:1.05rem}
+.opt span{color:var(--ink-2);font-size:.9rem}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 5px 0 var(--brand)}
+.amountbox{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:16px;padding:6px 16px;background:var(--card);max-width:340px;margin-top:14px}
+.amountbox span{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--ink-3)}
+.amountbox input{border:0;background:none;width:100%;font-family:var(--display);font-size:1.8rem;font-weight:800;padding:8px 0;letter-spacing:-.02em}
+.amountbox input:focus{outline:none}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.quick button{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-weight:750;font-size:.85rem}
+.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px}
+.timeline button{border:2px solid var(--line);background:var(--card);border-radius:14px;padding:14px 4px;font-weight:800;box-shadow:0 4px 0 var(--line);display:flex;flex-direction:column;align-items:center;gap:2px}
+.timeline button small{font-weight:600;color:var(--ink-3);font-size:.72rem}
+.timeline button[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff;box-shadow:0 4px 0 var(--brand-dk)}
+.timeline button[aria-pressed="true"] small{color:#e5e1ff}
+@media (max-width:640px){.timeline{grid-template-columns:repeat(4,1fr)}}
+.wiznav{display:flex;justify-content:space-between;margin-top:24px;gap:12px}
 
-/* SEBI feed */
-.feed{list-style:none;padding:0;margin:8px 0}
-.feed li{border-top:1px solid var(--line);padding:10px 0}
-.feed a{font-weight:600;text-decoration:none;color:var(--ink)}
-.feed a:hover{text-decoration:underline}
+.reveal{display:grid;grid-template-columns:1fr 280px;gap:18px;align-items:stretch}
+@media (max-width:760px){.reveal{grid-template-columns:1fr}}
+.yourfit{padding:0;overflow:hidden}
+.yourfit .top{background:var(--g);color:#fff;padding:22px 24px}
+.yourfit .top h2{color:#fff;font-size:clamp(2rem,5vw,2.8rem);margin-top:4px}
+.yourfit .inner{padding:18px 24px 22px}
+.meterbox{padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.meter{width:100%;max-width:240px;height:auto;display:block}
+.meter .needle{transform-origin:100px 100px;transition:transform 1.1s cubic-bezier(.3,1.5,.5,1)}
+.meterlabel{font-family:var(--display);font-weight:800;font-size:1.25rem;margin-top:2px}
+.note{border-radius:16px;padding:14px 16px;margin:12px 0;background:var(--brand-soft);display:flex;gap:12px}
+.note.warn{background:var(--gold-soft)}
+.note .ni{font-size:1.3rem;line-height:1.2}
+.reasons{padding-left:1.1em;margin:6px 0}
+.reasons li{margin:.35em 0}
+.alts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+@media (max-width:760px){.alts{grid-template-columns:1fr}}
+.alt{padding:16px;border-left:6px solid var(--g);display:flex;flex-direction:column;gap:6px}
+.alt b{font-family:var(--display);font-size:1.1rem}
 
-.empty{border:1.5px dashed var(--line);border-radius:12px;padding:18px;color:var(--ink-2);background:var(--surface)}
+/* ---------- AMC list ---------- */
+.amcrow{display:grid;grid-template-columns:1fr 250px 70px;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--line);background:none;border-left:0;border-right:0;border-bottom:0;text-align:left;width:100%}
+.amcrow:hover{background:color-mix(in srgb,var(--brand) 6%,var(--card))}
+.amcrow b{font-weight:800}
+.strip{display:grid;grid-template-columns:repeat(40,1fr);gap:2px}
+.strip i{height:18px;border-radius:2px;background:var(--bg-2)}
+.strip i.on{background:var(--g)}
+.legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.82rem;color:var(--ink-2);padding:12px 18px;align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;background:var(--g)}
+@media (max-width:640px){.amcrow{grid-template-columns:1fr 60px}.amcrow .strip{grid-column:1/-1;grid-row:2}}
+.catchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.catchip{border:2px solid color-mix(in srgb,var(--g) 50%,var(--line));background:var(--card);border-radius:12px;padding:6px 11px;font-weight:700;font-size:.85rem}
+.catchip[aria-pressed="true"]{background:var(--g);color:#fff;border-color:var(--g)}
 
-footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.85rem;color:var(--ink-2)}
-footer .warning{font-weight:700;color:var(--ink)}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
-.toast.show{opacity:1}
+/* ---------- Profile / badges ---------- */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.bdg{padding:16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.bdg .medal{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:1.9rem;background:var(--bg-2);filter:grayscale(1);opacity:.5}
+.bdg.on .medal{background:var(--gold-soft);filter:none;opacity:1;box-shadow:inset 0 0 0 3px var(--gold)}
+.bdg b{font-family:var(--display);font-size:1rem}
+.bdg span{font-size:.8rem;color:var(--ink-3)}
+
+/* ---------- Toasts & celebration ---------- */
+.toasts{position:fixed;right:20px;bottom:20px;z-index:80;display:grid;gap:8px;justify-items:end;pointer-events:none}
+@media (max-width:880px){.toasts{right:50%;transform:translateX(50%);bottom:calc(84px + env(safe-area-inset-bottom));justify-items:center}}
+.toast{white-space:nowrap;font-size:.92rem;background:var(--ink);color:var(--bg);border-radius:14px;padding:10px 16px;font-weight:800;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);display:flex;gap:10px;align-items:center;animation:tin .35s cubic-bezier(.2,1.4,.4,1)}
+.toast .x{color:var(--gold)}
+@keyframes tin{from{transform:translateY(14px) scale(.9);opacity:0}}
+.levelup{position:fixed;inset:0;z-index:90;display:none;place-items:center;background:rgba(10,12,30,.55);padding:20px}
+.levelup.on{display:grid}
+.levelup .card{padding:30px;text-align:center;max-width:380px;width:100%}
+.levelup .lvl{width:96px;height:96px;font-size:2.6rem;margin:0 auto 12px;box-shadow:0 8px 0 var(--gold-dk)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:95;overflow:hidden}
+.confetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall 1.6s cubic-bezier(.3,.6,.5,1) forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:.88rem;color:var(--ink-2)}
+footer .warn{font-weight:800;color:var(--ink);font-size:.95rem}
+.empty{border:2px dashed var(--line);border-radius:18px;padding:22px;color:var(--ink-2);text-align:center}
 </style>
 </head>
 <body>
-<header class="top">
+<header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#home" aria-label="FundFit home">
-      <svg viewBox="0 0 30 22" aria-hidden="true"><path d="M3 20a12 12 0 0 1 24 0" fill="none" stroke="#e8a317" stroke-width="4.5"/><path d="M15 20 21 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
-      FundFit
-    </a>
+    <a class="logo" href="#home" aria-label="FundFit home"><i><svg viewBox="0 0 22 16" aria-hidden="true"><path d="M2 14a9 9 0 0 1 18 0" fill="none" stroke="#ffb400" stroke-width="3.4" stroke-linecap="round"/><path d="M11 14l4.5-7" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></i>FundFit</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#learn" data-i18n="navLearn">Learn</a>
+      <a href="#funds" data-i18n="navFunds">Fund types</a>
+      <a href="#play" data-i18n="navPlay">Play</a>
+      <a href="#fit" data-i18n="navFit">Find my fit</a>
+      <a href="#houses" data-i18n="navHouses">Fund houses</a>
+    </nav>
     <span class="spacer"></span>
-    <button class="langbtn" id="langbtn" type="button" aria-label="Switch language">Tanglish</button>
+    <a class="player" href="#me" aria-label="Your progress">
+      <span class="streak" id="streak" title="Day streak"></span>
+      <span class="xpchip"><span class="lvl" id="lvl">1</span><span class="xpbar"><b id="xpbar"></b></span><span id="xp">0 XP</span></span>
+    </a>
+    <button class="lang" id="langbtn" type="button" aria-label="Switch language">தமிழ்+En</button>
   </div>
 </header>
-<nav class="tabs" aria-label="Sections">
-  <div class="wrap">
-    <a href="#home" data-i18n="navHome">Home</a>
-    <a href="#learn" data-i18n="navLearn">Learn</a>
-    <a href="#categories" data-i18n="navCats">Categories</a>
-    <a href="#fit" data-i18n="navFit">Find my fit</a>
-    <a href="#amcs" data-i18n="navAmcs">AMCs</a>
-  </div>
-</nav>
 
-<div class="wrap"><div class="datastrip" id="datastrip" aria-live="polite"><span><span class="dot none"></span>Loading data…</span></div></div>
-
-<main class="wrap">
-
-<!-- HOME -->
-<section class="view" id="v-home">
-  <div class="hero">
-    <div>
-      <h1 data-i18n="heroTitle">Which kind of mutual fund suits this money?</h1>
-      <p class="lede" data-i18n="heroLede">Tell FundFit how much, for how long and what it's for. It points you to a SEBI fund category, explains why, and shows which AMCs offer it. No sign-up, no tracking, no fund tips.</p>
-      <div class="cta">
-        <a class="btn primary" href="#fit" data-i18n="ctaFit">Find my fit</a>
-        <a class="btn ghost" href="#learn" data-i18n="ctaLearn">Learn the basics first</a>
-      </div>
-    </div>
-    <div class="meter-demo" id="heroMeter"></div>
-  </div>
-  <div id="homeStats"></div>
-  <div id="homeFeed"></div>
-</section>
-
-<!-- LEARN -->
-<section class="view" id="v-learn">
-  <h2 data-i18n="learnTitle">Mutual funds, the essentials</h2>
-  <p class="lede" data-i18n="learnLede">Everything here follows the NISM Series V-A workbook, updated for SEBI's February 2026 changes.</p>
-  <div class="topics" id="topics"></div>
-  <div id="learnFeed"></div>
-</section>
-
-<!-- CATEGORIES -->
-<section class="view" id="v-categories">
-  <h2 data-i18n="catsTitle">How SEBI classifies mutual funds</h2>
-  <p class="lede" id="catsLede"></p>
-  <div id="countsTable"></div>
-  <div class="filters" id="groupFilters" role="group" aria-label="Filter by group"></div>
-  <label class="sr" for="catSearch">Search categories</label>
-  <input class="search" id="catSearch" type="search" placeholder="Search a category, e.g. liquid, gilt, flexi">
-  <div id="catList"></div>
-  <div id="otherTypes"></div>
-</section>
-
-<!-- FIT -->
-<section class="view" id="v-fit">
-  <h2 data-i18n="fitTitle">Find my fit</h2>
-  <p class="lede" data-i18n="fitLede">A few quick questions. The answer is a fund category, not a specific scheme.</p>
-  <div id="wizard"></div>
-  <div id="result"></div>
-</section>
-
-<!-- AMCS -->
-<section class="view" id="v-amcs">
-  <h2 data-i18n="amcsTitle">Asset management companies</h2>
-  <p class="lede" data-i18n="amcsLede">Every AMC in AMFI's daily NAV file, with the categories it offers. Listed alphabetically; the order means nothing.</p>
-  <label class="sr" for="amcSearch">Search AMCs</label>
-  <input class="search" id="amcSearch" type="search" placeholder="Search an AMC">
-  <div id="amcDirectory"></div>
-</section>
-
+<main class="wrap" id="main">
+  <section class="view" id="v-home"></section>
+  <section class="view" id="v-learn"></section>
+  <section class="view" id="v-funds"></section>
+  <section class="view" id="v-play"></section>
+  <section class="view" id="v-fit"></section>
+  <section class="view" id="v-houses"></section>
+  <section class="view" id="v-me"></section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p class="warning">Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</p>
-    <p id="disclosure"></p>
-    <p>FundFit suggests a SEBI scheme category from your answers. It is an educational tool, not investment advice and not a recommendation to buy any scheme. Scheme lists and NAVs come from AMFI's public NAV file; circulars from SEBI's public circulars list and feed. Category rules are from SEBI's circular of 26 Feb 2026 and the NISM Series V-A workbook. Check the scheme's SID and KIM before investing.</p>
-    <p class="tiny">No cookies, no analytics, no sign-up. Your answers never leave this page.</p>
+    <p class="warn">Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</p>
+    <p id="byline"></p>
+    <p>FundFit helps you understand mutual funds and suggests a type of fund from your answers. It is for learning, not investment advice, and it doesn't recommend any particular scheme. Fund houses, schemes and NAVs come from AMFI's public daily NAV file; circulars from SEBI's website. Fund type rules follow SEBI's circular of 26 February 2026. Always read a scheme's SID and KIM before investing.</p>
+    <p class="tiny">No sign-up, no cookies, no analytics. Your progress and answers are saved only on this device.</p>
   </div>
 </footer>
-<div class="toast" id="toast" role="status"></div>
+
+<nav class="tabbar" aria-label="Sections">
+  <a href="#home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>Learn</a>
+  <a href="#funds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="12" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v12"/></svg>Funds</a>
+  <a href="#play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Play</a>
+  <a href="#fit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>My fit</a>
+</nav>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="levelup" id="levelup"></div>
 
 <script>
-/* ============ CONFIG: edit these ============ */
+/* ============ CONFIG ============ */
 const CONFIG = {
-  // Shown in the footer. Add your ARN only once you hold one, e.g. "AMFI-registered Mutual Fund Distributor · ARN-XXXXXX".
-  byline: "Built by Babu Balasubramanian for investor education.",
-  registration: "",
+  byline: "Made by Babu Balasubramanian to help people understand mutual funds.",
+  registration: "", // e.g. "AMFI-registered Mutual Fund Distributor · ARN-XXXXXX", only once you hold one
   siteUrl: location.origin + location.pathname,
 };
 
-/* ============ i18n ============ */
+/* ============ i18n (UI + questions) ============ */
 const STR = {
   en: {
-    navHome:"Home", navLearn:"Learn", navCats:"Categories", navFit:"Find my fit", navAmcs:"AMCs",
-    heroTitle:"Which kind of mutual fund suits this money?",
-    heroLede:"Tell FundFit how much, for how long and what it's for. It points you to a SEBI fund category, explains why, and shows which AMCs offer it. No sign-up, no tracking, no fund tips.",
-    ctaFit:"Find my fit", ctaLearn:"Learn the basics first",
-    learnTitle:"Mutual funds, the essentials",
-    learnLede:"Everything here follows the NISM Series V-A workbook, updated for SEBI's February 2026 changes.",
-    catsTitle:"How SEBI classifies mutual funds",
-    fitTitle:"Find my fit", fitLede:"A few quick questions. The answer is a fund category, not a specific scheme.",
-    amcsTitle:"Asset management companies",
-    amcsLede:"Every AMC in AMFI's daily NAV file, with the categories it offers. Listed alphabetically; the order means nothing.",
-    back:"Back", next:"Next", seeResult:"Show my fit", restart:"Start again", share:"Copy share card",
-    q_purpose:"What is this money for?",
-    q_purpose_h:"The purpose decides how much risk the money can take.",
+    navLearn:"Learn", navFunds:"Fund types", navPlay:"Play", navFit:"Find my fit", navHouses:"Fund houses",
+    back:"Back", next:"Next", seeResult:"Reveal my fit", restart:"Start again",
+    q_purpose:"What is this money for?", q_purpose_h:"The purpose decides how much risk the money can take.",
     p_emergency:"Emergency fund", p_emergency_d:"Money I may need any day",
-    p_goal:"A goal with a date", p_goal_d:"House, education, a car, a wedding",
-    p_wealth:"Long-term wealth", p_wealth_d:"No fixed use yet, I want it to grow",
+    p_goal:"A goal with a date", p_goal_d:"House, education, car, wedding",
+    p_wealth:"Growing my wealth", p_wealth_d:"No fixed use yet",
     p_tax:"Saving tax", p_tax_d:"Section 80C deduction",
-    q_mode:"How will you invest?",
-    m_sip:"Monthly SIP", m_sip_d:"A fixed amount every month",
-    m_lump:"Lumpsum", m_lump_d:"One amount, once",
-    amt_sip:"Monthly SIP amount", amt_lump:"Lumpsum amount",
-    q_horizon:"When will you need this money?",
-    q_horizon_h:"This matters more than anything else.",
-    h0:"Within 3 months", h1:"3 to 12 months", h2:"1 to 3 years", h3:"3 to 5 years", h4:"5 to 7 years", h5:"7 to 10 years", h6:"10 years or more",
-    q_risk:"Your investment falls 20% in a bad year. What do you do?",
-    q_risk_h:"Be honest; this is about how you'd really feel.",
-    r_exit:"Sell, I can't watch it fall", r_hold:"Hold and wait it out", r_add:"Invest more while it's cheap",
-    q_emerg:"Do you already have an emergency fund?",
-    q_emerg_h:"3 to 6 months of expenses kept somewhere you can reach in a day or two.",
-    e_yes:"Yes", e_no:"Not yet",
-    q_regime:"Which income tax regime do you file under?",
-    q_regime_h:"Only the old regime allows the Section 80C deduction.",
+    q_mode:"How will you invest?", m_sip:"Every month (SIP)", m_sip_d:"A fixed amount each month", m_lump:"All at once (lumpsum)", m_lump_d:"One amount, one time",
+    amt_sip:"How much each month?", amt_lump:"How much in total?",
+    q_horizon:"When will you need this money?", q_horizon_h:"This matters more than anything else.",
+    h0:"Within 3 months", h1:"3 to 12 months", h2:"1 to 3 years", h3:"3 to 5 years", h4:"5 to 7 years", h5:"7 to 10 years", h6:"10+ years",
+    q_risk:"Your investment falls 20% in a bad year. What do you do?", q_risk_h:"Be honest. This is about how you'd really feel.",
+    r_exit:"Sell. I can't watch it fall.", r_hold:"Hold and wait it out.", r_add:"Invest more while it's cheap.",
+    q_emerg:"Do you already have an emergency fund?", q_emerg_h:"3 to 6 months of expenses you can reach within a day or two.",
+    e_yes:"Yes, it's sorted", e_no:"Not yet",
+    q_regime:"Which income tax regime do you file under?", q_regime_h:"Only the old regime allows the Section 80C deduction.",
     t_old:"Old regime", t_new:"New regime", t_unsure:"Not sure",
-    yourFit:"Your fit", why:"Why this category", alsoConsider:"Also worth a look",
-    whoOffers:"Who offers this category", pickAmc:"Pick an AMC to see its schemes in this category.",
-    typicalRisk:"Typical risk level", riskNote:"Each scheme has its own riskometer in its SID. This is the usual level for the category.",
+    yourFit:"Your fit", why:"Why this type of fund", alsoConsider:"Also worth a look",
+    whoOffers:"Who offers it", pickAmc:"Pick a fund house to see its schemes.",
+    typicalRisk:"Typical risk level", riskNote:"Each scheme shows its own riskometer. This is the usual level for this type.",
   },
   ta: {
-    navHome:"Home", navLearn:"Kathukko", navCats:"Categories", navFit:"En fit enna?", navAmcs:"AMCs",
-    heroTitle:"Indha panathukku endha maadhiri mutual fund set aagum?",
-    heroLede:"Evlo panam, evlo naal, edhukkaga nu sollunga. FundFit oru SEBI fund category-a kaatum, yen nu vilakkum, adha endha AMC-lam offer panraanga nu kaatum. Sign-up illa, tracking illa, fund tips illa.",
-    ctaFit:"En fit-a kandupidi", ctaLearn:"Mudhalla basics kathukalaam",
-    learnTitle:"Mutual funds – mukkiyamaana vishayangal",
-    learnLede:"Idhellam NISM Series V-A workbook padi, SEBI-oda February 2026 maatrangaloda update pannadhu.",
-    catsTitle:"SEBI mutual funds-a eppadi pirikkudhu",
-    fitTitle:"En fit enna?", fitLede:"Konjam chinna kelvigal. Badhil oru fund category, specific scheme illa.",
-    amcsTitle:"Asset management companies",
-    amcsLede:"AMFI daily NAV file-la irukkura ella AMC-um, avanga offer panra categories-oda. Alphabet order-la irukku; order-ku artham illa.",
-    back:"Pinnaadi", next:"Adutha", seeResult:"En fit-a kaattu", restart:"Thirumba start pannu", share:"Share card copy pannu",
-    q_purpose:"Indha panam edhukku?",
-    q_purpose_h:"Purpose dhaan indha panam evlo risk edukkalaam nu mudivu pannum.",
+    navLearn:"Kathukko", navFunds:"Fund vagaigal", navPlay:"Vilayaadu", navFit:"En fit", navHouses:"Fund houses",
+    back:"Pinnaadi", next:"Adutha", seeResult:"En fit-a kaattu", restart:"Thirumba start",
+    q_purpose:"Indha panam edhukku?", q_purpose_h:"Purpose dhaan indha panam evlo risk edukkalaam nu mudivu pannum.",
     p_emergency:"Emergency fund", p_emergency_d:"Endha naalum thevai padalaam",
-    p_goal:"Date irukkura oru goal", p_goal_d:"Veedu, padippu, car, kalyaanam",
-    p_wealth:"Long-term wealth", p_wealth_d:"Ippo fixed use illa, valaranum",
+    p_goal:"Date irukkura goal", p_goal_d:"Veedu, padippu, car, kalyaanam",
+    p_wealth:"Wealth valarkkanum", p_wealth_d:"Ippo fixed use illa",
     p_tax:"Tax save panna", p_tax_d:"Section 80C deduction",
-    q_mode:"Eppadi invest pannuveenga?",
-    m_sip:"Maasa SIP", m_sip_d:"Ovvoru maasamum fixed amount",
-    m_lump:"Lumpsum", m_lump_d:"Oru thadava, oru amount",
-    amt_sip:"Maasa SIP amount", amt_lump:"Lumpsum amount",
-    q_horizon:"Indha panam eppo thevai padum?",
-    q_horizon_h:"Ellathaiyum vida idhu dhaan mukkiyam.",
-    h0:"3 maasathukkulla", h1:"3 – 12 maasam", h2:"1 – 3 varusham", h3:"3 – 5 varusham", h4:"5 – 7 varusham", h5:"7 – 10 varusham", h6:"10 varushathukku mela",
-    q_risk:"Oru mosamaana varushathula unga investment 20% keezha poguthu. Enna pannuveenga?",
-    q_risk_h:"Honest-a sollunga; neenga nijamaave eppadi feel pannuveenga nu.",
-    r_exit:"Vithuduven, vizhuradhu paakka mudiyaadhu", r_hold:"Hold panni wait pannuven", r_add:"Kammi vilaila innum invest pannuven",
-    q_emerg:"Ungakitta already emergency fund irukka?",
-    q_emerg_h:"3 – 6 maasa selavu, oru rendu naalla edukka mudiyura idathula.",
+    q_mode:"Eppadi invest pannuveenga?", m_sip:"Maasaa maasam (SIP)", m_sip_d:"Ovvoru maasamum fixed amount", m_lump:"Ore thadava (lumpsum)", m_lump_d:"Oru amount, oru thadava",
+    amt_sip:"Maasathukku evlo?", amt_lump:"Mothama evlo?",
+    q_horizon:"Indha panam eppo thevai padum?", q_horizon_h:"Ellathaiyum vida idhu dhaan mukkiyam.",
+    h0:"3 maasathukkulla", h1:"3 – 12 maasam", h2:"1 – 3 varusham", h3:"3 – 5 varusham", h4:"5 – 7 varusham", h5:"7 – 10 varusham", h6:"10+ varusham",
+    q_risk:"Oru mosamaana varushathula unga investment 20% keezha poguthu. Enna pannuveenga?", q_risk_h:"Honest-a sollunga.",
+    r_exit:"Vithuduven, paakka mudiyaadhu.", r_hold:"Hold panni wait pannuven.", r_add:"Kammi vilaila innum vaanguven.",
+    q_emerg:"Ungakitta emergency fund irukka?", q_emerg_h:"3 – 6 maasa selavu, rendu naalla edukka mudiyura idathula.",
     e_yes:"Irukku", e_no:"Innum illa",
-    q_regime:"Endha income tax regime-la file pannureenga?",
-    q_regime_h:"Old regime-la mattum dhaan Section 80C deduction kidaikkum.",
+    q_regime:"Endha tax regime-la file pannureenga?", q_regime_h:"Old regime-la mattum dhaan 80C deduction.",
     t_old:"Old regime", t_new:"New regime", t_unsure:"Theriyala",
-    yourFit:"Unga fit", why:"Yen indha category", alsoConsider:"Idhaiyum paarunga",
-    whoOffers:"Indha category-a yaar offer panraanga", pickAmc:"Oru AMC-a select panni, indha category-la avanga schemes-a paarunga.",
-    typicalRisk:"Vazhakkamaana risk level", riskNote:"Ovvoru scheme-kkum SID-la sondha riskometer irukku. Idhu category-oda vazhakkamaana level.",
+    yourFit:"Unga fit", why:"Yen indha fund type", alsoConsider:"Idhaiyum paarunga",
+    whoOffers:"Yaar offer panraanga", pickAmc:"Oru fund house-a select pannunga.",
+    typicalRisk:"Vazhakkamaana risk level", riskNote:"Ovvoru scheme-kkum sondha riskometer irukku. Idhu indha type-oda vazhakkamaana level.",
   }
 };
-let LANG = (()=>{ try{ return localStorage.getItem('ff-lang')||'en'; }catch(e){ return 'en'; } })();
+let LANG = (() => { try { return localStorage.getItem('ff-lang') || 'en'; } catch (e) { return 'en'; } })();
 const T = (k) => (STR[LANG] && STR[LANG][k]) || STR.en[k] || k;
 
 /* ============ RULES-START (pure; unit-tested from tests/rules.test.mjs) ============ */
@@ -455,7 +539,7 @@ const EXPLAIN = {
     t_elss_short:"ELSS locks every instalment for 3 years, but you need this money sooner. Tax saving shouldn't lock up money you'll need, so ELSS isn't suggested here.",
     w_elss_3to5:"With 3 to 5 years, the ELSS lock-in fits, but equity can still be down when the lock-in ends. Be prepared to wait longer.",
     n_lifecycle:"Life Cycle Funds (new in 2026) are built for dated goals: pick the one whose target year is close to, and not after, your goal year. It moves from equity to debt automatically.",
-    t_ability_willingness:"Your timeline can handle equity, but your comfort level says otherwise. NISM calls this ability versus willingness: both matter. A hybrid fund is a gentler way to start; you can shift more to equity as you get used to the swings.",
+    t_ability_willingness:"Your timeline can handle equity, but your comfort level says otherwise. Both matter: the ability to take risk and the willingness to live with it. A hybrid fund is a gentler way to start; you can shift more to equity as you get used to the swings.",
     t_short_high_appetite:"Your appetite for risk is high, but your time is short. Equity can stay down for 3 years or more, so the timeline wins here.",
     w_no_emergency:"Build your emergency fund first. Put 3 to 6 months of expenses in a liquid fund, then start this investment. Otherwise a surprise bill could force you to sell at a loss.",
     n_small_cap:"Small caps are the most volatile category. If you choose one, keep it to a part of your equity money, not all of it.",
@@ -483,7 +567,7 @@ const EXPLAIN = {
     t_elss_short:"ELSS ovvoru instalment-aiyum 3 varusham lock pannum, aana ungalukku indha panam seekiram thevai. Thevaiyaana panatha tax-kkaaga lock panna koodaadhu, adhanaala ELSS suggest pannala.",
     w_elss_3to5:"3 – 5 varushathukku ELSS lock-in set aagum, aana lock-in mudiyumbodhu equity keezha irukkalaam. Konjam adhigama wait panna ready-aa irunga.",
     n_lifecycle:"Life Cycle Funds (2026-la pudhusu) date irukkura goals-kkaaga. Unga goal varushathukku pakkathula, adhukku appuram illaadha target year irukkura fund-a eduthukonga. Adhu thaanaave equity-la irundhu debt-ku maarum.",
-    t_ability_willingness:"Unga timeline equity-a handle pannum, aana unga comfort vera sollidhu. NISM idha ability vs willingness nu solludhu: rendum mukkiyam. Hybrid fund oru mellisaana start; swings pazhagina appuram equity-a koottalaam.",
+    t_ability_willingness:"Unga timeline equity-a handle pannum, aana unga comfort vera sollidhu. Risk edukka mudiyuradhum, adha thaanga mudiyuradhum rendum mukkiyam. Hybrid fund oru mellisaana start; swings pazhagina appuram equity-a koottalaam.",
     t_short_high_appetite:"Unga risk appetite adhigam, aana time kammi. Equity 3 varusham mela kooda keezha irukkalaam, adhanaala inga timeline dhaan jeikkum.",
     w_no_emergency:"Mudhalla emergency fund ready pannunga. 3 – 6 maasa selava liquid fund-la vechitu, appuram indha investment-a start pannunga. Illana oru thideer selavu nashtathula vikka vekkum.",
     n_small_cap:"Small caps dhaan romba aadura category. Edutha, unga equity panathula oru pagudhi mattum; muzhusum illa.",
@@ -522,449 +606,692 @@ const ALT_WHY = {
   'life-cycle':"Pick a target year; it moves from equity to debt automatically as the year nears.",
 };
 
+
 /* ============ STATE & DATA ============ */
-let CATS = null, SCHEMES = null, SEBI = null, STATUS = null;
+let CATS = null, SCHEMES = null, SEBI = null;
 const catById = (id) => CATS && CATS.categories.find((c) => c.id === id);
-const RISK_LEVELS = ['Low','Low to Moderate','Moderate','Moderately High','High','Very High'];
+const groupById = (id) => CATS && CATS.groups.find((g) => g.id === id);
+const ACTIVE = () => CATS.categories.filter((c) => c.status !== 'discontinued');
+const collected = () => ACTIVE().filter((c) => G.cards[c.id]).length;
+const RISK_LEVELS = ['Low', 'Low to Moderate', 'Moderate', 'Moderately High', 'High', 'Very High'];
 const riskIndex = (r) => RISK_LEVELS.indexOf(r);
-const riskColor = (r) => { const i = riskIndex(r); return i < 0 ? 'var(--line)' : `var(--r${i+1})`; };
-const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmtINR = (n) => Number(n).toLocaleString('en-IN');
-const $ = (s, el=document) => el.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const inr = (n) => Number(n).toLocaleString('en-IN');
+const $ = (s, el = document) => el.querySelector(s);
+const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
-async function loadJson(url) {
-  const r = await fetch(url, { cache: 'no-cache' });
-  if (!r.ok) throw new Error(url + ' ' + r.status);
-  return r.json();
+const ICON = {
+  equity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+  debt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18M12 3l9 5H3z"/></svg>',
+  hybrid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l7 5"/></svg>',
+  lifecycle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c4-1 6-5 9-10s5-7 9-7"/><circle cx="21" cy="3" r="1.5" fill="currentColor"/><path d="M3 20h18"/></svg>',
+  other: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>',
+  solution: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
+  flame: '<svg viewBox="0 0 24 24" fill="#ff7a1a"><path d="M12 2s5 4.5 5 10a5 5 0 0 1-10 0c0-2.3 1-4 2-5 0 2 1 3 2 3 0-4 1-6 1-8z"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>',
+  cards: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="12" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v12"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>',
+};
+
+/* ============ GAME STATE (this device only) ============ */
+const LEVELS = [
+  { n: 'Beginner', xp: 0 }, { n: 'Saver', xp: 60 }, { n: 'Learner', xp: 150 }, { n: 'Investor', xp: 300 },
+  { n: 'Smart Investor', xp: 500 }, { n: 'Fund Explorer', xp: 750 }, { n: 'Money Master', xp: 1050 },
+];
+const BADGES = [
+  { id: 'first', e: '🌱', n: 'First step', d: 'Finish your first lesson', test: (g) => Object.keys(g.lessons).length >= 1 },
+  { id: 'scholar', e: '🎓', n: 'Scholar', d: 'Finish all 10 lessons', test: (g) => Object.keys(g.lessons).length >= LESSONS.length },
+  { id: 'collector', e: '🃏', n: 'Collector', d: 'Collect 20 fund types', test: () => CATS && collected() >= 20 },
+  { id: 'fullset', e: '👑', n: 'Full set', d: 'Collect all 40 fund types', test: () => CATS && collected() >= ACTIVE().length },
+  { id: 'sharp', e: '🎯', n: 'Sharp eye', d: 'Score 8+ in Fund Match', test: (g) => g.best >= 8 },
+  { id: 'perfect', e: '💯', n: 'Perfect 10', d: 'Score 10/10 in Fund Match', test: (g) => g.best >= 10 },
+  { id: 'fit', e: '🧭', n: 'Found my fit', d: 'Complete Find my fit', test: (g) => g.fits >= 1 },
+  { id: 'explorer', e: '🏦', n: 'Explorer', d: 'Look inside 5 fund houses', test: (g) => Object.keys(g.houses).length >= 5 },
+  { id: 'streak3', e: '🔥', n: 'On a roll', d: 'Visit 3 days in a row', test: (g) => g.streak >= 3 },
+];
+const GKEY = 'ff-game-v1';
+let G = (() => {
+  const blank = { xp: 0, lessons: {}, checks: {}, cards: {}, houses: {}, badges: {}, best: 0, games: 0, fits: 0, last: '', streak: 0 };
+  try { return Object.assign(blank, JSON.parse(localStorage.getItem(GKEY) || '{}')); } catch (e) { return blank; }
+})();
+const save = () => { try { localStorage.setItem(GKEY, JSON.stringify(G)); } catch (e) {} };
+const levelOf = (xp) => { let i = 0; LEVELS.forEach((l, k) => { if (xp >= l.xp) i = k; }); return i; };
+function award(xp, why) {
+  const before = levelOf(G.xp);
+  G.xp += xp; save();
+  toast(`<span class="x">+${xp} XP</span> ${esc(why)}`);
+  const after = levelOf(G.xp);
+  checkBadges();
+  paintPlayer();
+  if (after > before) setTimeout(() => levelUp(after), 500);
 }
-
-async function boot() {
-  const [c, s, sb, st] = await Promise.allSettled([
-    loadJson('data/categories.json'), loadJson('data/schemes.json'), loadJson('data/sebi.json'), loadJson('data/status.json')
-  ]);
-  CATS = c.status === 'fulfilled' ? c.value : null;
-  SCHEMES = s.status === 'fulfilled' ? s.value : null;
-  SEBI = sb.status === 'fulfilled' ? sb.value : null;
-  STATUS = st.status === 'fulfilled' ? st.value : null;
-  if (!CATS) {
-    document.querySelector('main').innerHTML = `<div class="empty" style="margin-top:20px"><b>The category data couldn't load.</b><p>If you opened this file directly from your computer, run it through a local web server or GitHub Pages instead: browsers block data files on file:// pages.</p></div>`;
-    return;
+function checkBadges() {
+  for (const b of BADGES) if (!G.badges[b.id] && b.test(G)) {
+    G.badges[b.id] = Date.now(); save();
+    setTimeout(() => toast(`<span>${b.e}</span> Badge unlocked: ${esc(b.n)}`), 700);
   }
-  indexSchemes();
-  renderDataStrip();
-  applyLang();
-  route();
+}
+function tickStreak() {
+  const today = new Date().toISOString().slice(0, 10);
+  if (G.last === today) return;
+  const y = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  G.streak = G.last === y ? G.streak + 1 : 1;
+  G.last = today; save(); checkBadges();
+}
+function paintPlayer() {
+  const i = levelOf(G.xp), cur = LEVELS[i], nxt = LEVELS[i + 1];
+  $('#lvl').textContent = i + 1;
+  $('#xp').textContent = `${inr(G.xp)} XP`;
+  $('#xpbar').style.width = nxt ? `${((G.xp - cur.xp) / (nxt.xp - cur.xp)) * 100}%` : '100%';
+  $('#streak').innerHTML = G.streak ? `${ICON.flame}${G.streak}` : '';
+}
+function toast(html) {
+  const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = html;
+  const box = $('#toasts'); box.appendChild(t); while (box.children.length > 3) box.firstChild.remove(); setTimeout(() => t.remove(), 2600);
+}
+function confetti() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = document.createElement('div'); c.className = 'confetti';
+  const cols = ['#3d2bff', '#ffb400', '#12b76a', '#ff6a3d', '#1a8fe3', '#c243d6'];
+  for (let i = 0; i < 70; i++) { const p = document.createElement('i'); p.style.left = Math.random() * 100 + 'vw'; p.style.background = pick(cols); p.style.animationDelay = Math.random() * .4 + 's'; p.style.animationDuration = 1.2 + Math.random() + 's'; c.appendChild(p); }
+  document.body.appendChild(c); setTimeout(() => c.remove(), 2600);
+}
+function levelUp(i) {
+  const el = $('#levelup');
+  el.innerHTML = `<div class="card"><div class="lvl">${i + 1}</div><h2>Level up!</h2><p class="muted">You're now a <b>${esc(LEVELS[i].n)}</b>.</p><button class="btn gold block" type="button" id="luok">Keep going</button></div>`;
+  el.classList.add('on'); confetti();
+  $('#luok').onclick = () => el.classList.remove('on'); $('#luok').focus();
 }
 
-/* category id -> [scheme], amc index -> Set(cat ids) */
+/* ============ DATA LOAD ============ */
+async function loadJson(u) { const r = await fetch(u, { cache: 'no-cache' }); if (!r.ok) throw new Error(u); return r.json(); }
 let BY_CAT = {}, AMC_CATS = [];
 function indexSchemes() {
   BY_CAT = {}; AMC_CATS = [];
   if (!SCHEMES) return;
   SCHEMES.amcs.forEach((_, i) => AMC_CATS[i] = new Set());
   for (const s of SCHEMES.schemes) {
-    if (s.s !== 'O') continue; // open-ended only for category suggestions
-    for (const id of s.c || []) {
-      (BY_CAT[id] ||= []).push(s);
-      AMC_CATS[s.a].add(id);
-    }
+    if (s.s !== 'O') continue;
+    for (const id of s.c || []) { (BY_CAT[id] ||= []).push(s); AMC_CATS[s.a].add(id); }
   }
 }
 const amcsFor = (catId) => {
-  const list = BY_CAT[catId] || [];
   const m = new Map();
-  for (const s of list) m.set(s.a, (m.get(s.a) || 0) + 1);
+  for (const s of BY_CAT[catId] || []) m.set(s.a, (m.get(s.a) || 0) + 1);
   return [...m.entries()].map(([a, n]) => ({ a, n, name: SCHEMES.amcs[a].name })).sort((x, y) => x.name.localeCompare(y.name));
 };
+const shortAmc = (n) => n.replace(/\s+Mutual Fund$/i, '').replace(/\s+MUTUAL FUND$/, '');
 
-function renderDataStrip() {
-  const el = $('#datastrip');
-  const parts = [];
-  if (SCHEMES) {
-    const age = (Date.now() - Date.parse(SCHEMES.updatedAt)) / 36e5;
-    const cls = age > 72 ? 'stale' : '';
-    const open = SCHEMES.schemes.filter((s) => s.s === 'O').length;
-    parts.push(`<span><span class="dot ${cls}"></span>AMFI data: NAVs as of <b>${esc(SCHEMES.navDate)}</b> · ${SCHEMES.amcs.length} AMCs · ${fmtINR(open)} open-ended schemes</span>`);
-    parts.push(`<span>Refreshed ${new Date(SCHEMES.updatedAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}${age > 72 ? ' (older than 3 days)' : ''}</span>`);
-  } else {
-    parts.push(`<span><span class="dot none"></span>Live AMFI data appears after the first automatic refresh. Categories and learning content work now.</span>`);
-  }
-  el.innerHTML = parts.join('');
-}
-
-/* ============ RISKOMETER ============ */
-function meterSVG(level, label) {
-  // level: 0..5, or -1 for none
-  const segs = 6, cx = 100, cy = 100, R = 88, r = 56;
-  let paths = '';
-  for (let i = 0; i < segs; i++) {
-    const a0 = Math.PI + (i / segs) * Math.PI + 0.012, a1 = Math.PI + ((i + 1) / segs) * Math.PI - 0.012;
-    const p = (a, rad) => `${(cx + rad * Math.cos(a)).toFixed(2)} ${(cy + rad * Math.sin(a)).toFixed(2)}`;
-    paths += `<path d="M${p(a0, R)} A${R} ${R} 0 0 1 ${p(a1, R)} L${p(a1, r)} A${r} ${r} 0 0 0 ${p(a0, r)}Z" fill="var(--r${i + 1})" opacity="${level < 0 || i === level ? 1 : .35}"/>`;
-  }
-  const angle = level < 0 ? -90 : -90 + ((level + .5) / segs) * 180;
-  return `<svg class="meter" viewBox="0 0 200 112" role="img" aria-label="Riskometer: ${esc(label || 'not applicable')}">
-    ${paths}
-    <g class="needle" style="transform:rotate(-90deg)" data-angle="${angle}">
-      <line x1="100" y1="100" x2="100" y2="30" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
-    </g>
-    <circle cx="100" cy="100" r="7" fill="var(--ink)"/>
-  </svg>${label ? `<div class="meterlabel">${esc(label)}</div>` : ''}`;
-}
-function swingNeedles(root = document) {
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    root.querySelectorAll('.needle').forEach((n) => n.style.transform = `rotate(${n.dataset.angle}deg)`);
-  }));
+async function boot() {
+  const [c, s, sb] = await Promise.allSettled([loadJson('data/categories.json'), loadJson('data/schemes.json'), loadJson('data/sebi.json')]);
+  CATS = c.status === 'fulfilled' ? c.value : null;
+  SCHEMES = s.status === 'fulfilled' ? s.value : null;
+  SEBI = sb.status === 'fulfilled' ? sb.value : null;
+  if (!CATS) { $('#main').innerHTML = '<div class="empty"><b>The fund data didn\'t load.</b><p>Open this site from its web address. Browsers block data files when a page is opened straight from your computer.</p></div>'; return; }
+  CATS.categories.forEach((c, i) => c.no = i + 1);
+  indexSchemes(); tickStreak(); paintPlayer(); applyLang(); route();
 }
 
 /* ============ ROUTER ============ */
-const VIEWS = ['home', 'learn', 'categories', 'fit', 'amcs'];
+const VIEWS = { home: renderHome, learn: renderLearn, funds: renderFunds, play: renderPlay, fit: renderFit, houses: renderHouses, me: renderMe };
 function route() {
-  const h = (location.hash || '#home').slice(1);
-  const [view, arg] = h.split('/');
-  const v = VIEWS.includes(view) ? view : 'home';
-  VIEWS.forEach((x) => $('#v-' + x).classList.toggle('on', x === v));
-  document.querySelectorAll('nav.tabs a').forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === '#' + v ? 'page' : 'false'));
-  ({ home: renderHome, learn: renderLearn, categories: () => renderCategories(arg), fit: renderFit, amcs: () => renderAmcs(arg) })[v]();
-  window.scrollTo({ top: 0 });
+  const [v, arg] = (location.hash.slice(1) || 'home').split('/');
+  const view = VIEWS[v] ? v : 'home';
+  document.querySelectorAll('.view').forEach((el) => el.classList.toggle('on', el.id === 'v-' + view));
+  document.querySelectorAll('.nav a, .tabbar a').forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === '#' + view ? 'page' : 'false'));
+  closeSheet();
+  VIEWS[view](arg);
+  window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
-
-/* ============ LANGUAGE ============ */
 function applyLang() {
-  document.documentElement.lang = LANG === 'ta' ? 'en-IN' : 'en';
   document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = T(el.dataset.i18n));
   $('#langbtn').textContent = LANG === 'en' ? 'Tanglish' : 'English';
-  $('#disclosure').textContent = [CONFIG.byline, CONFIG.registration].filter(Boolean).join(' ');
+  $('#byline').textContent = [CONFIG.byline, CONFIG.registration].filter(Boolean).join(' ');
 }
-$('#langbtn').addEventListener('click', () => {
-  LANG = LANG === 'en' ? 'ta' : 'en';
-  try { localStorage.setItem('ff-lang', LANG); } catch (e) {}
-  applyLang(); route();
-});
+$('#langbtn').onclick = () => { LANG = LANG === 'en' ? 'ta' : 'en'; try { localStorage.setItem('ff-lang', LANG); } catch (e) {} applyLang(); route(); };
 
-/* ============ HOME ============ */
-function renderHome() {
-  $('#heroMeter').innerHTML = meterSVG(3, '');
-  swingNeedles($('#heroMeter'));
-  const g = CATS.groups;
-  const active = CATS.categories.filter((c) => c.status !== 'discontinued').length;
-  $('#homeStats').innerHTML = `
-    <div class="panel">
-      <h3>${active} SEBI categories, ${SCHEMES ? SCHEMES.amcs.length + ' AMCs' : 'every AMC'}, one question at a time</h3>
-      <p class="muted">SEBI's February 2026 circular reorganised mutual funds into ${g.filter((x) => x.count2026).map((x) => `${x.count2026} ${x.name.toLowerCase()}`).join(', ')} categories. Solution-oriented funds were closed to new money. <a href="#categories">See all categories</a>.</p>
-    </div>`;
-  $('#homeFeed').innerHTML = feedHTML(4);
-}
-
-function feedHTML(n) {
-  if (!SEBI || !SEBI.items || !SEBI.items.length) return '';
-  const items = SEBI.items.slice(0, n);
-  return `<div class="panel"><h3>Latest from SEBI on mutual funds</h3>
-    <ul class="feed">${items.map((i) => `<li><a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.title)}</a><div class="tiny">${esc([i.type, i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : ''].filter(Boolean).join(', '))}</div></li>`).join('')}</ul>
-    <p class="tiny">From SEBI's circulars list and news feed, checked daily and filtered for mutual fund topics. New circulars can change category rules; FundFit's rules are updated by hand after review.</p></div>`;
-}
-
-/* ============ LEARN ============ */
-const TOPICS = [
-  { t: "What a mutual fund is", b: `
-    <p>A mutual fund pools money from many investors and invests it according to a stated objective. You invest <b>through</b> a mutual fund, not <b>in</b> one: it's a different way of owning shares, bonds or gold, not a different asset.</p>
-    <p>In India every mutual fund is set up as a <b>trust</b>. Profits and losses belong only to the unitholders; everyone else (AMC, distributor, custodian) earns a fee.</p>` },
-  { t: "Who runs it", b: `
-    <div class="structure">
-      <div><b>Sponsor</b><span class="small muted">Sets up the trust, puts capital into the AMC</span></div>
-      <div><b>Trustees</b><span class="small muted">Guard unitholders' interests; at least two-thirds independent</span></div>
-      <div><b>AMC</b><span class="small muted">Manages the money; net worth of at least Rs 50 crore</span></div>
-      <div><b>Custodian</b><span class="small muted">Holds the securities safely</span></div>
-      <div><b>RTA</b><span class="small muted">Keeps investor records, processes transactions</span></div>
-      <div><b>SEBI</b><span class="small muted">Regulates all of the above. AMFI is the industry association, not a regulator</span></div>
-      <div class="inv"><b>You, the unitholder</b><span class="small muted">The beneficiary of the trust</span></div>
-    </div>` },
-  { t: "NAV, units and AUM", b: `
-    <dl class="kv">
-      <dt>NAV</dt><dd>Net asset value per unit: what each unit would fetch if the scheme's holdings were sold today, after expenses. Calculated daily.</dd>
-      <dt>Units</dt><dd>You buy units at NAV. Most schemes start with a face value of Rs 10 at the NFO.</dd>
-      <dt>AUM</dt><dd>Assets under management = NAV × units outstanding. AMCs are ranked by AUM.</dd>
-    </dl>
-    <p>A higher NAV doesn't mean a fund is expensive. It only reflects how much the fund has grown since it started.</p>` },
-  { t: "Open-ended, close-ended and interval", b: `
-    <dl class="kv">
-      <dt>Open-ended</dt><dd>Buy or redeem any business day. Most funds, and every category FundFit suggests, are open-ended.</dd>
-      <dt>Close-ended</dt><dd>Buy only in the NFO; redeem at maturity or sell on the stock exchange, usually at a discount to NAV.</dd>
-      <dt>Interval</dt><dd>Close-ended, but opens for transactions at fixed intervals.</dd>
-    </dl>` },
-  { t: "Active and passive funds", b: `
-    <p><b>Active</b> funds have a manager choosing securities to beat a benchmark. They cost more and may or may not outperform.</p>
-    <p><b>Passive</b> funds (index funds and ETFs) simply copy an index. They cost much less and deliver the index's return minus a small tracking difference. ETFs trade on the stock exchange and need a demat account.</p>` },
-  { t: "Direct and regular plans", b: `
-    <p>Every scheme comes in two plans with the same portfolio:</p>
-    <dl class="kv">
-      <dt>Direct plan</dt><dd>Bought straight from the AMC or an execution-only platform. Lower expense ratio, no distributor involved.</dd>
-      <dt>Regular plan</dt><dd>Bought through a mutual fund distributor, who is paid a trail commission out of the expense ratio. You get their service: help choosing, paperwork, reviews.</dd>
-    </dl>
-    <p>The difference compounds over years, so know which one you're buying and what you get for it.</p>` },
-  { t: "Growth and IDCW options", b: `
-    <p><b>Growth</b>: gains stay invested and the NAV grows.</p>
-    <p><b>IDCW</b> (Income Distribution cum Capital Withdrawal, formerly "dividend"): the fund pays out part of the NAV. It isn't extra income; it comes out of your own capital, and the NAV drops by the amount paid.</p>` },
-  { t: "SIP, SWP and STP", b: `
-    <dl class="kv">
-      <dt>SIP</dt><dd>Systematic Investment Plan: a fixed amount invested at regular intervals. Buys more units when prices are low (rupee cost averaging).</dd>
-      <dt>SWP</dt><dd>Systematic Withdrawal Plan: a fixed amount withdrawn regularly.</dd>
-      <dt>STP</dt><dd>Systematic Transfer Plan: moves money regularly from one scheme to another of the same AMC, e.g. liquid to equity.</dd>
-    </dl>` },
-  { t: "What it costs", b: `
-    <dl class="kv">
-      <dt>Expense ratio (TER)</dt><dd>Annual cost, charged daily as a % of assets. You never see a bill; it's already taken out of the NAV.</dd>
-      <dt>Exit load</dt><dd>A charge if you redeem before a set period, e.g. 1% within a year. Liquid funds have a small graded load for the first 7 days.</dd>
-      <dt>Entry load</dt><dd>Abolished. Nobody may charge you to invest.</dd>
-    </dl>` },
-  { t: "The riskometer", b: `
-    <div style="max-width:240px">${'<!--meter-->'}</div>
-    <p>Every scheme shows a six-level riskometer: Low, Low to Moderate, Moderate, Moderately High, High and Very High. It's reviewed monthly based on the actual portfolio. Debt schemes also show a Potential Risk Class (PRC) matrix: interest-rate risk against credit risk.</p>` },
-  { t: "Documents to read", b: `
-    <dl class="kv">
-      <dt>SID</dt><dd>Scheme Information Document: objective, asset allocation, risks, costs, fund manager, benchmark.</dd>
-      <dt>SAI</dt><dd>Statement of Additional Information: details of the AMC and mutual fund, common to all its schemes.</dd>
-      <dt>KIM</dt><dd>Key Information Memorandum: the short summary that comes with every application form.</dd>
-    </dl>
-    <p>SEBI doesn't approve these documents; it vets them. Signing the application form means you're taken to have read them.</p>` },
-  { t: "Benefits and limitations", b: `
-    <p><b>Benefits:</b> professional management, diversification from as little as Rs 100-500, liquidity, transparency (daily NAV, monthly portfolios), regulation by SEBI, and tax efficiency: the fund itself pays no tax, so growth is taxed only when you redeem.</p>
-    <p><b>Limitations:</b> no customisation (that's what PMS is for), no control over costs, no guaranteed returns, and too many choices. SEBI's categorisation exists to fix that last one.</p>` },
-  { t: "Tax basics", b: `
-    <p>Gains are taxed when you redeem, based on the type of fund and how long you held it. Equity-oriented funds (65%+ in Indian equity) get more favourable treatment than debt funds. ELSS gives a Section 80C deduction of up to Rs 1.5 lakh, only under the old tax regime.</p>
-    <p class="small muted">Tax rules change with each Budget. Check the current rates on the Income Tax Department's site or with a tax professional before acting.</p>` },
-];
-function renderLearn() {
-  $('#topics').innerHTML = TOPICS.map((x, i) => `<details class="topic"${i === 0 ? ' open' : ''}><summary>${esc(x.t)}</summary><div class="body">${x.b.replace('<!--meter-->', meterSVG(-1, ''))}</div></details>`).join('');
-  $('#learnFeed').innerHTML = feedHTML(8);
-}
-
-/* ============ CATEGORIES ============ */
-let CAT_FILTER = 'all';
-function renderCategories(focusId) {
-  const g = CATS.groups;
-  const t26 = g.reduce((a, x) => a + x.count2026, 0), t17 = g.reduce((a, x) => a + x.count2017, 0);
-  $('#catsLede').textContent = `SEBI's circular of 26 February 2026 defines ${t26} categories. The NISM V-A workbook (Nov 2025 edition) still follows the 2017 framework: ${t17} categories, with Value or Contra as one slot and an AMC allowed only one of Balanced or Aggressive Hybrid. Both are shown, so you can study for the exam and invest by today's rules.`;
-  $('#countsTable').innerHTML = `
-    <table class="counts">
-      <thead><tr><th>Group</th><th>Feb 2026</th><th>2017 / NISM workbook</th><th>What changed</th></tr></thead>
-      <tbody>${g.map((x) => `<tr><td>${esc(x.name)}</td><td class="num">${x.count2026 || '–'}</td><td class="num">${x.count2017 || '–'}</td><td class="small muted">${esc(x.note2017)}</td></tr>`).join('')}
-      <tr class="total"><td>Total</td><td class="num">${t26}</td><td class="num">${t17}</td><td></td></tr></tbody>
-    </table>`;
-  const filt = [['all', 'All'], ...g.map((x) => [x.id, x.name])];
-  $('#groupFilters').innerHTML = filt.map(([id, n]) => `<button class="chip" type="button" data-g="${id}" aria-pressed="${CAT_FILTER === id}">${esc(n)}</button>`).join('');
-  $('#groupFilters').onclick = (e) => { const b = e.target.closest('[data-g]'); if (!b) return; CAT_FILTER = b.dataset.g; renderCategories(); };
-  $('#catSearch').oninput = drawCatList;
-  drawCatList();
-  drawOtherTypes();
-  if (focusId) {
-    const el = document.getElementById('cat-' + focusId);
-    if (el) { el.scrollIntoView({ block: 'center' }); openOfferings(focusId, el.querySelector('.offerslot')); }
+/* ============ SHARED UI ============ */
+function meterSVG(level, label) {
+  const segs = 6, cx = 100, cy = 100, R = 88, r = 54;
+  let paths = '';
+  for (let i = 0; i < segs; i++) {
+    const a0 = Math.PI + (i / segs) * Math.PI + .014, a1 = Math.PI + ((i + 1) / segs) * Math.PI - .014;
+    const p = (a, rad) => `${(cx + rad * Math.cos(a)).toFixed(2)} ${(cy + rad * Math.sin(a)).toFixed(2)}`;
+    paths += `<path d="M${p(a0, R)} A${R} ${R} 0 0 1 ${p(a1, R)} L${p(a1, r)} A${r} ${r} 0 0 0 ${p(a0, r)}Z" fill="var(--r${i + 1})" opacity="${level < 0 || i === level ? 1 : .28}"/>`;
   }
+  const ang = level < 0 ? -90 : -90 + ((level + .5) / segs) * 180;
+  return `<svg class="meter" viewBox="0 0 200 110" role="img" aria-label="Riskometer: ${esc(label || '')}">${paths}<g class="needle" style="transform:rotate(-90deg)" data-a="${ang}"><path d="M97 100 L100 26 L103 100Z" fill="var(--ink)"/></g><circle cx="100" cy="100" r="8" fill="var(--ink)"/></svg>${label ? `<div class="meterlabel">${esc(label)}</div>` : ''}`;
 }
-function drawCatList() {
-  const q = ($('#catSearch').value || '').toLowerCase().trim();
-  const out = [];
-  for (const g of CATS.groups) {
-    if (CAT_FILTER !== 'all' && CAT_FILTER !== g.id) continue;
-    const cs = CATS.categories.filter((c) => c.group === g.id && (!q || (c.name + ' ' + (c.was || '') + ' ' + c.what + ' ' + c.rule).toLowerCase().includes(q)));
-    if (!cs.length) continue;
-    out.push(`<div class="grouphead"><h3>${esc(g.name)}</h3><span class="small muted">${g.count2026 ? g.count2026 + ' categories' : 'discontinued'}</span></div>`);
-    for (const c of cs) {
-      const n = SCHEMES ? amcsFor(c.id).length : null;
-      const badges = (c.status === 'new' ? '<span class="badge new">New 2026</span>' : '') +
-        (c.status === 'discontinued' ? '<span class="badge gone">Closed to new money</span>' : '') +
-        (c.was ? `<span class="badge was">was ${esc(c.was)}</span>` : '');
-      out.push(`<div class="catrow" id="cat-${c.id}">
-        <span class="band" style="background:${riskColor(c.risk)}" title="Typical risk: ${esc(c.risk)}"></span>
-        <div><div class="name">${esc(c.name)}${badges}</div><div class="rule">${esc(c.rule)}</div>${c.nism ? `<div class="nism">${esc(c.nism)}</div>` : ''}</div>
-        <div class="side">${esc(c.horizon)}<br>${esc(c.risk)}</div>
-        <div class="more">${esc(c.what)} ${n !== null && c.status !== 'discontinued' ? `<button class="offerbtn" type="button" data-offer="${c.id}">${n ? `Offered by ${n} AMC${n > 1 ? 's' : ''}` : 'No schemes in AMFI data yet'}</button>` : ''}<div class="offerslot"></div></div>
-      </div>`);
-    }
-  }
-  $('#catList').innerHTML = out.join('') || `<div class="empty">No category matches "${esc(q)}". Try a shorter word, like "gilt" or "cap".</div>`;
-  $('#catList').onclick = (e) => {
-    const b = e.target.closest('[data-offer]'); if (!b) return;
-    const slot = b.parentElement.querySelector('.offerslot');
-    if (slot.innerHTML) { slot.innerHTML = ''; return; }
-    openOfferings(b.dataset.offer, slot);
-  };
+const swing = (root) => requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('.needle').forEach((n) => n.style.transform = `rotate(${n.dataset.a}deg)`)));
+const meterLine = (risk) => { const i = riskIndex(risk); return `<div class="meterline" aria-label="Risk: ${esc(risk)}">${[0, 1, 2, 3, 4, 5].map((k) => `<i style="${k <= i ? `background:var(--r${k + 1})` : ''}"></i>`).join('')}</div>`; };
+
+function fundCard(c, opts = {}) {
+  const g = groupById(c.group);
+  const got = !!G.cards[c.id];
+  const tag = opts.tag || 'button';
+  const ri = riskIndex(c.risk);
+  return `<${tag} class="fcard g-${c.group} ${got || opts.show ? '' : 'locked'}" ${tag === 'button' ? `type="button" data-card="${c.id}"` : ''} aria-label="${esc(c.name)}${got ? ', collected' : ''}">
+    <div class="top"><span><span class="ic">${ICON[c.group]}</span>${esc(g.name)}</span><span class="num">#${String(c.no).padStart(2, '0')}</span></div>
+    <div class="mid">
+      <div class="stat">${esc(c.stat[0])}</div><div class="statl">${esc(c.stat[1])}</div>
+      <div class="name">${esc(c.name)}</div>
+      <div class="good">${c.status === 'discontinued' ? '<span class="pill closed">Closed to new money</span>' : `Good for ${esc(c.horizon)}`}${c.status === 'new' ? ' · <span class="pill new">New</span>' : ''}</div>
+      ${ri >= 0 ? meterLine(c.risk) : ''}
+    </div>
+    <div class="foot"><span>${ri >= 0 ? esc(c.risk) + ' risk' : ''}</span><span class="lock">Tap to collect</span><span class="got" title="Collected">${ICON.check}</span></div>
+  </${tag}>`;
 }
-function drawOtherTypes() {
-  $('#otherTypes').innerHTML = `<div class="grouphead"><h3>Other scheme types you should know</h3></div>
-    <p class="muted small">These aren't separate SEBI categories but appear throughout the NISM V-A workbook and the exam.</p>
-    ${CATS.otherTypes.map((g) => `<details class="topic"><summary>${esc(g.group)} <span class="small muted" style="font-weight:500">${g.items.length}</span></summary><div class="body">
-      ${g.note ? `<p class="muted">${esc(g.note)}</p>` : ''}
-      <dl class="kv">${g.items.map((i) => `<dt>${esc(i.name)}</dt><dd>${esc(i.text)}</dd>`).join('')}</dl></div></details>`).join('')}`;
+function openSheet(html, gcls = '') {
+  const sh = $('#sheet'); sh.className = 'sheet ' + gcls; sh.innerHTML = html;
+  $('#scrim').classList.add('on'); document.body.style.overflow = 'hidden';
+  sh.querySelector('.close')?.focus();
+  sh.querySelector('.close')?.addEventListener('click', closeSheet);
+}
+function closeSheet() { $('#scrim').classList.remove('on'); document.body.style.overflow = ''; }
+$('#scrim').addEventListener('click', (e) => { if (e.target.id === 'scrim') closeSheet(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+function openFund(id) {
+  const c = catById(id); const g = groupById(c.group);
+  if (!G.cards[id]) { G.cards[id] = 1; save(); award(5, 'New fund type collected'); }
+  const n = SCHEMES ? amcsFor(id).length : 0;
+  openSheet(`<div class="shead"><button class="close" type="button" aria-label="Close">×</button>
+      <div class="pill" style="background:rgba(255,255,255,.2);color:#fff">${esc(g.name)} · #${String(c.no).padStart(2, '0')}</div>
+      <h2 style="margin-top:10px">${esc(c.name)}</h2>
+      ${c.was ? `<p style="opacity:.9;margin:6px 0 0">Earlier called ${esc(c.was)}. Some fund names still use it.</p>` : ''}</div>
+    <div class="sbody">
+      <p style="font-size:1.1rem">${esc(c.what)}</p>
+      <div class="facts">
+        <div><small>Good for</small><b>${esc(c.horizon)}</b></div>
+        <div><small>Typical risk</small><b>${esc(c.risk)}</b></div>
+        <div><small>Offered by</small><b>${SCHEMES ? (n ? n + ' fund house' + (n > 1 ? 's' : '') : 'None yet') : '…'}</b></div>
+      </div>
+      <p class="small"><b>SEBI's rule:</b> ${esc(c.rule)}</p>
+      ${c.status === 'discontinued' ? '' : `<div id="offerSlot"></div>`}
+    </div>`, 'g-' + c.group);
+  if (c.status !== 'discontinued') offerings(id, $('#offerSlot'));
+  const cardEl = document.querySelector(`[data-card="${id}"]`); if (cardEl) cardEl.classList.remove('locked');
 }
 
-/* ============ OFFERINGS: category -> AMCs -> schemes ============ */
-function openOfferings(catId, slot, preselectAmc) {
+function offerings(catId, slot, pre) {
   const c = catById(catId);
-  if (!SCHEMES) { slot.innerHTML = `<div class="empty">The AMC list appears once live AMFI data has loaded.</div>`; return; }
+  if (!SCHEMES) { slot.innerHTML = '<p class="dim small">Fund house data is loading or not refreshed yet.</p>'; return; }
   const list = amcsFor(catId);
-  if (!list.length) {
-    slot.innerHTML = `<div class="empty">No open-ended schemes are listed under ${esc(c.name)} in today's AMFI file.${c.status === 'new' ? ' This category is new in 2026, so AMCs may still be launching or re-labelling schemes.' : ''}</div>`;
-    return;
-  }
-  slot.innerHTML = `<div class="panel">
-    <h3>${T('whoOffers')}: ${esc(c.name)}</h3>
-    <p class="small muted">${T('pickAmc')} ${list.length} AMC${list.length > 1 ? 's' : ''}, A to Z.</p>
-    ${c.sharedLabel ? `<p class="note small">AMFI's NAV file still reports sectoral and thematic funds under one label, so this list includes both.</p>` : ''}
-    <div class="amclist">${list.map((x) => `<button class="amcbtn" type="button" data-amc="${x.a}" aria-pressed="false"><span>${esc(x.name.replace(/ Mutual Fund$/i, ''))}</span><small>${x.n}</small></button>`).join('')}</div>
-    <div class="schemes" aria-live="polite"></div></div>`;
-  const panel = slot.querySelector('.panel');
-  panel.querySelector('.amclist').onclick = (e) => {
-    const b = e.target.closest('[data-amc]'); if (!b) return;
-    panel.querySelectorAll('.amcbtn').forEach((x) => x.setAttribute('aria-pressed', x === b));
-    showSchemes(catId, Number(b.dataset.amc), panel.querySelector('.schemes'));
+  if (!list.length) { slot.innerHTML = `<div class="empty small">No fund house lists a scheme of this type yet.${c.status === 'new' ? ' It\'s new in 2026, so schemes are still launching.' : ''}</div>`; return; }
+  const many = list.length > 12;
+  slot.innerHTML = `<h3 style="margin-top:18px">${T('whoOffers')}</h3>
+    <p class="small muted">${list.length} fund house${list.length > 1 ? 's' : ''} offer this, listed A to Z. ${T('pickAmc')}${c.sharedLabel ? ' Some fund houses still report sectoral and thematic funds together, so both appear here.' : ''}</p>
+    ${many ? `<div class="amctools"><label class="sr" for="amcq">Search fund houses</label><input class="search" id="amcq" type="search" placeholder="Search ${list.length} fund houses"></div>` : ''}
+    <div class="amcgrid"></div>${many ? `<button class="linkbtn small" type="button" id="amcmore">Show all ${list.length}</button>` : ''}
+    <div class="schemes" aria-live="polite"></div>`;
+  let showAll = !many;
+  const grid = slot.querySelector('.amcgrid');
+  const draw = () => {
+    const q = (slot.querySelector('#amcq')?.value || '').toLowerCase();
+    const rows = list.filter((x) => x.name.toLowerCase().includes(q));
+    const shown = showAll || q ? rows : rows.slice(0, 12);
+    grid.innerHTML = shown.map((x) => `<button class="amcbtn" type="button" data-amc="${x.a}" aria-pressed="false"><span>${esc(shortAmc(x.name))}</span>${x.n > 1 ? `<small>${x.n} schemes</small>` : ''}</button>`).join('') || '<p class="dim small">No match.</p>';
+    const more = slot.querySelector('#amcmore'); if (more) more.hidden = showAll || !!q;
   };
-  if (preselectAmc !== undefined) panel.querySelector(`[data-amc="${preselectAmc}"]`)?.click();
+  draw();
+  slot.querySelector('#amcq')?.addEventListener('input', draw);
+  slot.querySelector('#amcmore')?.addEventListener('click', () => { showAll = true; draw(); });
+  grid.onclick = (e) => {
+    const b = e.target.closest('[data-amc]'); if (!b) return;
+    grid.querySelectorAll('.amcbtn').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    schemesOf(catId, +b.dataset.amc, slot.querySelector('.schemes'));
+    slot.querySelector('.schemes').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+  if (pre !== undefined) slot.querySelector(`[data-amc="${pre}"]`)?.click();
 }
-function showSchemes(catId, amc, box) {
+function schemesOf(catId, amc, box) {
   const list = (BY_CAT[catId] || []).filter((s) => s.a === amc);
-  const amcName = SCHEMES.amcs[amc].name;
-  const planTxt = (p) => p === 'RD' ? 'Regular and Direct plans' : p === 'R' ? 'Regular plan only' : 'Direct plan only';
-  box.innerHTML = `<h3 style="margin-top:14px">${esc(amcName)}</h3>
-    ${list.map((s) => `<div class="scheme">
-      <div class="sn">${esc(s.n)}</div>
-      <div class="meta"><span>${planTxt(s.p)}</span>${s.nav != null ? `<span>NAV Rs ${Number(s.nav).toLocaleString('en-IN', { maximumFractionDigits: 4 })} on ${esc(s.d)}</span>` : ''}<span>AMFI code ${esc(s.code)}</span></div>
-      <div class="meta"><a href="https://www.google.com/search?q=${encodeURIComponent(s.n + ' SID KIM ' + amcName)}" target="_blank" rel="noopener">Find its SID and KIM</a></div>
-    </div>`).join('')}
-    <p class="small" style="margin-top:12px"><b>Before choosing, check in the SID/KIM:</b></p>
-    <ul class="checklist"><li>Riskometer level</li><li>Expense ratio (TER) of the plan you'll buy</li><li>Exit load and its period</li><li>Minimum SIP and lumpsum</li><li>Benchmark and how the fund has tracked it</li><li>Fund manager and their tenure</li><li>Portfolio: top holdings, credit quality for debt</li><li>Fund size (AUM)</li></ul>
+  const name = SCHEMES.amcs[amc].name;
+  if (!G.houses[amc]) { G.houses[amc] = 1; save(); checkBadges(); }
+  const plans = (p) => p === 'RD' ? 'Direct and Regular plans' : p === 'R' ? 'Regular plan' : 'Direct plan';
+  box.innerHTML = `<h3 style="margin-top:14px">${esc(name)}</h3>
+    ${list.map((s) => `<div class="scheme"><div class="sn">${esc(s.n)}</div>
+      <div class="meta"><span>${plans(s.p)}</span>${s.nav != null ? `<span>NAV Rs ${Number(s.nav).toLocaleString('en-IN', { maximumFractionDigits: 4 })} on ${esc(s.d)}</span>` : ''}</div>
+      <div class="meta"><a href="https://www.google.com/search?q=${encodeURIComponent(s.n + ' ' + name + ' SID KIM')}" target="_blank" rel="noopener">Find its factsheet, SID and KIM</a></div></div>`).join('')}
+    <div class="note" style="margin-top:16px"><span class="ni">🔍</span><div><b>Before you choose, check in the factsheet:</b>
+    <ul class="checklist" style="margin:6px 0 0"><li>Riskometer level</li><li>Expense ratio of your plan</li><li>Exit load and for how long</li><li>Minimum SIP and lumpsum</li><li>Returns vs its benchmark over 5+ years</li><li>Fund manager and how long they've run it</li><li>Top holdings, or credit quality for debt</li><li>Fund size</li></ul></div></div>
     <p class="tiny">Past performance may or may not be sustained in future. FundFit doesn't rank or recommend schemes.</p>`;
 }
 
-/* ============ FIT WIZARD ============ */
-let ANS = {}, STEP = 0;
-function steps() {
-  const s = ['purpose', 'mode', 'horizon', 'risk'];
-  if (ANS.purpose !== 'emergency') s.push('emerg');
-  if (ANS.purpose === 'tax') s.push('regime');
-  return s;
+/* ============ HOME ============ */
+function renderHome() {
+  const el = $('#v-home');
+  const nCats = ACTIVE().length, got = collected(), lessons = Object.keys(G.lessons).length;
+  const trio = ['flexi-cap', 'liquid', 'daaf'].map(catById).filter(Boolean);
+  const q = (href, ic, color, title, text, done, total) => `<a class="card quest" href="${href}"><span class="ic" style="background:${color}">${ic}</span><h3>${title}</h3><span class="muted small">${text}</span>${total ? `<div class="row small dim" style="justify-content:space-between"><span>${done} of ${total}</span></div><div class="bar"><b style="width:${(done / total) * 100}%;background:${color}"></b></div>` : ''}</a>`;
+  el.innerHTML = `
+    <div class="hero">
+      <div>
+        <h1>Mutual funds,<br><span class="swap">minus the jargon.</span></h1>
+        <p class="lede">Learn in 10 short lessons, play your way through all ${nCats} fund types, and find the kind of fund that suits your money.</p>
+        <div class="row"><a class="btn" href="#fit">Find my fit</a><a class="btn plain" href="#learn">Start lesson 1</a></div>
+      </div>
+      <div class="hero-art"><div class="stack">${trio.map((c) => fundCard(c, { tag: 'div', show: true })).join('')}</div></div>
+    </div>
+    <div class="quests">
+      ${q('#learn', ICON.book, 'var(--brand)', 'Learn the basics', '10 bite-size lessons with a quick check each.', lessons, LESSONS.length)}
+      ${q('#funds', ICON.cards, 'var(--eq)', 'Collect fund types', `Open each card to learn what it's for.`, got, nCats)}
+      ${q('#play', ICON.bolt, 'var(--hyb)', 'Play Fund Match', 'Real-life situations. Pick the right fund.', G.best, 10)}
+      ${q('#fit', ICON.target, 'var(--ok)', 'Find my fit', 'Answer 5 questions, see the fund type for you.', G.fits ? 1 : 0, 1)}
+    </div>
+    ${SCHEMES ? `<div class="livebar"><span class="pulse" aria-hidden="true"></span><span>Live from AMFI</span><span><b>${SCHEMES.amcs.length}</b>fund houses</span><span><b>${inr(SCHEMES.schemes.filter((s) => s.s === 'O').length)}</b>open schemes</span><span>NAVs as of <b style="font-size:1.1rem">${esc(SCHEMES.navDate)}</b></span><a href="#houses" class="small">See all fund houses</a></div>` : ''}
+    <div class="twocol">
+      <div class="card pad"><h3>Three things to know first</h3>
+        <ol class="muted" style="padding-left:1.2em;margin:10px 0 0">
+          <li style="margin:.4em 0"><b style="color:var(--ink)">When you need the money matters most.</b> Money for next year and money for 10 years from now belong in very different funds.</li>
+          <li style="margin:.4em 0"><b style="color:var(--ink)">Build an emergency fund before anything else.</b> 3 to 6 months of expenses, somewhere safe and quick to reach.</li>
+          <li style="margin:.4em 0"><b style="color:var(--ink)">No fund guarantees returns.</b> Higher expected growth always comes with bigger ups and downs.</li>
+        </ol></div>
+      ${newsCard(5)}
+    </div>`;
 }
-function optBtns(key, opts, cls = '') {
-  return `<div class="opts ${cls}" role="group">${opts.map(([v, title, desc]) => `<button class="opt" type="button" data-k="${key}" data-v="${v}" aria-pressed="${ANS[key] === v}"><div><b>${esc(title)}</b>${desc ? `<span>${esc(desc)}</span>` : ''}</div></button>`).join('')}</div>`;
+function newsCard(n) {
+  const items = SEBI && SEBI.items ? SEBI.items.slice(0, n) : [];
+  if (!items.length) return `<div class="card pad"><h3>What's new from SEBI</h3><p class="muted small">New mutual fund rules from SEBI will show up here.</p></div>`;
+  return `<div class="card pad"><h3>What's new from SEBI</h3><div class="news">${items.map((i) => `<a href="${esc(i.link)}" target="_blank" rel="noopener" title="${esc(i.title)}"><span class="tt">${esc(i.title)}</span><div class="tiny">${esc([i.type, i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : ''].filter(Boolean).join(' · '))}</div></a>`).join('')}</div><p class="tiny" style="margin-top:10px">Checked daily on SEBI's website and filtered for mutual fund topics.</p></div>`;
 }
-function renderFit() {
-  if (ANS._done) { renderWizardDone(); return; }
-  const st = steps(); STEP = Math.min(STEP, st.length - 1);
-  const k = st[STEP];
-  let body = '';
-  if (k === 'purpose') body = `<h3>${T('q_purpose')}</h3><p class="muted">${T('q_purpose_h')}</p>` + optBtns('purpose', [['emergency', T('p_emergency'), T('p_emergency_d')], ['goal', T('p_goal'), T('p_goal_d')], ['wealth', T('p_wealth'), T('p_wealth_d')], ['tax', T('p_tax'), T('p_tax_d')]], 'two');
-  if (k === 'mode') body = `<h3>${T('q_mode')}</h3>` + optBtns('mode', [['sip', T('m_sip'), T('m_sip_d')], ['lump', T('m_lump'), T('m_lump_d')]], 'two') +
-    (ANS.mode ? `<label class="label" for="amt">${ANS.mode === 'sip' ? T('amt_sip') : T('amt_lump')}</label><div class="amount"><span>Rs</span><input id="amt" inputmode="numeric" autocomplete="off" value="${ANS.amount ? fmtINR(ANS.amount) : ''}" placeholder="${ANS.mode === 'sip' ? '5,000' : '1,00,000'}"></div>` : '');
-  if (k === 'horizon') body = `<h3>${T('q_horizon')}</h3><p class="muted">${T('q_horizon_h')}</p>` + optBtns('horizon', RULES.HORIZONS.map((h) => [h, T(h)]));
-  if (k === 'risk') body = `<h3>${T('q_risk')}</h3><p class="muted">${T('q_risk_h')}</p>` + optBtns('risk', [['exit', T('r_exit')], ['hold', T('r_hold')], ['add', T('r_add')]]);
-  if (k === 'emerg') body = `<h3>${T('q_emerg')}</h3><p class="muted">${T('q_emerg_h')}</p>` + optBtns('emergency', [['yes', T('e_yes')], ['no', T('e_no')]], 'two');
-  if (k === 'regime') body = `<h3>${T('q_regime')}</h3><p class="muted">${T('q_regime_h')}</p>` + optBtns('regime', [['old', T('t_old')], ['new', T('t_new')], ['unsure', T('t_unsure')]]);
 
-  const ready = { purpose: !!ANS.purpose, mode: !!ANS.mode && ANS.amount > 0, horizon: !!ANS.horizon, risk: !!ANS.risk, emerg: !!ANS.emergency, regime: !!ANS.regime }[k];
-  const last = STEP === st.length - 1;
-  $('#wizard').innerHTML = `<div class="wiz">
-    <div class="progress" aria-hidden="true"><i style="width:${(STEP / st.length) * 100}%"></i></div>
-    <div class="tiny">Question ${STEP + 1} of ${st.length}</div>
-    <div class="q">${body}</div>
-    <div class="wiznav">
-      <button class="btn ghost" type="button" id="wback" ${STEP === 0 ? 'disabled' : ''}>${T('back')}</button>
-      <button class="btn primary" type="button" id="wnext" ${ready ? '' : 'disabled'}>${last ? T('seeResult') : T('next')}</button>
+/* ============ LESSONS ============ */
+const LESSONS = [
+  { id: 'what', t: 'What a mutual fund is', s: '2 min', b: `
+    <p>A mutual fund pools money from lakhs of people and invests it for them in shares, bonds, gold or a mix. A professional team decides what to buy, following a goal written down before the fund starts.</p>
+    <div class="big-idea">You don't buy a separate "mutual fund asset". You buy shares, bonds or gold <i>through</i> a fund, in small pieces called units.</div>
+    <p>If the investments grow, your units are worth more. If they fall, your units are worth less. Everyone else involved, from the fund company to the distributor, only earns a fee.</p>`,
+    q: { q: 'The investments in a mutual fund belong to…', a: ['The investors who hold its units', 'The fund company (AMC)', 'The bank that holds the money', 'SEBI'], r: 0, e: 'The fund is set up as a trust for its investors. The fund company only manages the money for a fee.' } },
+  { id: 'safe', t: 'Who keeps your money safe', s: '2 min', b: `
+    <p>Your money isn't sitting with one company. Several independent parties each have a job:</p>
+    <div class="who">
+      <div><b>Fund company (AMC)</b><span class="small muted">Decides what to buy and sell</span></div>
+      <div><b>Trustees</b><span class="small muted">Watch the AMC on your behalf</span></div>
+      <div><b>Custodian</b><span class="small muted">Holds the actual shares and bonds</span></div>
+      <div><b>Registrar (RTA)</b><span class="small muted">Keeps your records and statements</span></div>
+      <div><b>SEBI</b><span class="small muted">The regulator that sets the rules</span></div>
+      <div><b>AMFI</b><span class="small muted">Industry body; registers distributors</span></div>
+      <div class="you"><b>You</b><span class="small muted">The owner of the units</span></div>
+    </div>
+    <p>This split is why a fund company going through trouble doesn't mean your investments disappear. It doesn't protect you from market falls, though.</p>`,
+    q: { q: 'Who regulates mutual funds in India?', a: ['SEBI', 'RBI', 'AMFI', 'The Finance Ministry'], r: 0, e: 'SEBI regulates mutual funds. AMFI is the industry association, not a regulator.' } },
+  { id: 'nav', t: 'NAV: the price of one unit', s: '2 min', b: `
+    <p>NAV (net asset value) is the value of one unit, worked out every business day from the market price of everything the fund holds, minus expenses.</p>
+    <p>You buy and sell units at the NAV. Invest Rs 10,000 when the NAV is Rs 50 and you get 200 units.</p>
+    <div class="big-idea">A low NAV doesn't make a fund cheap, and a high NAV doesn't make it expensive. A high NAV usually just means the fund is older and has grown.</div>`,
+    q: { q: 'Fund A has a NAV of Rs 15, Fund B has a NAV of Rs 150. Which is the better deal?', a: ['You can\'t tell from NAV alone', 'Fund A, it\'s cheaper', 'Fund B, it has grown more', 'Fund A, you get more units'], r: 0, e: 'What matters is how the fund\'s investments perform from here, not the NAV. 10% growth is 10% whether the NAV is 15 or 150.' } },
+  { id: 'families', t: 'Equity, debt and hybrid', s: '3 min', b: `
+    <dl class="kv">
+      <dt style="color:var(--eq)">Equity funds</dt><dd>Own shares of companies. Highest long-term growth, but can fall 30–50% in bad years. Give them 5+ years.</dd>
+      <dt style="color:var(--debt)">Debt funds</dt><dd>Lend to governments, banks and companies for interest. Steadier, lower returns. Good for parking money and goals within a few years.</dd>
+      <dt style="color:var(--hyb)">Hybrid funds</dt><dd>Mix both, and sometimes gold, for a smoother ride than pure equity.</dd>
+    </dl>
+    <div class="big-idea">The closer your goal, the less equity your money should hold.</div>
+    <p>SEBI sorts every fund into one of ${'{{N}}'} fund types, so a "large cap fund" means the same thing at every fund house. <a href="#funds">Browse them all</a>.</p>`,
+    q: { q: 'You need money for a trip in 8 months. Which family fits best?', a: ['Debt', 'Equity', 'Hybrid, mostly equity', 'Any of them'], r: 0, e: 'Equity can easily be down in 8 months. Short-term money belongs in short-term debt funds.' } },
+  { id: 'risk', t: 'Reading the riskometer', s: '2 min', b: `
+    <div style="max-width:260px;margin:0 auto">${'{{METER}}'}</div>
+    <p>Every scheme shows a riskometer with six levels: Low, Low to Moderate, Moderate, Moderately High, High and Very High. It's updated monthly from what the fund actually holds.</p>
+    <p>Almost all equity funds sit at Very High. That's not a warning to avoid them; it says their value swings a lot, so they need time.</p>
+    <p>Debt funds also show a small grid of interest-rate risk against credit risk (the chance a borrower doesn't repay).</p>`,
+    q: { q: 'How many levels does the riskometer have?', a: ['Six', 'Three', 'Five', 'Ten'], r: 0, e: 'Low, Low to Moderate, Moderate, Moderately High, High and Very High.' } },
+  { id: 'sip', t: 'SIP, lumpsum, SWP and STP', s: '3 min', b: `
+    <dl class="kv">
+      <dt>SIP</dt><dd>Invest a fixed amount every month. When prices fall, the same amount buys more units. It builds discipline and removes the stress of timing.</dd>
+      <dt>Lumpsum</dt><dd>Invest all at once. Fine for debt funds; for equity, spreading it out often feels easier.</dd>
+      <dt>STP</dt><dd>Park a lumpsum in a liquid fund and move a fixed amount into equity each month.</dd>
+      <dt>SWP</dt><dd>Withdraw a fixed amount regularly, e.g. as monthly income in retirement.</dd>
+    </dl>
+    <p>You can pause, change or stop a SIP whenever you want. Many funds accept SIPs from Rs 100–500 a month.</p>`,
+    q: { q: 'Markets fall and your SIP continues. What happens?', a: ['The same amount buys more units', 'The SIP stops automatically', 'You pay a penalty', 'You get fewer units'], r: 0, e: 'Lower prices mean more units for the same money, which helps when markets recover.' } },
+  { id: 'options', t: 'Growth or IDCW?', s: '2 min', b: `
+    <p><b>Growth option:</b> all gains stay invested and the NAV keeps growing. Best for building wealth.</p>
+    <p><b>IDCW option</b> (it used to be called "dividend"): the fund pays out some money now and then.</p>
+    <div class="big-idea">An IDCW payout isn't a bonus. It's your own money coming back to you, and the NAV drops by the same amount.</div>`,
+    q: { q: 'Where does an IDCW payout come from?', a: ['Your own investment\'s value', 'Extra profit on top of your returns', 'The fund company\'s pocket', 'The government'], r: 0, e: 'The NAV falls by the amount paid out. It\'s a withdrawal from your own investment.' } },
+  { id: 'plans', t: 'Direct and Regular plans', s: '2 min', b: `
+    <p>Every scheme has two plans that own exactly the same investments:</p>
+    <dl class="kv">
+      <dt>Direct plan</dt><dd>Bought directly from the fund house or an execution-only app. Lower yearly cost. You do the research and upkeep yourself.</dd>
+      <dt>Regular plan</dt><dd>Bought through a mutual fund distributor, who is paid from the fund's yearly cost. You get their help choosing, paperwork and reviews.</dd>
+    </dl>
+    <p>Small cost differences compound over years. Know which one you're buying and what you get for the difference.</p>`,
+    q: { q: 'Which plan has the lower yearly cost?', a: ['Direct plan', 'Regular plan', 'Both cost the same', 'Depends on the NAV'], r: 0, e: 'Direct plans have no distributor commission built in, so their expense ratio is lower.' } },
+  { id: 'costs', t: 'What a fund costs you', s: '2 min', b: `
+    <dl class="kv">
+      <dt>Expense ratio</dt><dd>A yearly cost, a % of your investment, deducted a tiny bit every day. You never get a bill; it's already in the NAV.</dd>
+      <dt>Exit load</dt><dd>A small charge if you sell too soon, e.g. 1% within a year. Check the period before you invest.</dd>
+      <dt>Entry load</dt><dd>Banned. Nobody may charge you to invest.</dd>
+    </dl>
+    <p>Index funds usually cost the least because nobody has to pick stocks.</p>`,
+    q: { q: 'How is the expense ratio charged?', a: ['A little every day, already reflected in the NAV', 'Once a year as a separate bill', 'Only when you sell', 'Only on SIPs'], r: 0, e: 'It\'s deducted daily from the fund\'s assets, so the NAV you see is already after costs.' } },
+  { id: 'ready', t: 'Before you invest', s: '3 min', b: `
+    <ul>
+      <li><b>Emergency fund first.</b> 3–6 months of expenses in a liquid fund or savings account.</li>
+      <li><b>Insurance next.</b> Term life and health cover before investing for growth.</li>
+      <li><b>Match the fund to the timeline.</b> That's what <a href="#fit">Find my fit</a> does.</li>
+      <li><b>Read the scheme documents.</b> The KIM is a short summary; the SID has the details.</li>
+      <li><b>Know the tax.</b> Gains are taxed when you sell; equity funds are taxed more gently than debt. ELSS gives a Section 80C deduction only under the old tax regime. Tax rules change with Budgets, so check the current ones.</li>
+      <li><b>Stay invested.</b> Most long-term damage comes from selling in a panic.</li>
+    </ul>`,
+    q: { q: 'What should come before investing in an equity fund?', a: ['An emergency fund', 'A credit card', 'A high NAV fund', 'Nothing, start right away'], r: 0, e: 'Without an emergency fund, a surprise expense could force you to sell equity at a loss.' } },
+];
+function renderLearn(arg) {
+  const el = $('#v-learn');
+  if (arg) return renderLesson(arg);
+  const nextIdx = LESSONS.findIndex((l) => !G.lessons[l.id]);
+  el.innerHTML = `<div class="section-head"><div><h2>Learn the basics</h2><p class="muted">10 short lessons. Finish each with a one-question check for bonus XP.</p></div><div class="pill">${Object.keys(G.lessons).length} of ${LESSONS.length} done</div></div>
+    <div class="path">${LESSONS.map((l, i) => `<button class="node ${G.lessons[l.id] ? 'done' : i === nextIdx ? 'next' : ''}" type="button" data-l="${l.id}">
+      <span class="disc">${G.lessons[l.id] ? ICON.star : i + 1}</span><span><b>${esc(l.t)}</b><span>${l.s}${G.checks[l.id] ? ' · check passed' : ''}</span></span></button>`).join('')}</div>`;
+  el.querySelector('.path').onclick = (e) => { const b = e.target.closest('[data-l]'); if (b) location.hash = 'learn/' + b.dataset.l; };
+}
+function renderLesson(id) {
+  const i = LESSONS.findIndex((l) => l.id === id); if (i < 0) return (location.hash = 'learn');
+  const l = LESSONS[i], el = $('#v-learn');
+  const body = l.b.replace('{{N}}', CATS.categories.filter((c) => c.status !== 'discontinued').length).replace('{{METER}}', meterSVG(-1, ''));
+  el.innerHTML = `<div class="lesson">
+    <p><a href="#learn" class="small">← All lessons</a></p>
+    <div class="pill" style="margin-top:6px">Lesson ${i + 1} of ${LESSONS.length} · ${l.s}</div>
+    <h2 style="margin:12px 0 10px">${esc(l.t)}</h2>
+    <div class="body">${body}</div>
+    <div class="card qcard" style="margin-top:26px" id="lcheck"></div>
+  </div>`;
+  if (!G.lessons[l.id]) { G.lessons[l.id] = 1; save(); award(10, 'Lesson read'); }
+  quizQuestion($('#lcheck'), { kind: 'Quick check', q: l.q.q, answers: l.q.a, right: l.q.r, explain: l.q.e }, (ok) => {
+    if (ok && !G.checks[l.id]) { G.checks[l.id] = 1; save(); award(15, 'Check passed'); }
+  }, () => { location.hash = i < LESSONS.length - 1 ? 'learn/' + LESSONS[i + 1].id : 'funds'; }, i < LESSONS.length - 1 ? 'Next lesson' : 'Collect fund types');
+}
+
+/* Shared question renderer. onAnswer(ok) fires once; onNext on continue. */
+function quizQuestion(box, qq, onAnswer, onNext, nextLabel = 'Continue', head = '') {
+  const order = shuffle(qq.answers.map((a, i) => i));
+  const two = qq.answers.length === 2;
+  box.innerHTML = `${head}<div class="qkind">${esc(qq.kind)}</div><div class="qtext">${esc(qq.q)}</div>
+    <div class="answers ${two ? 'two' : ''}">${order.map((k, n) => `<button class="ans" type="button" data-k="${k}"><kbd>${n + 1}</kbd><span>${esc(qq.answers[k])}</span></button>`).join('')}</div>
+    <div class="feedback" role="status"></div>
+    <div class="qfoot"><button class="btn" type="button" disabled>${esc(nextLabel)}</button></div>`;
+  let done = false;
+  const fb = box.querySelector('.feedback'), nb = box.querySelector('.qfoot .btn');
+  const choose = (b) => {
+    if (done) return; done = true;
+    const ok = +b.dataset.k === qq.right;
+    box.querySelectorAll('.ans').forEach((x) => { if (+x.dataset.k === qq.right) x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    fb.className = 'feedback show ' + (ok ? 'good' : 'bad');
+    fb.innerHTML = `<b>${ok ? pick(['Nailed it!', 'Correct!', 'Spot on!', 'Yes!']) : 'Not quite.'}</b>${esc(qq.explain || '')}`;
+    nb.disabled = false; nb.className = 'btn ' + (ok ? 'ok' : ''); nb.focus();
+    onAnswer(ok);
+  };
+  box.querySelector('.answers').onclick = (e) => { const b = e.target.closest('.ans'); if (b) choose(b); };
+  box.onkeydown = (e) => { const n = +e.key; const bs = box.querySelectorAll('.ans'); if (n >= 1 && n <= bs.length && !done) choose(bs[n - 1]); };
+  nb.onclick = onNext;
+  box.querySelector('.ans').focus({ preventScroll: true });
+}
+
+/* ============ FUND TYPES (deck) ============ */
+let DECK_FILTER = 'all', DECK_Q = '';
+function renderFunds(arg) {
+  const el = $('#v-funds');
+  const got = collected(), total = ACTIVE().length;
+  el.innerHTML = `<div class="section-head"><div><h2>Every type of mutual fund</h2><p class="muted">SEBI sorts all funds into ${ACTIVE().length} types, so a name means the same thing at every fund house. Open a card to learn what it's for and who offers it.</p></div>
+    <div style="min-width:220px"><div class="row" style="justify-content:space-between"><b>${got} / ${total} collected</b><span class="dim small">+5 XP each</span></div><div class="bar" style="margin-top:6px"><b style="width:${(got / total) * 100}%;background:var(--gold)"></b></div></div></div>
+    <div class="filters" role="group" aria-label="Filter">${[['all', 'All', ''], ...CATS.groups.map((g) => [g.id, g.name, 'g-' + g.id])].map(([id, n, cls]) => `<button class="chip ${cls}" type="button" data-f="${id}" aria-pressed="${DECK_FILTER === id}">${id !== 'all' ? '<i></i>' : ''}${esc(n)}</button>`).join('')}</div>
+    <label class="sr" for="dq">Search fund types</label><input class="search" id="dq" type="search" placeholder="Search: liquid, gold, tax…" value="${esc(DECK_Q)}">
+    <div id="deckbody"></div>
+    <div class="grouptitle" style="margin-top:40px"><h3>Other names you'll hear</h3><p>Not separate fund types, but words that come up when you start investing.</p></div>
+    <div class="twocol">${CATS.otherTypes.map((g) => `<div class="card pad"><h3>${esc(g.group)}</h3><dl class="kv">${g.items.map((i) => `<dt>${esc(i.name)}</dt><dd>${esc(i.text)}</dd>`).join('')}</dl></div>`).join('')}</div>`;
+  el.querySelector('.filters').onclick = (e) => { const b = e.target.closest('[data-f]'); if (!b) return; DECK_FILTER = b.dataset.f; renderFunds(); };
+  $('#dq').oninput = (e) => { DECK_Q = e.target.value; drawDeck(); };
+  drawDeck();
+  if (arg) openFund(arg);
+}
+function drawDeck() {
+  const q = DECK_Q.toLowerCase().trim();
+  const out = [];
+  for (const g of CATS.groups) {
+    if (DECK_FILTER !== 'all' && DECK_FILTER !== g.id) continue;
+    const cs = CATS.categories.filter((c) => c.group === g.id && (!q || `${c.name} ${c.was || ''} ${c.what}`.toLowerCase().includes(q)));
+    if (!cs.length) continue;
+    out.push(`<div class="grouptitle g-${g.id}"><span class="dot"></span><h3>${esc(g.name)}</h3><span class="dim">${cs.length} type${cs.length > 1 ? 's' : ''}</span><p>${esc(g.about)}</p></div><div class="deck">${cs.map((c) => fundCard(c)).join('')}</div>`);
+  }
+  $('#deckbody').innerHTML = out.join('') || `<div class="empty">Nothing matches "${esc(q)}". Try a shorter word like "gold" or "tax".</div>`;
+  $('#deckbody').onclick = (e) => { const b = e.target.closest('[data-card]'); if (b) openFund(b.dataset.card); };
+}
+
+/* ============ PLAY: FUND MATCH ============ */
+const MYTHS = [
+  ['A fund with a lower NAV is cheaper to buy.', false, 'NAV says nothing about value. Growth from here is what counts.'],
+  ['Mutual funds guarantee returns.', false, 'No mutual fund can promise returns. Even debt funds can lose money.'],
+  ['Many funds let you start a SIP with Rs 100–500 a month.', true, 'Minimums vary by scheme, but small SIPs are common.'],
+  ['Debt funds can never lose money.', false, 'Bond prices move with interest rates, and borrowers can default.'],
+  ['ELSS gives a tax deduction under the new tax regime.', false, 'The Section 80C deduction exists only in the old regime.'],
+  ['Index funds usually cost less than actively managed funds.', true, 'Nobody has to pick stocks, so the expense ratio is lower.'],
+  ['IDCW payouts are extra income on top of your returns.', false, 'They come out of your own investment; the NAV drops by the same amount.'],
+  ['A liquid fund is a common place to keep an emergency fund.', true, 'It\'s low risk and money usually reaches you the next working day.'],
+  ['Good past returns guarantee good future returns.', false, 'Past performance may or may not be repeated.'],
+  ['You can stop or pause a SIP whenever you want.', true, 'There\'s no penalty for stopping a SIP itself; exit loads apply only if you sell early.'],
+  ['Direct and Regular plans of a fund own the same investments.', true, 'Same portfolio; only the yearly cost differs.'],
+  ['You should invest in equity before building an emergency fund.', false, 'An emergency fund comes first so you\'re never forced to sell in a fall.'],
+];
+const SCENARIOS = [
+  { t: 'Riya wants to keep 6 months of expenses ready for emergencies.', i: { purpose: 'emergency', horizon: 'h1', risk: 'hold' } },
+  { t: 'Arun needs a car down payment in 2 years and hates seeing losses.', i: { purpose: 'goal', horizon: 'h2', risk: 'exit' } },
+  { t: 'Meena is saving for her daughter\'s college, 12 years away, and stays calm in crashes.', i: { purpose: 'goal', horizon: 'h6', risk: 'hold' } },
+  { t: 'Karthik got a bonus he\'ll use for a home renovation in 8 months.', i: { purpose: 'goal', horizon: 'h1', risk: 'hold' } },
+  { t: 'Farhan wants to build wealth over 15+ years and buys more when markets fall.', i: { purpose: 'wealth', horizon: 'h6', risk: 'add' } },
+  { t: 'Divya needs money for a house down payment in about 4 years.', i: { purpose: 'goal', horizon: 'h3', risk: 'hold' } },
+  { t: 'Suresh has 6 years to invest but sells whenever markets fall.', i: { purpose: 'wealth', horizon: 'h4', risk: 'exit' } },
+  { t: 'Priya files under the old tax regime and wants to save tax while investing for 8 years.', i: { purpose: 'tax', horizon: 'h5', risk: 'hold', regime: 'old' } },
+  { t: 'Vikram wants to park money for 2 months before paying his child\'s school fees.', i: { purpose: 'goal', horizon: 'h0', risk: 'hold' } },
+  { t: 'Lakshmi wants steady growth over 7 years and is okay with some ups and downs.', i: { purpose: 'wealth', horizon: 'h5', risk: 'hold' } },
+];
+function buildRound() {
+  const qs = [];
+  for (const s of shuffle(SCENARIOS).slice(0, 4)) {
+    const r = RULES.suggest({ emergency: 'yes', mode: 'sip', amount: 5000, ...s.i });
+    const okSet = new Set([r.primary, ...r.alts]);
+    const primaryGroup = catById(r.primary).group;
+    const wrong = shuffle(ACTIVE().filter((c) => !okSet.has(c.id) && c.group !== primaryGroup && c.id !== 'sectoral-debt')).slice(0, 3);
+    qs.push({ kind: 'Which fund fits?', q: s.t, answers: [catById(r.primary).name, ...wrong.map((c) => c.name)], right: 0, explain: X(r.reasons[0]) });
+  }
+  const pool = ACTIVE().filter((c) => !c.what.toLowerCase().includes(c.name.toLowerCase().replace(/ fund.*$/, '').replace(/[–-].*$/, '').trim()));
+  for (const c of shuffle(pool).slice(0, 3)) {
+    const same = shuffle(ACTIVE().filter((x) => x.group === c.group && x.id !== c.id));
+    const others = shuffle(ACTIVE().filter((x) => x.group !== c.group));
+    const d = [...same, ...others].slice(0, 3);
+    qs.push({ kind: 'Name that fund', q: c.what, answers: [c.name, ...d.map((x) => x.name)], right: 0, explain: `${c.name}: ${c.rule}.` });
+  }
+  for (const [m, truth, why] of shuffle(MYTHS).slice(0, 3)) qs.push({ kind: 'Myth or fact?', q: m, answers: ['Fact', 'Myth'], right: truth ? 0 : 1, explain: why, fixed: true });
+  return shuffle(qs);
+}
+let RUN = null;
+function renderPlay() {
+  const el = $('#v-play');
+  el.innerHTML = `<div class="narrow" style="margin:0 auto">
+    <div class="section-head"><div><h2>Fund Match</h2><p class="muted">10 quick questions from real life. Pick the fund that fits, name the fund type, and bust the myths. Streaks earn bonus XP.</p></div></div>
+    <div class="card pad" style="text-align:center">
+      <div class="row" style="justify-content:center;gap:28px;margin:6px 0 18px">
+        <div><div class="score-big" style="font-size:2.6rem">${G.best}/10</div><div class="dim small">Best score</div></div>
+        <div><div class="score-big" style="font-size:2.6rem">${G.games}</div><div class="dim small">Games played</div></div>
+      </div>
+      <button class="btn gold" type="button" id="startGame" style="font-size:1.1rem;padding:16px 34px">Play now</button>
     </div></div>`;
-  $('#result').innerHTML = '';
-  $('#wizard').onclick = (e) => {
-    const b = e.target.closest('.opt'); if (!b) return;
+  $('#startGame').onclick = startGame;
+}
+function startGame() {
+  RUN = { qs: buildRound(), i: 0, score: 0, combo: 0, marks: [], log: [] };
+  nextQ();
+}
+function nextQ() {
+  const el = $('#v-play');
+  if (RUN.i >= RUN.qs.length) return endGame();
+  const q = RUN.qs[RUN.i];
+  el.innerHTML = `<div class="narrow" style="margin:0 auto"><div class="card qcard" id="qbox"></div></div>`;
+  const head = `<div class="qhead"><button class="linkbtn" type="button" id="quit" aria-label="Quit game">✕</button><div class="bar"><b style="width:${(RUN.i / RUN.qs.length) * 100}%"></b></div><span class="combo">${RUN.combo >= 2 ? '🔥×' + RUN.combo : ''}</span></div>`;
+  const qq = q.fixed ? { ...q } : q;
+  quizQuestion($('#qbox'), qq, (ok) => {
+    RUN.marks.push(ok); RUN.log.push(q);
+    if (ok) { RUN.score++; RUN.combo++; } else RUN.combo = 0;
+  }, () => { RUN.i++; nextQ(); }, RUN.i === RUN.qs.length - 1 ? 'See score' : 'Next', head);
+  if (q.fixed) { // keep Fact / Myth order stable
+    const box = $('#qbox .answers'); const bs = [...box.children].sort((a, b) => +a.dataset.k - +b.dataset.k);
+    bs.forEach((b, n) => { b.querySelector('kbd').textContent = n + 1; box.appendChild(b); });
+  }
+  $('#quit').onclick = () => { RUN = null; renderPlay(); };
+}
+function endGame() {
+  const s = RUN.score;
+  G.games++; const newBest = s > G.best; if (newBest) G.best = s; save();
+  const xp = s * 10 + (s === 10 ? 50 : 0);
+  if (xp) award(xp, `Fund Match: ${s}/10`); else checkBadges();
+  if (s >= 8) confetti();
+  const line = RUN.marks.map((m) => m ? '🟩' : '🟥').join('');
+  $('#v-play').innerHTML = `<div class="narrow" style="margin:0 auto"><div class="card pad" style="text-align:center">
+    <div class="score-big">${s}<span class="dim" style="font-size:2.4rem">/10</span></div>
+    <h3 style="margin-top:8px">${s === 10 ? 'Perfect game!' : s >= 8 ? 'Excellent!' : s >= 5 ? 'Good going!' : 'Keep learning, you\'ll get there.'}${newBest ? ' New best!' : ''}</h3>
+    <div class="dots">${RUN.marks.map((m) => `<i class="${m ? 'r' : 'w'}"></i>`).join('')}</div>
+    <div class="row" style="justify-content:center;margin-top:18px">
+      <button class="btn gold" type="button" id="again">Play again</button>
+      <button class="btn plain" type="button" id="shareScore">Share score</button>
+      ${s < 7 ? '<a class="btn plain" href="#learn">Review lessons</a>' : ''}
+    </div></div>
+    <h3 style="margin:26px 0 10px">Your answers</h3>
+    <div class="card" style="overflow:hidden">${RUN.log.map((q, k) => `<div style="padding:14px 18px;border-top:${k ? '1px solid var(--line)' : '0'};display:grid;grid-template-columns:28px 1fr;gap:10px">
+      <span style="font-size:1.1rem">${RUN.marks[k] ? '✅' : '❌'}</span>
+      <div><div class="tiny" style="font-weight:800;color:var(--brand)">${esc(q.kind)}</div><div style="font-weight:700">${esc(q.q)}</div>
+      <div class="small" style="margin-top:4px"><b style="color:var(--ok-dk)">${esc(q.answers[q.right])}</b> <span class="muted">· ${esc(q.explain)}</span></div></div></div>`).join('')}</div></div>`;
+  $('#again').onclick = startGame;
+  $('#shareScore').onclick = () => share(`FundFit · Fund Match ${s}/10\n${line}\nCan you beat me? ${CONFIG.siteUrl}#play`);
+}
+function share(txt) {
+  if (navigator.share && matchMedia('(pointer:coarse)').matches) navigator.share({ text: txt }).catch(() => {});
+  else if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => toast('Copied. Paste it anywhere.'), () => prompt('Copy this:', txt));
+  else prompt('Copy this:', txt);
+}
+
+/* ============ FIND MY FIT ============ */
+let ANS = {}, STEP = 0;
+const steps = () => ['purpose', 'mode', 'horizon', 'risk', ...(ANS.purpose !== 'emergency' ? ['emerg'] : []), ...(ANS.purpose === 'tax' ? ['regime'] : [])];
+const opt = (key, v, emo, title, desc) => `<button class="opt" type="button" data-k="${key}" data-v="${v}" aria-pressed="${ANS[key] === v}"><span class="emo" aria-hidden="true">${emo}</span><div><b>${esc(title)}</b>${desc ? `<span>${esc(desc)}</span>` : ''}</div></button>`;
+function renderFit() {
+  const el = $('#v-fit');
+  if (ANS._done) return renderReveal();
+  const st = steps(); STEP = Math.min(STEP, st.length - 1); const k = st[STEP];
+  let body = '';
+  if (k === 'purpose') body = `<h2>${T('q_purpose')}</h2><p class="muted">${T('q_purpose_h')}</p><div class="opts" style="margin-top:18px">${opt('purpose', 'emergency', '🛟', T('p_emergency'), T('p_emergency_d'))}${opt('purpose', 'goal', '🎯', T('p_goal'), T('p_goal_d'))}${opt('purpose', 'wealth', '🌳', T('p_wealth'), T('p_wealth_d'))}${opt('purpose', 'tax', '🧾', T('p_tax'), T('p_tax_d'))}</div>`;
+  if (k === 'mode') body = `<h2>${T('q_mode')}</h2><div class="opts" style="margin-top:18px">${opt('mode', 'sip', '📅', T('m_sip'), T('m_sip_d'))}${opt('mode', 'lump', '💰', T('m_lump'), T('m_lump_d'))}</div>
+    ${ANS.mode ? `<label class="small" for="amt" style="display:block;margin-top:18px;font-weight:800">${ANS.mode === 'sip' ? T('amt_sip') : T('amt_lump')}</label><div class="amountbox"><span>₹</span><input id="amt" inputmode="numeric" autocomplete="off" value="${ANS.amount ? inr(ANS.amount) : ''}" placeholder="${ANS.mode === 'sip' ? '5,000' : '1,00,000'}"></div>
+    <div class="quick">${(ANS.mode === 'sip' ? [1000, 5000, 10000, 25000] : [50000, 100000, 500000, 1000000]).map((n) => `<button type="button" data-q="${n}">₹${inr(n)}</button>`).join('')}</div>` : ''}`;
+  if (k === 'horizon') body = `<h2>${T('q_horizon')}</h2><p class="muted">${T('q_horizon_h')}</p><div class="timeline" role="group">${RULES.HORIZONS.map((h, i) => { const lbl = ['< 3', '3–12', '1–3', '3–5', '5–7', '7–10', '10+'][i]; const u = i < 2 ? 'months' : 'years'; return `<button type="button" data-k="horizon" data-v="${h}" aria-pressed="${ANS.horizon === h}" aria-label="${esc(T(h))}">${lbl}<small>${u}</small></button>`; }).join('')}</div>`;
+  if (k === 'risk') body = `<h2>${T('q_risk')}</h2><p class="muted">${T('q_risk_h')}</p><div class="opts one" style="margin-top:18px">${opt('risk', 'exit', '😰', T('r_exit'))}${opt('risk', 'hold', '😌', T('r_hold'))}${opt('risk', 'add', '😎', T('r_add'))}</div>`;
+  if (k === 'emerg') body = `<h2>${T('q_emerg')}</h2><p class="muted">${T('q_emerg_h')}</p><div class="opts" style="margin-top:18px">${opt('emergency', 'yes', '✅', T('e_yes'))}${opt('emergency', 'no', '⏳', T('e_no'))}</div>`;
+  if (k === 'regime') body = `<h2>${T('q_regime')}</h2><p class="muted">${T('q_regime_h')}</p><div class="opts" style="margin-top:18px">${opt('regime', 'old', '📜', T('t_old'))}${opt('regime', 'new', '🆕', T('t_new'))}${opt('regime', 'unsure', '🤷', T('t_unsure'))}</div>`;
+  const ready = { purpose: ANS.purpose, mode: ANS.mode && ANS.amount > 0, horizon: ANS.horizon, risk: ANS.risk, emerg: ANS.emergency, regime: ANS.regime }[k];
+  const last = STEP === st.length - 1;
+  el.innerHTML = `<div class="wiz"><div class="step-dots" aria-label="Step ${STEP + 1} of ${st.length}">${st.map((_, i) => `<i class="${i <= STEP ? 'on' : ''}"></i>`).join('')}</div>
+    <div class="card pad" style="padding:28px">${body}
+    <div class="wiznav"><button class="btn plain" type="button" id="wback" ${STEP ? '' : 'disabled'}>${T('back')}</button><button class="btn ${last ? 'gold' : ''}" type="button" id="wnext" ${ready ? '' : 'disabled'}>${last ? T('seeResult') : T('next')}</button></div></div>
+    <p class="tiny" style="text-align:center;margin-top:14px">Your answers stay on this device.</p></div>`;
+  el.querySelector('.card').onclick = (e) => {
+    const q = e.target.closest('[data-q]'); if (q) { ANS.amount = +q.dataset.q; renderFit(); return; }
+    const b = e.target.closest('[data-k]'); if (!b) return;
     ANS[b.dataset.k] = b.dataset.v;
-    const autoAdvance = b.dataset.k !== 'mode';
-    if (autoAdvance && STEP < steps().length - 1) { STEP++; }
+    if (b.dataset.k !== 'mode' && STEP < steps().length - 1) STEP++;
     renderFit();
     if (b.dataset.k === 'mode') setTimeout(() => $('#amt')?.focus(), 0);
   };
   const amt = $('#amt');
-  if (amt) amt.oninput = () => {
-    const n = parseInt(amt.value.replace(/[^\d]/g, ''), 10) || 0;
-    ANS.amount = n;
-    amt.value = n ? fmtINR(n) : '';
-    $('#wnext').disabled = !(n > 0);
-  };
-  if (amt) amt.onkeydown = (e) => { if (e.key === 'Enter' && ANS.amount > 0) $('#wnext').click(); };
+  if (amt) { amt.oninput = () => { const n = parseInt(amt.value.replace(/\D/g, ''), 10) || 0; ANS.amount = n; amt.value = n ? inr(n) : ''; $('#wnext').disabled = !(n > 0); }; amt.onkeydown = (e) => { if (e.key === 'Enter' && ANS.amount > 0) $('#wnext').click(); }; }
   $('#wback').onclick = () => { STEP = Math.max(0, STEP - 1); renderFit(); };
-  $('#wnext').onclick = () => { if (last) { ANS._done = true; renderWizardDone(); } else { STEP++; renderFit(); } };
+  $('#wnext').onclick = () => { if (last) { ANS._done = true; renderReveal(true); } else { STEP++; renderFit(); } };
 }
-
-function renderWizardDone() {
-  const r = RULES.suggest(ANS);
-  const c = catById(r.primary);
-  const ri = riskIndex(c.risk);
-  const summary = [T(ANS.horizon), ANS.mode === 'sip' ? `SIP of Rs ${fmtINR(ANS.amount)}/month` : `Lumpsum of Rs ${fmtINR(ANS.amount)}`, T('p_' + ANS.purpose)].join(' · ');
-  $('#wizard').innerHTML = `<div class="small muted" style="margin-top:10px">${esc(summary)} <button class="btn link" type="button" id="wedit">Change answers</button></div>`;
-  const noteBlock = (k, cls = '') => `<div class="note ${cls}"><span>${esc(X(k))}</span></div>`;
-  $('#result').innerHTML = `<div class="result">
-    <div class="fitcard">
-      <div>
-        <div class="label">${T('yourFit')}</div>
-        <h2>${esc(c.name)}</h2>
-        <p class="muted">${esc(c.what)}</p>
-        <p class="small"><b>Rule:</b> ${esc(c.rule)}</p>
-      </div>
-      <div class="meterbox">${meterSVG(ri, c.risk)}<p class="tiny" style="text-align:center">${T('typicalRisk')}. ${T('riskNote')}</p></div>
+function renderReveal(fresh) {
+  const r = RULES.suggest(ANS), c = catById(r.primary), ri = riskIndex(c.risk);
+  if (fresh) { if (!G.fits) award(25, 'Found your fit'); G.fits++; save(); checkBadges(); if (!G.cards[c.id]) { G.cards[c.id] = 1; save(); } }
+  const sum = [T(ANS.horizon), ANS.mode === 'sip' ? `₹${inr(ANS.amount)} a month` : `₹${inr(ANS.amount)} at once`, T('p_' + ANS.purpose)].join(' · ');
+  const note = (k, cls = '', ic = '💡') => `<div class="note ${cls}"><span class="ni">${ic}</span><div>${esc(X(k))}</div></div>`;
+  $('#v-fit').innerHTML = `<p class="small muted">${esc(sum)} · <button class="linkbtn" type="button" id="edit">Change answers</button></p>
+    <div class="reveal">
+      <div class="card yourfit g-${c.group}"><div class="top"><div class="small" style="font-weight:800;opacity:.9">${T('yourFit')}</div><h2>${esc(c.name)}</h2></div>
+        <div class="inner"><p style="font-size:1.08rem;margin-top:0">${esc(c.what)}</p>
+        <div class="facts"><div><small>Key rule</small><b>${esc(c.stat[0])}</b> <span class="small muted">${esc(c.stat[1])}</span></div><div><small>Good for</small><b>${esc(c.horizon)}</b></div><div><small>Offered by</small><b>${SCHEMES ? amcsFor(c.id).length + ' fund houses' : '…'}</b></div></div>
+        <p class="small muted" style="margin:0"><b>SEBI's rule:</b> ${esc(c.rule)}</p></div></div>
+      <div class="card meterbox">${meterSVG(ri, c.risk)}<p class="tiny" style="margin-top:6px">${T('typicalRisk')}. ${T('riskNote')}</p></div>
     </div>
-    ${r.teach.map((k) => noteBlock(k)).join('')}
-    ${r.warnings.map((k) => noteBlock(k, 'warn')).join('')}
-    <h3 style="margin-top:18px">${T('why')}</h3>
-    <ul class="reasons">${r.reasons.map((k) => `<li>${esc(X(k))}</li>`).join('')}</ul>
-    ${r.notes.map((k) => noteBlock(k)).join('')}
-    ${r.alts.length ? `<div class="alts"><h3>${T('alsoConsider')}</h3>${r.alts.map((id) => { const a = catById(id); return `<div class="alt"><span class="band" style="background:${riskColor(a.risk)}"></span><div><b>${esc(a.name)}</b><div class="small muted">${esc(ALT_WHY[id] || a.what)}</div></div><button class="offerbtn" type="button" data-alt="${id}">AMCs</button></div>`; }).join('')}</div>` : ''}
-    <div class="row-actions">
-      <button class="btn primary" type="button" id="seeAmcs">${T('whoOffers')}</button>
-      <button class="btn ghost" type="button" id="shareBtn">${T('share')}</button>
-      <button class="btn ghost" type="button" id="restart">${T('restart')}</button>
-    </div>
-    <div id="fitOffer"></div>
-    <p class="tiny" style="margin-top:14px">This is a category suggestion based on your answers, not personal investment advice. A full suitability review would also consider your income, existing investments, loans, dependants and tax position.</p>
-  </div>`;
-  swingNeedles($('#result'));
-  $('#wedit').onclick = () => { ANS._done = false; STEP = 0; renderFit(); };
-  $('#restart').onclick = () => { ANS = {}; STEP = 0; renderFit(); };
-  $('#seeAmcs').onclick = () => { openOfferings(r.primary, $('#fitOffer')); $('#fitOffer').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-  $('#result').querySelectorAll('[data-alt]').forEach((b) => b.onclick = () => { openOfferings(b.dataset.alt, $('#fitOffer')); $('#fitOffer').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-  $('#shareBtn').onclick = () => share(c, ri);
+    ${r.teach.map((k) => note(k)).join('')}${r.warnings.map((k) => note(k, 'warn', '⚠️')).join('')}
+    <div class="card pad" style="margin-top:14px"><h3>${T('why')}</h3><ul class="reasons">${r.reasons.map((k) => `<li>${esc(X(k))}</li>`).join('')}</ul>${r.notes.map((k) => note(k)).join('')}</div>
+    ${r.alts.length ? `<h3 style="margin:22px 0 8px">${T('alsoConsider')}</h3><div class="alts">${r.alts.map((id) => { const a = catById(id); return `<div class="card alt g-${a.group}"><b>${esc(a.name)}</b><span class="small muted">${esc(ALT_WHY[id] || a.what)}</span><button class="linkbtn small" type="button" data-open="${id}" style="align-self:flex-start;margin-top:auto">See who offers it</button></div>`; }).join('')}</div>` : ''}
+    <div class="card pad" style="margin-top:18px" id="fitOffer"></div>
+    <div class="row" style="margin-top:18px"><button class="btn plain" type="button" id="shareFit">Share my fit</button><button class="btn plain" type="button" id="again">${T('restart')}</button></div>
+    <p class="tiny" style="margin-top:14px">This suggests a type of fund from your answers. It isn't personal advice; a full review would also look at your income, loans, dependants, other investments and taxes.</p>`;
+  swing($('#v-fit'));
+  offerings(r.primary, $('#fitOffer'));
+  $('#edit').onclick = () => { ANS._done = false; STEP = 0; renderFit(); };
+  $('#again').onclick = () => { ANS = {}; STEP = 0; renderFit(); };
+  $('#v-fit').querySelectorAll('[data-open]').forEach((b) => b.onclick = () => openFund(b.dataset.open));
+  $('#shareFit').onclick = () => { const sq = ri < 0 ? '' : ['🟩', '🟩', '🟨', '🟧', '🟥', '🟥'].slice(0, ri + 1).join('') + '⬜'.repeat(5 - ri); share(`FundFit 🎯\n${T(ANS.horizon)} · ${ANS.mode === 'sip' ? 'SIP' : 'Lumpsum'}\nMy fit: ${c.name}\nRisk ${sq} ${c.risk}\nFind yours: ${CONFIG.siteUrl}#fit`); };
 }
 
-function share(c, ri) {
-  const squares = ri < 0 ? '' : '🟩🟩🟨🟧🟥🟥'.match(/./gu).slice(0, ri + 1).join('') + '⬜'.repeat(5 - ri);
-  const txt = `FundFit 🎯\n${T(ANS.horizon)} · ${ANS.mode === 'sip' ? 'SIP' : 'Lumpsum'}\nMy fit: ${c.name}\nRisk ${squares} ${c.risk}\nFind yours: ${CONFIG.siteUrl}`;
-  const done = () => toast('Share card copied');
-  if (navigator.share && matchMedia('(pointer:coarse)').matches) navigator.share({ text: txt }).catch(() => {});
-  else if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, () => prompt('Copy this:', txt));
-  else prompt('Copy this:', txt);
-}
-function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
-
-/* ============ AMC DIRECTORY ============ */
-function renderAmcs(arg) {
-  const box = $('#amcDirectory');
-  if (!SCHEMES) { box.innerHTML = `<div class="empty">The AMC list is built from AMFI's daily NAV file and appears after the first automatic refresh.</div>`; return; }
+/* ============ FUND HOUSES ============ */
+let HQ = '';
+function renderHouses(arg) {
+  const el = $('#v-houses');
+  if (!SCHEMES) { el.innerHTML = '<div class="empty">Fund house data appears after the first daily refresh.</div>'; return; }
+  const total = ACTIVE().length;
+  el.innerHTML = `<div class="section-head"><div><h2>Fund houses</h2><p class="muted">All ${SCHEMES.amcs.length} fund houses (AMCs) in AMFI's daily list, A to Z. The strip shows which of the ${total} fund types each one offers. More isn't better; it just shows their range.</p></div></div>
+    <label class="sr" for="hq">Search fund houses</label><input class="search" id="hq" type="search" placeholder="Search a fund house" value="${esc(HQ)}" style="margin-bottom:14px">
+    <div class="card" style="overflow:hidden"><div class="legend"><b style="color:var(--ink)">Each square is one fund type:</b>${CATS.groups.filter((g) => g.id !== 'solution').map((g) => `<span class="g-${g.id}"><i></i>${esc(g.name)}</span>`).join('')}</div><div id="hlist"></div></div>`;
   const draw = () => {
-    const q = ($('#amcSearch').value || '').toLowerCase();
-    const rows = SCHEMES.amcs.map((a, i) => ({ ...a, i, cats: AMC_CATS[i] ? AMC_CATS[i].size : 0 }))
-      .filter((a) => a.name.toLowerCase().includes(q)).sort((x, y) => x.name.localeCompare(y.name));
-    box.innerHTML = `<p class="small muted">${rows.length} of ${SCHEMES.amcs.length} AMCs</p>` + rows.map((a) => `
-      <details class="topic" data-i="${a.i}"><summary>${esc(a.name)} <span class="small muted" style="font-weight:500">${a.cats} categories · ${a.schemes} schemes</span></summary>
-      <div class="body amcbody"></div></details>`).join('');
+    const q = HQ.toLowerCase();
+    const rows = SCHEMES.amcs.map((a, i) => ({ ...a, i, n: AMC_CATS[i]?.size || 0 })).filter((a) => a.name.toLowerCase().includes(q)).sort((x, y) => x.name.localeCompare(y.name));
+    $('#hlist').innerHTML = rows.map((a) => `<button class="amcrow" type="button" data-h="${a.i}"><span><b>${esc(shortAmc(a.name))}</b><br><span class="tiny">${a.schemes} scheme${a.schemes === 1 ? '' : 's'}${G.houses[a.i] ? ' · visited' : ''}</span></span>
+      <span class="strip" aria-hidden="true">${ACTIVE().map((c) => `<i class="g-${c.group} ${AMC_CATS[a.i]?.has(c.id) ? 'on' : ''}" title="${esc(c.name)}"></i>`).join('')}</span>
+      <span style="text-align:right"><b>${a.n}</b><span class="dim small">/${total}</span></span></button>`).join('') || '<div class="empty">No fund house matches that.</div>';
   };
-  $('#amcSearch').oninput = draw;
+  $('#hq').oninput = (e) => { HQ = e.target.value; draw(); };
+  $('#hlist').onclick = (e) => { const b = e.target.closest('[data-h]'); if (b) openHouse(+b.dataset.h); };
   draw();
-  if (box.dataset.bound) return;
-  box.dataset.bound = 1;
-  box.addEventListener('toggle', (e) => {
-    const d = e.target; if (!d.open || d.dataset.filled) return;
-    d.dataset.filled = 1;
-    const i = Number(d.dataset.i);
-    const byGroup = CATS.groups.map((g) => ({ g, cs: CATS.categories.filter((c) => c.group === g.id && AMC_CATS[i].has(c.id)) })).filter((x) => x.cs.length);
-    d.querySelector('.amcbody').innerHTML = byGroup.length ? byGroup.map(({ g, cs }) => `<p><b>${esc(g.name)}:</b> ${cs.map((c) => `<a href="#categories/${c.id}">${esc(c.name)}</a>`).join(', ')}</p>`).join('') : '<p class="muted">No open-ended schemes mapped to a SEBI category.</p>';
-  }, true);
+  if (arg !== undefined && arg !== '') openHouse(+arg);
+}
+function openHouse(i) {
+  const a = SCHEMES.amcs[i];
+  if (!G.houses[i]) { G.houses[i] = 1; save(); award(5, 'Fund house explored'); }
+  const byGroup = CATS.groups.map((g) => ({ g, cs: CATS.categories.filter((c) => c.group === g.id && AMC_CATS[i]?.has(c.id)) })).filter((x) => x.cs.length);
+  openSheet(`<div class="shead"><button class="close" type="button" aria-label="Close">×</button><h2>${esc(a.name)}</h2><p style="opacity:.9;margin:6px 0 0">${a.schemes} scheme${a.schemes === 1 ? '' : 's'} across ${AMC_CATS[i]?.size || 0} fund types</p></div>
+    <div class="sbody">${byGroup.map(({ g, cs }) => `<h3 style="margin-top:6px">${esc(g.name)}</h3><div class="catchips">${cs.map((c) => `<button class="catchip g-${c.group}" type="button" data-c="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>`).join('') || '<p class="muted">No open-ended schemes in a SEBI fund type.</p>'}
+    <div id="houseSchemes"></div></div>`);
+  $('#sheet').querySelectorAll('[data-c]').forEach((b) => b.onclick = () => {
+    $('#sheet').querySelectorAll('[data-c]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    schemesOf(b.dataset.c, i, $('#houseSchemes'));
+    $('#houseSchemes').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+/* ============ ME (progress) ============ */
+function renderMe() {
+  const i = levelOf(G.xp), nxt = LEVELS[i + 1];
+  $('#v-me').innerHTML = `<div class="section-head"><div><h2>Your progress</h2><p class="muted">Saved only in this browser. Clearing your browser data resets it.</p></div></div>
+    <div class="card pad row" style="gap:20px">
+      <span class="lvl" style="width:74px;height:74px;font-size:2.2rem">${i + 1}</span>
+      <div style="flex:1;min-width:200px"><h3 style="font-size:1.6rem">${esc(LEVELS[i].n)}</h3><p class="muted small">${inr(G.xp)} XP${nxt ? ` · ${inr(nxt.xp - G.xp)} XP to ${esc(nxt.n)}` : ' · top level reached'}</p>
+      <div class="bar" style="margin-top:8px"><b style="width:${nxt ? ((G.xp - LEVELS[i].xp) / (nxt.xp - LEVELS[i].xp)) * 100 : 100}%;background:var(--gold)"></b></div></div>
+      <div class="row" style="gap:22px">
+        <div><div class="score-big" style="font-size:2rem">${Object.keys(G.lessons).length}</div><div class="tiny">lessons</div></div>
+        <div><div class="score-big" style="font-size:2rem">${collected()}</div><div class="tiny">fund types</div></div>
+        <div><div class="score-big" style="font-size:2rem">${G.streak}</div><div class="tiny">day streak</div></div>
+      </div></div>
+    <h3 style="margin:26px 0 12px">Badges</h3>
+    <div class="badges">${BADGES.map((b) => `<div class="card bdg ${G.badges[b.id] ? 'on' : ''}"><span class="medal">${b.e}</span><b>${esc(b.n)}</b><span>${esc(b.d)}</span></div>`).join('')}</div>
+    <h3 style="margin:26px 0 8px">How to earn XP</h3>
+    <p class="muted small">Read a lesson +10 · Pass its check +15 · Collect a fund type +5 · Fund Match +10 per correct answer (+50 for a perfect game) · Find my fit +25 · Explore a fund house +5</p>
+    <p style="margin-top:20px"><button class="linkbtn small" type="button" id="reset">Reset my progress</button></p>`;
+  $('#reset').onclick = () => { if (confirm('Reset all XP, badges and collected cards on this device?')) { try { localStorage.removeItem(GKEY); } catch (e) {} location.reload(); } };
 }
 
 boot();
