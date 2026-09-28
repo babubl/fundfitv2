@@ -1,0 +1,57 @@
+name: Refresh AMFI/SEBI data and deploy
+
+on:
+  schedule:
+    - cron: '17 3 * * *'   # 08:47 IST daily, after AMFI publishes the previous day's NAVs
+  push:
+    branches: [main]
+  workflow_dispatch:       # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh-and-deploy
+  cancel-in-progress: false
+
+jobs:
+  refresh-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Test parser and rules
+        run: node --test tests/*.test.mjs
+
+      - name: Fetch latest AMFI and SEBI data
+        run: node scripts/fetch-data.mjs
+
+      - name: Commit data if it changed
+        run: |
+          git config user.name "fundfit-bot"
+          git config user.email "fundfit-bot@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

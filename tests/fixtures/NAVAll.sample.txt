@@ -1,0 +1,56 @@
+Scheme Code;ISIN Div Payout/ ISIN Growth;ISIN Div Reinvestment;Scheme Name;Net Asset Value;Date
+
+Open Ended Schemes(Debt Scheme - Low Duration Fund)
+
+Alpha Mutual Fund
+
+100001;INF000A01011;-;Alpha Low Duration Fund - Regular Plan - Growth;3210.1234;26-Sep-2026
+100002;INF000A01029;-;Alpha Low Duration Fund - Direct Plan - Growth;3350.5678;26-Sep-2026
+100003;INF000A01037;INF000A01045;Alpha Low Duration Fund - Regular Plan - Daily IDCW;1008.1;26-Sep-2026
+
+Beta Mutual Fund
+
+100010;INF000B01011;-;Beta Ultra Short to Short Term Fund Direct Growth;15.12;25-Sep-2026
+
+Open Ended Schemes(Equity Scheme - Dividend Yield Fund)
+
+Alpha Mutual Fund
+
+100020;INF000A02011;-;Alpha Dividend Yield Fund - Regular - Growth;45.10;26-Sep-2026
+100021;INF000A02029;INF000A02037;Alpha Dividend Yield Fund - Direct - IDCW;30.00;26-Sep-2026
+
+Open Ended Schemes(Equity Scheme - Sectoral/ Thematic)
+
+Beta Mutual Fund
+
+100030;INF000B02011;-;Beta Banking & Financial Services Fund-Growth Option-Direct Plan;22.5;26-Sep-2026
+
+Open Ended Schemes(Debt Scheme - Sectoral Fund)
+
+Beta Mutual Fund
+
+100040;INF000B03011;-;Beta Infrastructure Debt Sectoral Fund - Regular Plan - Growth;10.05;26-Sep-2026
+
+Open Ended Schemes(Life Cycle Fund - Life Cycle Fund 2045)
+
+Gamma Mutual Fund
+
+100050;INF000G01011;-;Gamma Life Cycle Fund 2045 - Direct Plan - Growth;10.2;26-Sep-2026
+
+Open Ended Schemes(Other Scheme - FoF Overseas)
+
+Gamma Mutual Fund
+
+100060;INF000G02011;-;Gamma US Equity Passive FOF - Regular Plan - Growth;18.7;26-Sep-2026
+
+Open Ended Schemes(Other Scheme - Brand New Label)
+
+Gamma Mutual Fund
+
+100070;INF000G03011;-;Gamma Mystery Fund - Regular Plan - Growth;11.0;26-Sep-2026
+
+Close Ended Schemes(Income)
+
+Alpha Mutual Fund
+
+100080;INF000A03011;-;Alpha Fixed Term Plan Series 12 - Regular Plan - Growth;12.3;26-Sep-2026
