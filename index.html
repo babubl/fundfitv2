@@ -387,7 +387,7 @@ footer .warn{font-weight:800;color:var(--ink);font-size:.95rem}
 .cmp-wrap{overflow-x:auto;margin:0 -4px}
 @media (max-width:640px){
   .cmp thead{display:none}
-  .cmp tr{display:grid;grid-template-columns:repeat(4,1fr);gap:4px 8px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .cmp tr{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 8px;padding:12px 0;border-bottom:1px solid var(--line)}
   .cmp td{border:0;padding:0;text-align:left}
   .cmp td:first-child{grid-column:1/-1;margin-bottom:4px}
   .cmp td[data-l]::before{content:attr(data-l);display:block;font-size:.7rem;color:var(--ink-3);font-weight:800}
@@ -440,7 +440,7 @@ details.more summary{cursor:pointer;font-weight:750;padding:10px 0}
   <div class="wrap">
     <p class="warn">Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</p>
     <p id="byline"></p>
-    <p>FundFit explains mutual funds and suggests a type of fund from your answers. It is for learning, not investment advice, and it doesn't recommend any scheme. Fund lists, NAVs, returns and expense ratios come from AMFI's public data; returns are calculated from AMFI's published NAVs and past performance may or may not be sustained in future. Rule updates come from SEBI's website. Fund types follow SEBI's circular of 26 February 2026. Read a scheme's documents before investing.</p>
+    <p>FundFit explains mutual funds and suggests a type of fund from your answers. It is for learning, not investment advice, and it doesn't recommend any scheme. Fund lists, NAVs and returns come from AMFI's public data; returns are calculated from AMFI's published NAVs and past performance may or may not be sustained in future. Rule updates come from SEBI's website. Fund types follow SEBI's circular of 26 February 2026. Read a scheme's documents before investing.</p>
     <p class="tiny">No sign-up, no cookies, no analytics. Your progress and answers stay on this device.</p>
   </div>
 </footer>
@@ -850,27 +850,25 @@ async function compareFunds(catId, slot, opts = {}) {
     ${kinds.length > 1 ? `<div class="kinds" role="group" aria-label="What it tracks" style="margin-top:10px">${kinds.map((k) => `<button class="chip" type="button" data-kind="${k}" aria-pressed="${st.kind === k}">${esc(KIND_LABEL[k] || k)}</button>`).join('')}</div>` : ''}
     <div class="cmp-tools">
       <label class="sr" for="cq">Search funds</label><input class="search" id="cq" type="search" placeholder="Search by fund house">
-      <label class="sr" for="cs">Sort by</label><select id="cs"><option value="name">Sort: A to Z</option><option value="ter">Lowest expense ratio</option><option value="r3">Highest 3-year return</option><option value="r5">Highest 5-year return</option><option value="age">Longest track record</option></select>
+      <label class="sr" for="cs">Sort by</label><select id="cs"><option value="name">Sort: A to Z</option><option value="r3">Highest 3-year return</option><option value="r5">Highest 5-year return</option><option value="age">Longest track record</option></select>
       <span class="seg" role="group" aria-label="Plan"><button type="button" data-plan="D" aria-pressed="true">Direct plan</button><button type="button" data-plan="R" aria-pressed="false">Regular plan</button></span>
     </div>
-    <div class="cmp-wrap"><table class="cmp"><thead><tr><th>Fund</th><th>Expense ratio</th><th>1 year</th><th>3 years</th><th>5 years</th></tr></thead><tbody></tbody></table></div>
+    <div class="cmp-wrap"><table class="cmp"><thead><tr><th>Fund</th><th>1 year</th><th>3 years</th><th>5 years</th></tr></thead><tbody></tbody></table></div>
     <button class="linkbtn small" type="button" id="cmore" hidden></button>
-    <div class="note" style="margin-top:14px"><span class="ni">💡</span><div class="small"><b>How to read this.</b> The expense ratio is the yearly cost; lower leaves more for you. Direct plans cost less than Regular plans because no distributor is paid; switch plans above to see the difference. Look at 5-year returns over 1-year ones, and compare with the category average. Past performance may or may not be sustained in future, and FundFit doesn't rank or recommend any fund.</div></div>`;
+    <div class="note" style="margin-top:14px"><span class="ni">💡</span><div class="small"><b>How to read this.</b> Look at 5-year returns more than 1-year ones, and compare each fund with the average. Switch between Direct and Regular above: the gap is mostly the extra yearly cost of the Regular plan, which pays a distributor. Check each fund's exact expense ratio in its factsheet; lower leaves more for you. Past performance may or may not be sustained in future, and FundFit doesn't rank or recommend any fund.</div></div>`;
   const tb = slot.querySelector('tbody');
   const val = (s, i) => s.r && s.r[st.plan] ? s.r[st.plan][i] : null;
-  const ter = (s) => s.t ? s.t[st.plan === 'R' ? 0 : 1] : null;
   const pct = (v, cls = '') => v == null ? '<span class="na">–</span>' : `<span class="${v < 0 ? 'neg' : ''} ${cls}">${v.toFixed(1)}%</span>`;
   const draw = () => {
     let rows = all.filter((s) => (!st.kind || s.k === st.kind || !s.k) && (st.amc === undefined || s.a === st.amc) && (!st.q || SCHEMES.amcs[s.a].name.toLowerCase().includes(st.q) || s.n.toLowerCase().includes(st.q)));
-    const key = { ter: (s) => ter(s) ?? 99, r3: (s) => -(val(s, 1) ?? -999), r5: (s) => -(val(s, 2) ?? -999), age: (s) => -(s.y || 0) }[st.sort];
+    const key = { r3: (s) => -(val(s, 1) ?? -999), r5: (s) => -(val(s, 2) ?? -999), age: (s) => -(s.y || 0) }[st.sort];
     rows.sort((a, b) => key ? key(a) - key(b) || a.n.localeCompare(b.n) : a.n.localeCompare(b.n));
     const avg = (i) => { const v = rows.map((s) => val(s, i)).filter((x) => x != null); return v.length >= 3 ? v.reduce((a, b) => a + b, 0) / v.length : null; };
-    const avgT = (() => { const v = rows.map(ter).filter((x) => x != null); return v.length >= 3 ? v.reduce((a, b) => a + b, 0) / v.length : null; })();
     const shown = st.all || st.q ? rows : rows.slice(0, 15);
-    tb.innerHTML = (rows.length >= 3 ? `<tr class="avg"><td>Average of these ${rows.length}</td><td data-l="Expense">${avgT == null ? '<span class="na">–</span>' : avgT.toFixed(2) + '%'}</td><td data-l="1 yr">${pct(avg(0))}</td><td data-l="3 yrs">${pct(avg(1))}</td><td data-l="5 yrs">${pct(avg(2))}</td></tr>` : '') +
+    tb.innerHTML = (rows.length >= 3 ? `<tr class="avg"><td>Average of these ${rows.length}</td><td data-l="1 yr">${pct(avg(0))}</td><td data-l="3 yrs">${pct(avg(1))}</td><td data-l="5 yrs">${pct(avg(2))}</td></tr>` : '') +
       shown.map((s) => `<tr><td><div class="fn">${esc(s.n)}<small>${esc(shortAmc(SCHEMES.amcs[s.a].name))} · ${s.y >= 5 ? '5+ years old' : s.y >= 3 ? '3–5 years old' : s.y >= 1 ? '1–3 years old' : 'Under 1 year old'}${/\bETF\b|\bBeES\b/i.test(s.n) ? ' · Traded on the stock exchange' : s.p === 'R' ? ' · Regular plan only' : s.p === 'D' ? ' · Direct plan only' : ''} · <a href="https://www.google.com/search?q=${encodeURIComponent(s.n + ' factsheet')}" target="_blank" rel="noopener">Factsheet</a></small></div></td>
-        <td data-l="Expense">${ter(s) == null ? '<span class="na">–</span>' : ter(s).toFixed(2) + '%'}</td><td data-l="1 yr">${pct(val(s, 0))}</td><td data-l="3 yrs">${pct(val(s, 1))}</td><td data-l="5 yrs">${pct(val(s, 2))}</td></tr>`).join('') ||
-      '<tr><td colspan="5" class="dim">No fund matches that search.</td></tr>';
+        <td data-l="1 yr">${pct(val(s, 0))}</td><td data-l="3 yrs">${pct(val(s, 1))}</td><td data-l="5 yrs">${pct(val(s, 2))}</td></tr>`).join('') ||
+      '<tr><td colspan="4" class="dim">No fund matches that search.</td></tr>';
     const more = slot.querySelector('#cmore');
     more.hidden = st.all || !!st.q || rows.length <= 15; more.textContent = `Show all ${rows.length} funds`;
   };
@@ -1327,8 +1325,8 @@ function renderReveal(fresh) {
     <div class="card pad" style="margin-top:18px"><h3>Your next steps</h3>
       <ol class="nextsteps">
         ${ANS.emergency === 'no' && ANS.purpose !== 'emergency' ? '<li><div><b>Set up your emergency fund first</b> in a liquid fund.</div></li>' : ''}
-        <li><div><b>Shortlist 2 or 3 funds</b> from the comparison above: low cost, a steady 5-year record against the average, and at least 3–5 years old.</div></li>
-        <li><div><b>Read each one's factsheet</b> for its riskometer, exit load, minimum amount and fund manager.</div></li>
+        <li><div><b>Shortlist 2 or 3 funds</b> from the comparison above: a steady 5-year record against the average, at least 3–5 years old.</div></li>
+        <li><div><b>Read each one's factsheet</b> for its expense ratio (lower is better), riskometer, exit load, minimum amount and fund manager.</div></li>
         <li><div><b>Complete KYC and invest</b>, directly or through a distributor. <a href="#learn/start">How to actually invest</a></div></li>
         <li><div><b>Review once a year.</b> Move money to safer funds as your goal gets close.</div></li>
       </ol></div>

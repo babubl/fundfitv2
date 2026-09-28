@@ -17,7 +17,7 @@ FundFit is for everyday investors who want to understand mutual funds and pick a
 | Find my fit | Purpose, SIP or lumpsum, horizon, risk comfort, emergency fund and tax regime lead to a fund type, alternatives, warnings, next steps, and a comparison of real funds. |
 | Fund houses | Every AMC in AMFI's daily file, with a strip showing which fund types it offers. |
 
-Fund comparisons show each fund's expense ratio (Direct and Regular) and 1, 3 and 5-year returns worked out from AMFI's published NAVs, with the category average. They're sorted A to Z by default; users can re-sort. No fund is ranked, labelled "best" or recommended.
+Fund comparisons show each fund's 1, 3 and 5-year returns (Direct or Regular plan) worked out from AMFI's published NAVs, with the category average. They're sorted A to Z by default; users can re-sort. No fund is ranked, labelled "best" or recommended.
 
 XP, levels, badges and streaks are saved only in the visitor's browser. Fonts are self-hosted (Bricolage Grotesque and Figtree, SIL Open Font License), so the site makes no third-party requests.
 
@@ -29,7 +29,6 @@ GitHub Action (daily 08:47 IST, and on every push)
   ├─ scripts/fetch-data.mjs
   │    ├─ AMFI NAVAll.txt  → data/schemes.json   (AMCs, schemes, category, plans, latest NAV)
   │    ├─ AMFI NAV history → 1, 3 and 5-year returns and fund age
-  │    ├─ AMFI TER data    → expense ratios for Direct and Regular plans
   │    └─ SEBI RSS feed    → data/sebi.json      (MF-related circulars, rolling 40)
   ├─ commits data/ if it changed
   └─ deploys the site to GitHub Pages
@@ -72,3 +71,7 @@ To preview on your computer, run a local server from this folder (`python3 -m ht
 - AMFI NAV file: https://www.amfiindia.com/spages/NAVAll.txt
 - SEBI RSS: https://www.sebi.gov.in/sebirss.xml
 - SEBI circular HO/24/13/15(2)2026-IMD-RAC4/I/5764/2026, 26 Feb 2026: Categorisation and Rationalisation of Mutual Fund Schemes
+
+## Known gap: expense ratios
+
+AMFI publishes expense ratios through a web service that returns only 5 rows per request (page size and page number are ignored), so collecting them for 2,000+ funds isn't practical. The comparison shows the Direct vs Regular return gap instead and points users to each factsheet for the exact expense ratio. `scripts/lib.mjs` keeps tested `parseTer`/`addTer` helpers for when a bulk source is available.

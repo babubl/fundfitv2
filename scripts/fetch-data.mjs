@@ -4,7 +4,7 @@
 // so the live site never goes blank.
 
 import { readFile, writeFile } from 'node:fs/promises';
-import { parseNavAll, parseSebiRss, parseSebiListing, parseNavHistory, addReturns, parseTer, addTer, norm } from './lib.mjs';
+import { parseNavAll, parseSebiRss, parseSebiListing, parseNavHistory, addReturns } from './lib.mjs';
 
 const ROOT = new URL('..', import.meta.url);
 const path = (p) => new URL(p, ROOT);
@@ -18,12 +18,9 @@ const SEBI_LISTINGS = [
   { type: 'Circular', url: 'https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0' },
 ];
 const HISTORY_URL = (d) => `https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?frmdt=${d}`;
-const TER_AMCS_URL = 'https://www.amfiindia.com/api/populate-mf';
-const TER_URL = (id, month) => `https://www.amfiindia.com/api/populate-te-rdata-revised?MF_ID=${id}&Month=${month}&strCat=-1&strType=1&page=1&pageSize=20000`;
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const parseAmfiDate = (s) => { const m = String(s).match(/(\d{1,2})-([A-Za-z]{3})-(\d{4})/); return m ? new Date(Date.UTC(+m[3], MON.indexOf(m[2][0].toUpperCase() + m[2].slice(1, 3).toLowerCase()), +m[1])) : null; };
 const fmtAmfiDate = (d) => `${String(d.getUTCDate()).padStart(2, '0')}-${MON[d.getUTCMonth()]}-${d.getUTCFullYear()}`;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = 'Mozilla/5.0 (compatible; FundFit-data-refresh/2.0; +https://github.com/babubl)';
 
 async function getText(urls, label, attempts = 3) {
@@ -69,11 +66,16 @@ if (navText) {
     if (base) {
       for (const years of [1, 3, 5]) {
         let got = null;
-        for (let back = 0; back < 7 && !got; back++) {
+        // Walk back to a weekday with a full NAV file. Weekend files exist but only cover
+        // liquid-type funds, so they are skipped, and a file must hold at least a third as
+        // many schemes as today's to count.
+        for (let back = 0; back < 10 && !got; back++) {
           const d = new Date(base); d.setUTCFullYear(d.getUTCFullYear() - years); d.setUTCDate(d.getUTCDate() - back);
+          if (d.getUTCDay() === 0 || d.getUTCDay() === 6) continue;
           const txt = await getText([HISTORY_URL(fmtAmfiDate(d))], `AMFI history ${years}y ${fmtAmfiDate(d)}`, 1);
           const h = txt ? parseNavHistory(txt) : null;
-          if (h && h.navs.size > 300) got = { years, navs: h.navs, date: fmtAmfiDate(d) };
+          if (h && h.navs.size >= current.size / 3) got = { years, navs: h.navs, date: fmtAmfiDate(d) };
+          else if (h) console.log(`  ${fmtAmfiDate(d)}: only ${h.navs.size} NAVs, trying an earlier day`);
         }
         if (got) histories.push(got); else problems.push(`AMFI NAV history for ${years}y ago unavailable`);
       }
@@ -82,32 +84,6 @@ if (navText) {
     const withReturns = parsed.schemes.filter((x) => x.r).length;
     sources.returns = { dates: histories.map((h) => h.date), schemes: withReturns };
     console.log(`Returns: ${withReturns} schemes, history dates ${histories.map((h) => h.date).join(', ')}`);
-
-    // ----- Expense ratios (TER) from AMFI, one call per fund house -----
-    let terMatched = 0;
-    try {
-      const listTxt = await getText([TER_AMCS_URL], 'AMFI TER fund houses', 2);
-      const list = listTxt ? JSON.parse(listTxt) : [];
-      const byName = new Map(parsed.amcs.map((a, i) => [norm(a.name.replace(/mutual fund/i, '')), i]));
-      const terByAmc = new Map();
-      const months = base ? [0, 1].map((k) => { const d = new Date(base); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() - k); return `${String(d.getUTCMonth() + 1).padStart(2, '0')}-${d.getUTCFullYear()}`; }) : [];
-      for (const m of list) {
-        const i = byName.get(norm(String(m.mfName || '').replace(/mutual fund/i, '')));
-        if (i === undefined) continue;
-        for (const month of months) {
-          await sleep(700);
-          const t = await getText([TER_URL(m.mfId, month)], `TER ${m.mfName} ${month}`, 2);
-          let rows = [];
-          try { rows = t ? JSON.parse(t).data || [] : []; } catch { rows = []; }
-          if (rows.length) { terByAmc.set(i, parseTer(rows)); break; }
-        }
-      }
-      terMatched = addTer(parsed.schemes, parsed.amcs, terByAmc);
-      sources.ter = { amcs: terByAmc.size, matched: terMatched };
-      console.log(`TER: ${terByAmc.size} fund houses, ${terMatched} schemes matched`);
-    } catch (e) {
-      problems.push('TER fetch failed: ' + e.message);
-    }
 
     await writeJson('data/schemes.json', {
       updatedAt: now,
