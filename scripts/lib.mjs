@@ -197,12 +197,12 @@ export function parseSebiRss(xml) {
 // SEBI circulars listing page: <tr><td>Sep 09, 2026</td><td><a href="...">Title</a></td></tr>
 export function parseSebiListing(html, type = 'Circular') {
   const items = [];
-  for (const m of html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
-    const row = m[1];
-    const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((c) => c[1]);
+  // Split on row openings: SEBI's markup doesn't reliably close <tr> or <td>.
+  for (const row of html.split(/<tr[\s>]/i).slice(1)) {
+    const cells = row.split(/<td[^>]*>/i).slice(1).map((c) => c.replace(/<\/td>[\s\S]*$/i, ''));
     if (cells.length < 2) continue;
     const date = isoDate(decode(cells[0]));
-    const a = row.match(/<a[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/i);
+    const a = row.match(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([^<]*)/i); // no </a> needed
     if (!date || !a) continue;
     const titleAttr = a[0].match(/title=["']([^"']+)["']/i);
     const title = decode(titleAttr ? titleAttr[1] : a[2]);

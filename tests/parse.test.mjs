@@ -89,8 +89,9 @@ test('SEBI RSS parsing flags MF items and normalises dates', async () => {
 
 test('SEBI circulars listing parsing', async () => {
   const items = parseSebiListing(await read('fixtures/sebi.listing.sample.html'));
-  assert.equal(items.length, 3);
-  assert.deepEqual(items.map((i) => i.mf), [false, true, true]);
+  assert.equal(items.length, 5, 'rows without closing </tr> or </td> still parse');
+  assert.deepEqual(items.map((i) => i.mf), [false, true, true, true, false]);
+  assert.equal(items[3].title, 'Intraday borrowing facility availed by mutual funds');
   assert.equal(items[0].title.startsWith('Review of Position Limits for Clients and Penalty'), true, 'full title from title attribute');
   assert.equal(items[2].link, 'https://www.sebi.gov.in/legal/circulars/jul-2026/swp-stp-demat_102914.html', 'relative link made absolute');
   assert.equal(items[1].date, '2026-07-21');
