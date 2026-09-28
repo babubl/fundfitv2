@@ -47,42 +47,44 @@
    "id": "multi-cap",
    "group": "equity",
    "name": "Multi Cap Fund",
-   "rule": "Min 75% equity, with at least 25% each in large, mid and small cap",
+   "rule": "At least 75% in shares, with at least 25% each in large, mid and small companies.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Spreads money across all three company sizes in fixed minimum proportions, so it can't drift into only large caps.",
+   "what": "Owns big, medium and small companies, with at least a quarter of the money in each size. It can't quietly drift into only big companies.",
    "amfi": [
     "Multi Cap Fund"
    ],
    "stat": [
     "25%+",
     "each in large, mid and small"
-   ]
+   ],
+   "clue": "Must keep at least a quarter of its money in each of large, mid and small companies."
   },
   {
    "id": "large-cap",
    "group": "equity",
    "name": "Large Cap Fund",
-   "rule": "Min 80% in large caps (top 100 companies by full market cap)",
+   "rule": "At least 80% in large companies (India's top 100 by market value).",
    "horizon": "5+ years",
    "risk": "Very High",
-   "what": "Invests in India's 100 biggest listed companies. The steadiest of the equity categories, but still equity.",
+   "what": "Owns India's 100 biggest listed companies. The steadiest equity fund, but it can still fall 30% or more in a bad year.",
    "amfi": [
     "Large Cap Fund"
    ],
    "stat": [
     "80%",
     "in India's top 100 companies"
-   ]
+   ],
+   "clue": "At least 80% of its money is in India's 100 biggest companies."
   },
   {
    "id": "large-mid",
    "group": "equity",
    "name": "Large & Mid Cap Fund",
-   "rule": "Min 35% large cap + min 35% mid cap",
+   "rule": "At least 35% in large companies and at least 35% in mid-sized companies.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "A blend of the top 100 companies and the next 150, aiming for more growth than large caps alone.",
+   "what": "Owns the 100 biggest companies plus the next 150, for more growth than a large cap fund with a bit more risk.",
    "amfi": [
     "Large & Mid Cap Fund",
     "Large and Mid Cap Fund"
@@ -90,128 +92,136 @@
    "stat": [
     "35+35%",
     "in large and mid caps"
-   ]
+   ],
+   "clue": "Must hold at least 35% in the top 100 companies and at least 35% in companies ranked 101 to 250."
   },
   {
    "id": "mid-cap",
    "group": "equity",
    "name": "Mid Cap Fund",
-   "rule": "Min 65% in mid caps (companies ranked 101-250)",
+   "rule": "At least 65% in mid-sized companies (ranked 101 to 250).",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Invests mainly in mid-sized companies: higher growth potential, deeper falls in bad years.",
+   "what": "Owns mostly medium-sized companies. More room to grow than big companies, and deeper falls in bad years.",
    "amfi": [
     "Mid Cap Fund"
    ],
    "stat": [
     "65%",
     "in companies ranked 101–250"
-   ]
+   ],
+   "clue": "At least 65% in companies ranked 101 to 250 by size."
   },
   {
    "id": "small-cap",
    "group": "equity",
    "name": "Small Cap Fund",
-   "rule": "Min 65% in small caps (rank 251 onwards)",
+   "rule": "At least 65% in small companies (ranked 251 and below).",
    "horizon": "10+ years",
    "risk": "Very High",
-   "what": "Invests mainly in smaller companies. The most volatile equity category; can stay down for years.",
+   "what": "Owns mostly smaller companies. The biggest growth potential and the wildest swings; it can stay down for years.",
    "amfi": [
     "Small Cap Fund"
    ],
    "stat": [
     "65%",
     "in companies ranked 251+"
-   ]
+   ],
+   "clue": "At least 65% in companies ranked 251 and below by size."
   },
   {
    "id": "flexi-cap",
    "group": "equity",
    "name": "Flexi Cap Fund",
-   "rule": "Min 65% equity, any mix of large, mid and small",
+   "rule": "At least 65% in shares, any mix of company sizes.",
    "horizon": "5+ years",
    "risk": "Very High",
-   "what": "The fund manager decides the size mix freely and can shift it with market conditions.",
+   "what": "The fund manager is free to mix big, medium and small companies in any proportion and change it over time.",
    "amfi": [
     "Flexi Cap Fund"
    ],
    "stat": [
     "Any mix",
     "of large, mid and small"
-   ]
+   ],
+   "clue": "At least 65% in shares, with no minimum for any company size."
   },
   {
    "id": "dividend-yield",
    "group": "equity",
    "name": "Dividend Yield Fund",
-   "rule": "Min 80% in dividend-yielding stocks",
+   "rule": "At least 80% in shares of companies that pay dividends.",
    "horizon": "5+ years",
    "risk": "Very High",
-   "what": "Focuses on companies that pay regular dividends. It's still equity; the dividends don't make it a fixed-income product.",
+   "what": "Owns companies that pay regular dividends. It's still an equity fund: the dividends don't make it safe like a deposit.",
    "amfi": [
     "Dividend Yield Fund"
    ],
    "stat": [
     "80%",
     "in dividend-paying stocks"
-   ]
+   ],
+   "clue": "At least 80% in companies known for paying regular dividends."
   },
   {
    "id": "value",
    "group": "equity",
    "name": "Value Fund",
-   "rule": "Min 80% equity following a value strategy; max 50% portfolio overlap with the AMC's Contra fund",
+   "rule": "At least 80% in shares, picked with a value approach.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Buys companies that look cheap relative to their fundamentals and waits for the market to re-rate them.",
+   "what": "Buys companies that look cheap compared with what they earn or own, and waits for the market to notice.",
    "amfi": [
     "Value Fund"
    ],
    "stat": [
     "80%",
     "in undervalued stocks"
-   ]
+   ],
+   "clue": "Hunts for shares priced below what the business seems to be worth."
   },
   {
    "id": "contra",
    "group": "equity",
    "name": "Contra Fund",
-   "rule": "Min 80% equity following a contrarian strategy; max 50% overlap with the AMC's Value fund",
+   "rule": "At least 80% in shares, picked by going against current market sentiment.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Deliberately goes against current market sentiment, buying what's out of favour.",
+   "what": "Deliberately buys what most investors are avoiding right now, betting the crowd is wrong.",
    "amfi": [
     "Contra Fund"
    ],
    "stat": [
     "80%",
     "in out-of-favour stocks"
-   ]
+   ],
+   "clue": "Deliberately buys what the crowd is selling or ignoring."
   },
   {
    "id": "focused",
    "group": "equity",
    "name": "Focused Fund",
-   "rule": "Max 30 stocks; min 80% equity",
+   "rule": "No more than 30 stocks; at least 80% in shares.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "A concentrated portfolio of 30 stocks or fewer, so each pick matters more, for better or worse.",
+   "what": "Holds 30 companies or fewer, so each pick matters more, for better or worse.",
    "amfi": [
     "Focused Fund"
    ],
    "stat": [
     "≤ 30",
     "stocks in the portfolio"
-   ]
+   ],
+   "clue": "Allowed to hold no more than 30 stocks."
   },
   {
    "id": "sectoral",
    "group": "equity",
    "name": "Sectoral Fund",
-   "rule": "Min 80% in one sector (e.g. banking, pharma); sectors from AMFI's half-yearly list",
+   "rule": "At least 80% in one sector, e.g. banking or healthcare.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Bets on a single sector. Performance depends heavily on that sector's cycle.",
+   "what": "Invests in one industry only, like banking or pharma. It rises and falls with that industry.",
    "amfi": [
     "Sectoral Fund",
     "Sectoral/ Thematic",
@@ -221,16 +231,17 @@
    "stat": [
     "1",
     "sector, e.g. banking or pharma"
-   ]
+   ],
+   "clue": "Puts at least 80% of its money into a single industry, like banking or pharma."
   },
   {
    "id": "thematic",
    "group": "equity",
    "name": "Thematic Fund",
-   "rule": "Min 80% in one theme (e.g. consumption, ESG); max 50% overlap with other equity schemes except large cap",
+   "rule": "At least 80% in one theme that can cover several sectors.",
    "horizon": "7+ years",
    "risk": "Very High",
-   "what": "Invests across sectors linked by a common theme. Broader than a sector fund, narrower than a diversified fund.",
+   "what": "Invests in one idea that spans several industries, like consumption or manufacturing. Narrower than a diversified fund.",
    "amfi": [
     "Thematic Fund",
     "Sectoral/ Thematic",
@@ -240,17 +251,18 @@
    "stat": [
     "1",
     "theme, e.g. consumption"
-   ]
+   ],
+   "clue": "Built around one idea, like rural consumption, that spans several industries."
   },
   {
    "id": "elss",
    "group": "equity",
    "name": "ELSS – Tax Saver Fund",
    "was": "ELSS",
-   "rule": "Min 80% equity; 3-year lock-in on every instalment",
-   "horizon": "3+ years (lock-in), ideally 7+",
+   "rule": "At least 80% in shares; each investment is locked for 3 years.",
+   "horizon": "7+ years (3-year lock-in)",
    "risk": "Very High",
-   "what": "Equity fund with a Section 80C deduction of up to Rs 1.5 lakh, available only under the old tax regime. Each SIP instalment has its own 3-year lock-in.",
+   "what": "An equity fund that saves tax under the old tax regime (Section 80C, up to Rs 1.5 lakh a year). Your money is locked for 3 years.",
    "amfi": [
     "ELSS",
     "ELSS - Tax Saver Fund",
@@ -259,49 +271,52 @@
    "stat": [
     "3 yrs",
     "lock-in, with 80C tax saving"
-   ]
+   ],
+   "clue": "The only fund type with a 3-year lock-in that also gives a Section 80C tax deduction."
   },
   {
    "id": "overnight",
    "group": "debt",
    "name": "Overnight Fund",
-   "rule": "Securities maturing in 1 day; up to 5% in G-secs/T-bills of up to 30 days for margin",
-   "horizon": "1 day to a few weeks",
+   "rule": "Invests only in securities that mature the next day.",
+   "horizon": "a day to a few weeks",
    "risk": "Low",
-   "what": "Lends money overnight, mostly to banks, against government securities. Almost no interest-rate or credit risk.",
+   "what": "Lends money for just one day at a time, mostly to banks against government bonds. Almost no risk, and returns to match.",
    "amfi": [
     "Overnight Fund"
    ],
    "stat": [
     "1 day",
     "maturity of every holding"
-   ]
+   ],
+   "clue": "Everything it owns matures by the next day."
   },
   {
    "id": "liquid",
    "group": "debt",
    "name": "Liquid Fund",
-   "rule": "Only debt and money market securities maturing within 91 days",
-   "horizon": "Up to 3 months",
+   "rule": "Invests only in debt that matures within 91 days.",
+   "horizon": "up to 3 months",
    "risk": "Low to Moderate",
-   "what": "The standard parking place for an emergency fund or money needed soon. Redemptions usually credited next working day.",
+   "what": "The usual home for an emergency fund or money needed within weeks. Low risk, and money usually reaches you the next working day.",
    "amfi": [
     "Liquid Fund"
    ],
    "stat": [
     "≤ 91",
     "days maturity"
-   ]
+   ],
+   "clue": "Can't own anything that matures later than 91 days."
   },
   {
    "id": "ultra-short-term",
    "group": "debt",
    "name": "Ultra Short Term Fund",
    "was": "Ultra Short Duration Fund",
-   "rule": "Macaulay duration 3-6 months",
-   "horizon": "3-6 months",
+   "rule": "Average duration of 3 to 6 months.",
+   "horizon": "3–6 months",
    "risk": "Low to Moderate",
-   "what": "Slightly longer than liquid funds, for money parked for a few months.",
+   "what": "For money you'll need in 3 to 6 months. A little more return than a liquid fund, still low risk.",
    "amfi": [
     "Ultra Short Duration Fund",
     "Ultra Short Term Fund"
@@ -309,17 +324,18 @@
    "stat": [
     "3–6",
     "months duration"
-   ]
+   ],
+   "clue": "Keeps its average duration between 3 and 6 months."
   },
   {
    "id": "ultra-short-to-short",
    "group": "debt",
    "name": "Ultra Short to Short Term Fund",
    "was": "Low Duration Fund",
-   "rule": "Macaulay duration 6-12 months",
-   "horizon": "6-12 months",
+   "rule": "Average duration of 6 to 12 months.",
+   "horizon": "6–12 months",
    "risk": "Low to Moderate",
-   "what": "For money needed in 6 months to a year.",
+   "what": "For money you'll need in 6 to 12 months.",
    "amfi": [
     "Low Duration Fund",
     "Ultra Short to Short Term Fund"
@@ -327,16 +343,17 @@
    "stat": [
     "6–12",
     "months duration"
-   ]
+   ],
+   "clue": "Keeps its average duration between 6 and 12 months."
   },
   {
    "id": "money-market",
    "group": "debt",
    "name": "Money Market Fund",
-   "rule": "Money market instruments maturing within 1 year",
-   "horizon": "3-12 months",
+   "rule": "Invests only in money market instruments that mature within 1 year.",
+   "horizon": "3–12 months",
    "risk": "Low to Moderate",
-   "what": "Holds short-term instruments such as CDs, CPs and T-bills.",
+   "what": "Lends for up to a year through short-term instruments issued by banks, companies and the government.",
    "amfi": [
     "Money Market Fund",
     "Money Market"
@@ -344,17 +361,18 @@
    "stat": [
     "≤ 1 yr",
     "money market instruments"
-   ]
+   ],
+   "clue": "Holds only short-term IOUs from banks, companies and the government that mature within a year."
   },
   {
    "id": "short-term",
    "group": "debt",
    "name": "Short Term Fund",
    "was": "Short Duration Fund",
-   "rule": "Macaulay duration 1-3 years",
-   "horizon": "1-3 years",
+   "rule": "Average duration of 1 to 3 years.",
+   "horizon": "1–3 years",
    "risk": "Moderate",
-   "what": "A common choice for goals 1 to 3 years away.",
+   "what": "A common choice for goals 1 to 3 years away. High-quality lending with modest ups and downs.",
    "amfi": [
     "Short Duration Fund",
     "Short Term Fund"
@@ -362,17 +380,18 @@
    "stat": [
     "1–3",
     "years duration"
-   ]
+   ],
+   "clue": "Keeps its average duration between 1 and 3 years."
   },
   {
    "id": "medium-term",
    "group": "debt",
    "name": "Medium Term Fund",
    "was": "Medium Duration Fund",
-   "rule": "Macaulay duration 3-4 years (1-4 years in an anticipated adverse situation)",
-   "horizon": "3-4 years",
+   "rule": "Average duration of 3 to 4 years (can be cut to 1 year if the manager expects trouble).",
+   "horizon": "3–4 years",
    "risk": "Moderate",
-   "what": "Longer duration means more sensitivity to interest-rate changes.",
+   "what": "Lends for a bit longer, so it moves more when interest rates change. Better for 3+ years.",
    "amfi": [
     "Medium Duration Fund",
     "Medium Term Fund"
@@ -380,17 +399,18 @@
    "stat": [
     "3–4",
     "years duration"
-   ]
+   ],
+   "clue": "Keeps its average duration between 3 and 4 years."
   },
   {
    "id": "medium-long",
    "group": "debt",
    "name": "Medium to Long Term Fund",
    "was": "Medium to Long Duration Fund",
-   "rule": "Macaulay duration 4-7 years (1-7 years in an anticipated adverse situation)",
-   "horizon": "4-7 years",
+   "rule": "Average duration of 4 to 7 years (can be cut to 1 year if the manager expects trouble).",
+   "horizon": "4–7 years",
    "risk": "Moderate",
-   "what": "Gains when rates fall and loses when rates rise, more sharply than shorter funds.",
+   "what": "Lends for longer still. It gains when interest rates fall and loses when they rise.",
    "amfi": [
     "Medium to Long Duration Fund",
     "Medium to Long Term Fund"
@@ -398,17 +418,18 @@
    "stat": [
     "4–7",
     "years duration"
-   ]
+   ],
+   "clue": "Keeps its average duration between 4 and 7 years."
   },
   {
    "id": "long-term",
    "group": "debt",
    "name": "Long Term Fund",
    "was": "Long Duration Fund",
-   "rule": "Macaulay duration above 7 years",
+   "rule": "Average duration of more than 7 years.",
    "horizon": "7+ years",
    "risk": "Moderate",
-   "what": "The most interest-rate-sensitive debt category.",
+   "what": "Lends for the longest periods, so it's the most sensitive to interest rate changes of any debt fund.",
    "amfi": [
     "Long Duration Fund",
     "Long Term Fund"
@@ -416,17 +437,18 @@
    "stat": [
     "7+",
     "years duration"
-   ]
+   ],
+   "clue": "Its average duration must be more than 7 years."
   },
   {
    "id": "dynamic-term",
    "group": "debt",
    "name": "Dynamic Term Fund",
    "was": "Dynamic Bond",
-   "rule": "Invests across durations; the manager changes duration with the rate view",
+   "rule": "Any duration; the manager changes it with their view on rates.",
    "horizon": "3+ years",
    "risk": "Moderate",
-   "what": "The fund manager actively lengthens or shortens duration based on where rates are expected to go.",
+   "what": "The manager lends for shorter or longer periods depending on where they think interest rates are heading.",
    "amfi": [
     "Dynamic Bond",
     "Dynamic Bond Fund",
@@ -435,49 +457,52 @@
    "stat": [
     "Any",
     "duration; the manager decides"
-   ]
+   ],
+   "clue": "Has no duration limit; the manager changes it based on their view of interest rates."
   },
   {
    "id": "corporate-bond",
    "group": "debt",
    "name": "Corporate Bond Fund",
-   "rule": "Min 80% in AA+ and above rated corporate bonds",
-   "horizon": "1-3+ years",
+   "rule": "At least 80% in bonds rated AA+ or higher.",
+   "horizon": "1–3 years or more",
    "risk": "Moderate",
-   "what": "Lends to high-rated companies.",
+   "what": "Lends to companies with the highest credit ratings, so the chance of not being repaid is low.",
    "amfi": [
     "Corporate Bond Fund"
    ],
    "stat": [
     "80%",
     "in AA+ and above bonds"
-   ]
+   ],
+   "clue": "At least 80% in company bonds with the top credit ratings (AA+ or higher)."
   },
   {
    "id": "credit-risk",
    "group": "debt",
    "name": "Credit Risk Fund",
-   "rule": "Min 65% in bonds rated AA and below (AA+ excluded); name can't stress returns",
+   "rule": "At least 65% in bonds rated AA or lower.",
    "horizon": "3+ years",
    "risk": "Moderately High",
-   "what": "Earns extra yield by lending to lower-rated companies, and accepts the default risk that comes with it.",
+   "what": "Earns extra interest by lending to lower-rated companies, and takes on a real risk that some won't repay.",
    "amfi": [
     "Credit Risk Fund"
    ],
    "stat": [
     "65%",
     "in AA and lower-rated bonds"
-   ]
+   ],
+   "clue": "At least 65% in bonds rated below the top grades, for extra interest."
   },
   {
    "id": "banking-psu",
    "group": "debt",
    "name": "Banking and PSU Debt Fund",
    "was": "Banking and PSU Fund",
-   "rule": "Min 80% in debt of banks, PSUs, public financial institutions and municipal bonds",
-   "horizon": "1-3+ years",
+   "rule": "At least 80% in debt of banks, public sector companies and municipal bodies.",
+   "horizon": "1–3 years or more",
    "risk": "Moderate",
-   "what": "Lends mainly to banks and government-owned companies.",
+   "what": "Lends mainly to banks and government-owned companies. Low chance of default.",
    "amfi": [
     "Banking and PSU Fund",
     "Banking and PSU Debt Fund",
@@ -486,16 +511,17 @@
    "stat": [
     "80%",
     "lent to banks and PSUs"
-   ]
+   ],
+   "clue": "At least 80% lent to banks, government-owned companies and city bodies."
   },
   {
    "id": "gilt",
    "group": "debt",
    "name": "Gilt Fund",
-   "rule": "Min 80% in government securities across maturities",
+   "rule": "At least 80% in government securities.",
    "horizon": "3+ years",
    "risk": "Moderate",
-   "what": "No credit risk, since the government is the borrower, but prices still swing with interest rates.",
+   "what": "Lends only to the government, so there's no risk of not being repaid. Prices still move with interest rates.",
    "amfi": [
     "Gilt Fund",
     "Gilt"
@@ -503,17 +529,18 @@
    "stat": [
     "80%",
     "in government bonds"
-   ]
+   ],
+   "clue": "At least 80% in government bonds, of any maturity."
   },
   {
    "id": "gilt-10yr",
    "group": "debt",
    "name": "10-year Constant Maturity Gilt Fund",
    "was": "Gilt Fund with 10-year constant duration",
-   "rule": "Min 80% in G-secs; Macaulay duration of 10 years",
+   "rule": "At least 80% in government securities, with a 10-year duration.",
    "horizon": "5+ years",
    "risk": "Moderate",
-   "what": "Keeps duration pinned at 10 years, so it moves closely with the 10-year government bond.",
+   "what": "Lends to the government with its duration fixed at 10 years, so it moves closely with the 10-year government bond.",
    "amfi": [
     "Gilt Fund with 10 year constant duration",
     "10-year Constant Maturity Gilt Fund",
@@ -522,17 +549,18 @@
    "stat": [
     "10 yrs",
     "government bond duration"
-   ]
+   ],
+   "clue": "Holds government bonds with its duration fixed at 10 years."
   },
   {
    "id": "floating",
    "group": "debt",
    "name": "Floating Interest Rates Fund",
    "was": "Floater Fund",
-   "rule": "Min 65% in floating-rate instruments (including swapped fixed-rate)",
-   "horizon": "1-3 years",
+   "rule": "At least 65% in floating-rate instruments.",
+   "horizon": "1–3 years",
    "risk": "Moderate",
-   "what": "Holds bonds whose interest resets with market rates, which cushions it when rates rise.",
+   "what": "Holds bonds whose interest rate resets with the market, so it holds up better when rates rise.",
    "amfi": [
     "Floater Fund",
     "Floating Interest Rates Fund",
@@ -541,17 +569,18 @@
    "stat": [
     "65%",
     "in floating-rate bonds"
-   ]
+   ],
+   "clue": "At least 65% in bonds whose interest rate resets with market rates."
   },
   {
    "id": "sectoral-debt",
    "group": "debt",
    "name": "Sectoral Fund (Debt)",
    "status": "new",
-   "rule": "Min 80% in AA+ and above rated bonds of one sector: financial services, energy, infrastructure, housing or real estate",
+   "rule": "At least 80% in AA+ or higher rated bonds of one sector (financial services, energy, infrastructure, housing or real estate).",
    "horizon": "3+ years",
    "risk": "Moderate",
-   "what": "New in 2026. Concentrates high-rated debt in a single sector, so sector-specific stress matters more.",
+   "what": "New in 2026. Lends to top-rated borrowers in one sector, such as housing or energy, so trouble in that sector hits harder.",
    "amfi": [
     "Sectoral Fund (Debt)",
     "Sectoral Debt Fund"
@@ -559,65 +588,69 @@
    "stat": [
     "80%",
     "in top-rated bonds of one sector"
-   ]
+   ],
+   "clue": "A debt fund that lends at least 80% to top-rated borrowers in a single sector like housing or energy."
   },
   {
    "id": "conservative-hybrid",
    "group": "hybrid",
    "name": "Conservative Hybrid Fund",
-   "rule": "Equity 10-25%, debt 75-90%",
-   "horizon": "2-3+ years",
+   "rule": "10–25% in shares, 75–90% in debt.",
+   "horizon": "2–3 years or more",
    "risk": "Moderately High",
-   "what": "Mostly debt, with a small equity portion to add some growth.",
+   "what": "Mostly debt with a small slice of shares (10–25%) for a bit of extra growth.",
    "amfi": [
     "Conservative Hybrid Fund"
    ],
    "stat": [
     "10–25%",
     "equity, rest in debt"
-   ]
+   ],
+   "clue": "Keeps just 10 to 25% in shares and the rest in debt."
   },
   {
    "id": "balanced-hybrid",
    "group": "hybrid",
    "name": "Balanced Hybrid Fund",
-   "rule": "Equity 40-60%, debt 40-60%; no arbitrage allowed. An AMC offers this OR Aggressive Hybrid",
-   "horizon": "3-5+ years",
+   "rule": "40–60% in shares and 40–60% in debt; no arbitrage.",
+   "horizon": "3–5 years or more",
    "risk": "Very High",
-   "what": "A roughly even split between equity and debt.",
+   "what": "A roughly even split between shares and debt.",
    "amfi": [
     "Balanced Hybrid Fund"
    ],
    "stat": [
     "40–60%",
     "equity, rest in debt"
-   ]
+   ],
+   "clue": "Splits roughly half and half between shares and debt, with no arbitrage allowed."
   },
   {
    "id": "aggressive-hybrid",
    "group": "hybrid",
    "name": "Aggressive Hybrid Fund",
-   "rule": "Equity 65-80%, debt 20-35%. An AMC offers this OR Balanced Hybrid",
+   "rule": "65–80% in shares, 20–35% in debt.",
    "horizon": "5+ years",
    "risk": "Very High",
-   "what": "Mostly equity with a debt cushion. Taxed as equity.",
+   "what": "Mostly shares (65–80%) with a debt cushion. Taxed like an equity fund.",
    "amfi": [
     "Aggressive Hybrid Fund"
    ],
    "stat": [
     "65–80%",
     "equity, rest in debt"
-   ]
+   ],
+   "clue": "Keeps 65 to 80% in shares and the rest in debt."
   },
   {
    "id": "daaf",
    "group": "hybrid",
    "name": "Dynamic Asset Allocation Fund",
    "was": "Dynamic Asset Allocation or Balanced Advantage",
-   "rule": "Equity and debt mix managed dynamically (usually model-driven)",
-   "horizon": "3-5+ years",
+   "rule": "The share and debt mix changes over time, usually following a model.",
+   "horizon": "3–5 years or more",
    "risk": "Very High",
-   "what": "Popularly called Balanced Advantage. Cuts equity when markets look expensive and adds when cheap.",
+   "what": "Often called a Balanced Advantage Fund. It cuts shares when markets look expensive and adds when they look cheap, by itself.",
    "amfi": [
     "Dynamic Asset Allocation or Balanced Advantage",
     "Dynamic Asset Allocation Fund",
@@ -627,16 +660,17 @@
    "stat": [
     "0–100%",
     "equity, adjusted by the fund"
-   ]
+   ],
+   "clue": "Shifts between shares and debt by itself as markets look cheaper or dearer."
   },
   {
    "id": "multi-asset",
    "group": "hybrid",
    "name": "Multi Asset Allocation Fund",
-   "rule": "Min 10% each in 3 or more asset classes; foreign securities aren't a separate class",
+   "rule": "At least 10% each in three or more asset classes.",
    "horizon": "5+ years",
    "risk": "Very High",
-   "what": "Typically mixes equity, debt and gold or silver in one fund.",
+   "what": "Holds at least three kinds of investment, usually shares, debt and gold or silver, in one fund.",
    "amfi": [
     "Multi Asset Allocation",
     "Multi Asset Allocation Fund"
@@ -644,32 +678,34 @@
    "stat": [
     "3+",
     "asset classes, 10%+ each"
-   ]
+   ],
+   "clue": "Must hold at least 10% each in three or more kinds of assets."
   },
   {
    "id": "arbitrage",
    "group": "hybrid",
    "name": "Arbitrage Fund",
-   "rule": "Min 65% in equity via arbitrage; debt only in G-secs under 1 year and G-sec repo; no InvITs",
-   "horizon": "3-12 months",
+   "rule": "At least 65% in shares, fully hedged; its debt is limited to short government securities.",
+   "horizon": "3–12 months",
    "risk": "Low",
-   "what": "Earns the price gap between cash and futures markets. Low risk, but taxed as equity, which can suit higher tax brackets.",
+   "what": "Earns the small price gap between the cash and futures markets. Low risk like a debt fund, but taxed like equity.",
    "amfi": [
     "Arbitrage Fund"
    ],
    "stat": [
     "65%",
     "equity, fully hedged"
-   ]
+   ],
+   "clue": "Earns the price gap between buying shares and selling their futures at the same time."
   },
   {
    "id": "equity-savings",
    "group": "hybrid",
    "name": "Equity Savings Fund",
-   "rule": "Min 65% equity (much of it hedged); net unhedged equity 15-40%; min 10% debt",
-   "horizon": "2-3+ years",
+   "rule": "At least 65% in shares, but only 15–40% exposed to market moves; at least 10% in debt.",
+   "horizon": "2–3 years or more",
    "risk": "Moderately High",
-   "what": "Mixes arbitrage, a little unhedged equity and debt for a smoother ride than pure equity.",
+   "what": "Mixes shares with protective trades that cancel out most market moves, plus debt. Only 15–40% really moves with the market, so the ride is smoother than equity.",
    "amfi": [
     "Equity Savings",
     "Equity Savings Fund"
@@ -677,17 +713,18 @@
    "stat": [
     "15–40%",
     "exposed to market moves"
-   ]
+   ],
+   "clue": "Only 15 to 40% of its money actually moves with the stock market; the rest is hedged or in debt."
   },
   {
    "id": "life-cycle",
    "group": "lifecycle",
    "name": "Life Cycle Fund",
    "status": "new",
-   "rule": "Target maturity 5-30 years in multiples of 5; glide path from equity to debt; max 6 active per AMC; exit load 3%/2%/1% in years 1/2/3",
-   "horizon": "Tied to the fund's target year",
+   "rule": "Target date 5 to 30 years away in multiples of 5; follows a set path from shares to debt; exit load of 3%, 2% and 1% in years 1 to 3.",
+   "horizon": "until its target year",
    "risk": "Changes over time",
-   "what": "New in 2026. Named by target year (e.g. Life Cycle Fund 2045). Starts equity-heavy and automatically shifts to debt as the target year approaches.",
+   "what": "New in 2026. Named after a target year, like 2045. It starts mostly in shares and moves to safer investments by itself as the year approaches.",
    "amfi": [
     "Life Cycle Fund",
     "Life Cycle Funds"
@@ -695,16 +732,17 @@
    "stat": [
     "5–30",
     "years to its target date"
-   ]
+   ],
+   "clue": "Named after a target year and moves from shares to debt by itself as that year approaches."
   },
   {
    "id": "index-etf",
    "group": "other",
    "name": "Index Funds / ETFs",
-   "rule": "Min 95% in the securities of the index tracked",
-   "horizon": "Depends on the index",
+   "rule": "At least 95% in the securities of the index it tracks.",
+   "horizon": "depends on the index",
    "risk": "Depends on the index",
-   "what": "Passive funds that copy an index at low cost. ETFs trade on the exchange and need a demat account; index funds are bought from the AMC like any other fund.",
+   "what": "Copies an index, like the Nifty 50, instead of picking stocks. Very low cost. ETFs trade on the stock exchange and need a demat account.",
    "amfi": [
     "Index Funds",
     "Other ETFs",
@@ -716,16 +754,17 @@
    "stat": [
     "95%",
     "copies an index"
-   ]
+   ],
+   "clue": "Simply copies a market benchmark like the Nifty 50, with no stock-picking."
   },
   {
    "id": "fof",
    "group": "other",
    "name": "Fund of Funds (Domestic & Overseas)",
-   "rule": "Min 95% in the underlying fund(s); 2026 sub-types: equity, debt, hybrid, commodity, overseas",
-   "horizon": "Depends on the underlying",
+   "rule": "At least 95% in its underlying fund or funds.",
+   "horizon": "depends on the funds held",
    "risk": "Depends on the underlying",
-   "what": "A fund that invests in other funds, e.g. to reach overseas markets or package an allocation.",
+   "what": "A fund that invests in other funds, for example to reach foreign markets or combine a few funds in one.",
    "amfi": [
     "FoF Domestic",
     "FoF Overseas",
@@ -735,17 +774,18 @@
    "stat": [
     "95%",
     "invested in other funds"
-   ]
+   ],
+   "clue": "Puts at least 95% of its money into other mutual funds."
   },
   {
    "id": "retirement",
    "group": "solution",
    "name": "Retirement Fund",
    "status": "discontinued",
-   "rule": "Lock-in of 5 years or retirement age, whichever is earlier",
+   "rule": "Locked in for 5 years or until retirement age, whichever is earlier.",
    "horizon": "—",
    "risk": "—",
-   "what": "Closed to new investors since February 2026. Existing investments continue until SEBI-approved mergers into similar funds.",
+   "what": "Closed to new investors since February 2026. Existing investments continue until they're merged into similar funds.",
    "amfi": [
     "Retirement Fund"
    ],
@@ -759,10 +799,10 @@
    "group": "solution",
    "name": "Children's Fund",
    "status": "discontinued",
-   "rule": "Lock-in of 5 years or the child reaching majority, whichever is earlier",
+   "rule": "Locked in for 5 years or until the child turns 18, whichever is earlier.",
    "horizon": "—",
    "risk": "—",
-   "what": "Closed to new investors since February 2026. Existing investments continue until SEBI-approved mergers into similar funds.",
+   "what": "Closed to new investors since February 2026. Existing investments continue until they're merged into similar funds.",
    "amfi": [
     "Children's Fund",
     "Childrens Fund",

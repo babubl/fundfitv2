@@ -1,0 +1,6 @@
+Scheme Code;NAV Name;Plan;Option;ISIN Div Payout/ISIN Growth;ISIN Div Reinvestment;Net Asset Value;Date
+Open Ended Schemes ( Equity Scheme - Multi Cap Fund )
+Axis Mutual Fund
+135759;Axis Children's Fund-Regular Growth;Regular Plan;GROWTH;INF846K01WJ1;;12.9250;25-Sep-2023
+135762;Axis Children's Fund-Direct Growth;Direct Plan;GROWTH;INF846K01WO1;;14.0000;25-Sep-2023
+200040;Zerodha Financial Services Debt Fund; Series A;Regular Plan;GROWTH;X;;9.5;25-Sep-2023

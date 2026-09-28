@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FundFit – Mutual funds, minus the jargon</title>
-<meta name="description" content="Learn mutual funds in 10 bite-size lessons, collect all 40 fund types, play Fund Match, and find the kind of fund that suits your money. Live data from AMFI and SEBI.">
+<meta name="description" content="Understand mutual funds in 11 short lessons, learn all 40 fund types by playing, find the type that fits your money, then compare real funds by cost, returns and track record. Live data from AMFI and SEBI.">
 <meta name="theme-color" content="#3d2bff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233d2bff'/%3E%3Cpath d='M7 22a9 9 0 0 1 18 0' fill='none' stroke='%23ffb400' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M16 22l5-8' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+
 @font-face{font-family:"Bricolage";src:url(fonts/bricolage.woff2) format("woff2-variations");font-weight:200 800;font-display:swap}
 @font-face{font-family:"Figtree";src:url(fonts/figtree.woff2) format("woff2-variations");font-weight:300 900;font-display:swap}
 
@@ -68,7 +69,6 @@ button{cursor:pointer}
 .lvl{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#3a2800;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.9rem}
 .xpbar{width:70px;height:7px;border-radius:9px;background:var(--bg-2);overflow:hidden}
 .xpbar b{display:block;height:100%;background:var(--gold);border-radius:9px;transition:width .5s}
-.lang{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 11px;font-weight:700;font-size:.8rem}
 @media (max-width:880px){.nav{display:none}.xpbar{display:none}}
 
 /* Bottom tab bar (mobile) */
@@ -342,6 +342,69 @@ button.fcard:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 18px 3
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:.88rem;color:var(--ink-2)}
 footer .warn{font-weight:800;color:var(--ink);font-size:.95rem}
 .empty{border:2px dashed var(--line);border-radius:18px;padding:22px;color:var(--ink-2);text-align:center}
+
+/* ---------- v3 additions ---------- */
+.player[hidden]{display:none}
+.try{padding:22px;position:relative}
+.try h3{font-size:1.15rem}
+.try .timeline{margin:12px 0 16px}
+.try-out{border-radius:18px;background:var(--bg-2);padding:16px;display:grid;gap:10px;min-height:190px}
+.fam{display:flex;height:14px;border-radius:8px;overflow:hidden;background:var(--card)}
+.fam i{display:block;height:100%;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.famkey{display:flex;gap:12px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-2);font-weight:700}
+.famkey span{display:inline-flex;align-items:center;gap:5px}
+.famkey b{width:10px;height:10px;border-radius:3px;display:inline-block}
+.try-out .pick{display:flex;gap:12px;align-items:flex-start}
+.try-out .pick .dot{width:14px;height:14px;border-radius:5px;background:var(--g);margin-top:6px;flex:none}
+.try-out .pick b{font-family:var(--display);font-size:1.3rem;letter-spacing:-.015em}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.kpi{padding:16px}
+.kpi b{display:block;font-family:var(--display);font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.kpi span{font-size:.85rem;color:var(--ink-2)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+.daily{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:20px;background:linear-gradient(135deg,var(--brand),color-mix(in srgb,var(--brand) 60%,var(--hyb)));color:#fff;border:0}
+.daily h3{color:#fff;font-size:1.35rem}
+.daily p{margin:4px 0 0;opacity:.9}
+.daily .btn{--c:#fff;--d:#c9c3ff;--t:var(--brand)}
+.daily.done{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.daily.done h3{color:var(--ink)}
+/* comparison */
+.cmp-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.cmp-tools select,.cmp-tools .search{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:8px 12px;font-weight:650;max-width:260px}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:7px 12px;font-weight:750;font-size:.88rem}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cmp{width:100%;border-collapse:collapse;font-size:.93rem}
+.cmp th{text-align:right;font-size:.75rem;color:var(--ink-3);font-weight:800;padding:8px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+.cmp th:first-child,.cmp td:first-child{text-align:left}
+.cmp td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.cmp td:first-child{white-space:normal}
+.cmp .fn{font-weight:750}
+.cmp .fn small{display:block;font-weight:600;color:var(--ink-3);font-size:.78rem}
+.cmp tr.avg td{background:var(--bg-2);font-weight:800;color:var(--ink-2)}
+.cmp .neg{color:var(--no-dk)}
+.cmp .na{color:var(--ink-3)}
+.cmp-wrap{overflow-x:auto;margin:0 -4px}
+@media (max-width:640px){
+  .cmp thead{display:none}
+  .cmp tr{display:grid;grid-template-columns:repeat(4,1fr);gap:4px 8px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .cmp td{border:0;padding:0;text-align:left}
+  .cmp td:first-child{grid-column:1/-1;margin-bottom:4px}
+  .cmp td[data-l]::before{content:attr(data-l);display:block;font-size:.7rem;color:var(--ink-3);font-weight:800}
+  .cmp tr.avg{background:var(--bg-2);border-radius:12px;padding:10px}
+  .cmp tr.avg td{background:none}
+}
+.kinds{display:flex;gap:6px;flex-wrap:wrap}
+.nextsteps{counter-reset:s;display:grid;gap:10px;margin:10px 0 0;padding:0;list-style:none}
+.nextsteps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.nextsteps li::before{content:counter(s);width:34px;height:34px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.collect{margin-top:18px;border-radius:18px;padding:18px;background:var(--bg-2)}
+.collect .qtext{font-size:1.15rem}
+.plan{display:flex;gap:10px 28px;flex-wrap:wrap;margin-top:6px}
+.plan div b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.plan div span{font-size:.8rem;color:var(--ink-3);font-weight:700}
+details.more{border-top:1px solid var(--line);margin-top:24px;padding-top:6px}
+details.more summary{cursor:pointer;font-weight:750;padding:10px 0}
 </style>
 </head>
 <body>
@@ -349,18 +412,17 @@ footer .warn{font-weight:800;color:var(--ink);font-size:.95rem}
   <div class="wrap">
     <a class="logo" href="#home" aria-label="FundFit home"><i><svg viewBox="0 0 22 16" aria-hidden="true"><path d="M2 14a9 9 0 0 1 18 0" fill="none" stroke="#ffb400" stroke-width="3.4" stroke-linecap="round"/><path d="M11 14l4.5-7" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></i>FundFit</a>
     <nav class="nav" aria-label="Sections">
-      <a href="#learn" data-i18n="navLearn">Learn</a>
-      <a href="#funds" data-i18n="navFunds">Fund types</a>
-      <a href="#play" data-i18n="navPlay">Play</a>
-      <a href="#fit" data-i18n="navFit">Find my fit</a>
-      <a href="#houses" data-i18n="navHouses">Fund houses</a>
+      <a href="#learn">Learn</a>
+      <a href="#funds">Fund types</a>
+      <a href="#play">Play</a>
+      <a href="#fit">Find my fit</a>
+      <a href="#houses">Fund houses</a>
     </nav>
     <span class="spacer"></span>
-    <a class="player" href="#me" aria-label="Your progress">
-      <span class="streak" id="streak" title="Day streak"></span>
+    <a class="player" id="player" href="#me" aria-label="Your progress" hidden>
+      <span class="streak" id="streak" title="Days in a row"></span>
       <span class="xpchip"><span class="lvl" id="lvl">1</span><span class="xpbar"><b id="xpbar"></b></span><span id="xp">0 XP</span></span>
     </a>
-    <button class="lang" id="langbtn" type="button" aria-label="Switch language">தமிழ்+En</button>
   </div>
 </header>
 
@@ -378,8 +440,8 @@ footer .warn{font-weight:800;color:var(--ink);font-size:.95rem}
   <div class="wrap">
     <p class="warn">Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</p>
     <p id="byline"></p>
-    <p>FundFit helps you understand mutual funds and suggests a type of fund from your answers. It is for learning, not investment advice, and it doesn't recommend any particular scheme. Fund houses, schemes and NAVs come from AMFI's public daily NAV file; circulars from SEBI's website. Fund type rules follow SEBI's circular of 26 February 2026. Always read a scheme's SID and KIM before investing.</p>
-    <p class="tiny">No sign-up, no cookies, no analytics. Your progress and answers are saved only on this device.</p>
+    <p>FundFit explains mutual funds and suggests a type of fund from your answers. It is for learning, not investment advice, and it doesn't recommend any scheme. Fund lists, NAVs, returns and expense ratios come from AMFI's public data; returns are calculated from AMFI's published NAVs and past performance may or may not be sustained in future. Rule updates come from SEBI's website. Fund types follow SEBI's circular of 26 February 2026. Read a scheme's documents before investing.</p>
+    <p class="tiny">No sign-up, no cookies, no analytics. Your progress and answers stay on this device.</p>
   </div>
 </footer>
 
@@ -403,69 +465,30 @@ const CONFIG = {
   siteUrl: location.origin + location.pathname,
 };
 
-/* ============ i18n (UI + questions) ============ */
-const STR = {
-  en: {
-    navLearn:"Learn", navFunds:"Fund types", navPlay:"Play", navFit:"Find my fit", navHouses:"Fund houses",
-    back:"Back", next:"Next", seeResult:"Reveal my fit", restart:"Start again",
-    q_purpose:"What is this money for?", q_purpose_h:"The purpose decides how much risk the money can take.",
-    p_emergency:"Emergency fund", p_emergency_d:"Money I may need any day",
-    p_goal:"A goal with a date", p_goal_d:"House, education, car, wedding",
-    p_wealth:"Growing my wealth", p_wealth_d:"No fixed use yet",
-    p_tax:"Saving tax", p_tax_d:"Section 80C deduction",
-    q_mode:"How will you invest?", m_sip:"Every month (SIP)", m_sip_d:"A fixed amount each month", m_lump:"All at once (lumpsum)", m_lump_d:"One amount, one time",
-    amt_sip:"How much each month?", amt_lump:"How much in total?",
-    q_horizon:"When will you need this money?", q_horizon_h:"This matters more than anything else.",
-    h0:"Within 3 months", h1:"3 to 12 months", h2:"1 to 3 years", h3:"3 to 5 years", h4:"5 to 7 years", h5:"7 to 10 years", h6:"10+ years",
-    q_risk:"Your investment falls 20% in a bad year. What do you do?", q_risk_h:"Be honest. This is about how you'd really feel.",
-    r_exit:"Sell. I can't watch it fall.", r_hold:"Hold and wait it out.", r_add:"Invest more while it's cheap.",
-    q_emerg:"Do you already have an emergency fund?", q_emerg_h:"3 to 6 months of expenses you can reach within a day or two.",
-    e_yes:"Yes, it's sorted", e_no:"Not yet",
-    q_regime:"Which income tax regime do you file under?", q_regime_h:"Only the old regime allows the Section 80C deduction.",
-    t_old:"Old regime", t_new:"New regime", t_unsure:"Not sure",
-    yourFit:"Your fit", why:"Why this type of fund", alsoConsider:"Also worth a look",
-    whoOffers:"Who offers it", pickAmc:"Pick a fund house to see its schemes.",
-    typicalRisk:"Typical risk level", riskNote:"Each scheme shows its own riskometer. This is the usual level for this type.",
-  },
-  ta: {
-    navLearn:"Kathukko", navFunds:"Fund vagaigal", navPlay:"Vilayaadu", navFit:"En fit", navHouses:"Fund houses",
-    back:"Pinnaadi", next:"Adutha", seeResult:"En fit-a kaattu", restart:"Thirumba start",
-    q_purpose:"Indha panam edhukku?", q_purpose_h:"Purpose dhaan indha panam evlo risk edukkalaam nu mudivu pannum.",
-    p_emergency:"Emergency fund", p_emergency_d:"Endha naalum thevai padalaam",
-    p_goal:"Date irukkura goal", p_goal_d:"Veedu, padippu, car, kalyaanam",
-    p_wealth:"Wealth valarkkanum", p_wealth_d:"Ippo fixed use illa",
-    p_tax:"Tax save panna", p_tax_d:"Section 80C deduction",
-    q_mode:"Eppadi invest pannuveenga?", m_sip:"Maasaa maasam (SIP)", m_sip_d:"Ovvoru maasamum fixed amount", m_lump:"Ore thadava (lumpsum)", m_lump_d:"Oru amount, oru thadava",
-    amt_sip:"Maasathukku evlo?", amt_lump:"Mothama evlo?",
-    q_horizon:"Indha panam eppo thevai padum?", q_horizon_h:"Ellathaiyum vida idhu dhaan mukkiyam.",
-    h0:"3 maasathukkulla", h1:"3 – 12 maasam", h2:"1 – 3 varusham", h3:"3 – 5 varusham", h4:"5 – 7 varusham", h5:"7 – 10 varusham", h6:"10+ varusham",
-    q_risk:"Oru mosamaana varushathula unga investment 20% keezha poguthu. Enna pannuveenga?", q_risk_h:"Honest-a sollunga.",
-    r_exit:"Vithuduven, paakka mudiyaadhu.", r_hold:"Hold panni wait pannuven.", r_add:"Kammi vilaila innum vaanguven.",
-    q_emerg:"Ungakitta emergency fund irukka?", q_emerg_h:"3 – 6 maasa selavu, rendu naalla edukka mudiyura idathula.",
-    e_yes:"Irukku", e_no:"Innum illa",
-    q_regime:"Endha tax regime-la file pannureenga?", q_regime_h:"Old regime-la mattum dhaan 80C deduction.",
-    t_old:"Old regime", t_new:"New regime", t_unsure:"Theriyala",
-    yourFit:"Unga fit", why:"Yen indha fund type", alsoConsider:"Idhaiyum paarunga",
-    whoOffers:"Yaar offer panraanga", pickAmc:"Oru fund house-a select pannunga.",
-    typicalRisk:"Vazhakkamaana risk level", riskNote:"Ovvoru scheme-kkum sondha riskometer irukku. Idhu indha type-oda vazhakkamaana level.",
-  }
-};
-let LANG = (() => { try { return localStorage.getItem('ff-lang') || 'en'; } catch (e) { return 'en'; } })();
-const T = (k) => (STR[LANG] && STR[LANG][k]) || STR.en[k] || k;
-
 /* ============ RULES-START (pure; unit-tested from tests/rules.test.mjs) ============ */
 const RULES = (() => {
   const HORIZONS = ['h0','h1','h2','h3','h4','h5','h6'];
+  // General money, by horizon and how the person reacts to a 20% fall.
+  // Nervous investors ("exit") never get a Very High-risk fund as the main suggestion.
   const TABLE = {
     h0: { exit:['liquid','overnight','money-market'], hold:['liquid','overnight','money-market'], add:['liquid','overnight','money-market'] },
     h1: { exit:['money-market','ultra-short-term','ultra-short-to-short'], hold:['money-market','ultra-short-to-short','arbitrage'], add:['money-market','arbitrage','ultra-short-to-short'] },
     h2: { exit:['short-term','banking-psu','corporate-bond'], hold:['short-term','corporate-bond','conservative-hybrid'], add:['equity-savings','conservative-hybrid','short-term'] },
-    h3: { exit:['conservative-hybrid','short-term','equity-savings'], hold:['daaf','equity-savings','conservative-hybrid'], add:['aggressive-hybrid','daaf','multi-asset'] },
-    h4: { exit:['daaf','conservative-hybrid','equity-savings'], hold:['large-cap','daaf','flexi-cap','index-etf'], add:['flexi-cap','large-mid','aggressive-hybrid','index-etf'] },
-    h5: { exit:['aggressive-hybrid','daaf','large-cap'], hold:['flexi-cap','large-cap','multi-asset','index-etf'], add:['large-mid','flexi-cap','mid-cap','index-etf'] },
-    h6: { exit:['large-cap','aggressive-hybrid','index-etf'], hold:['flexi-cap','multi-cap','large-mid','index-etf'], add:['flexi-cap','mid-cap','small-cap','index-etf'] },
+    h3: { exit:['conservative-hybrid','short-term','corporate-bond'], hold:['equity-savings','conservative-hybrid','daaf'], add:['daaf','aggressive-hybrid','multi-asset'] },
+    h4: { exit:['conservative-hybrid','equity-savings','daaf'], hold:['large-cap','daaf','flexi-cap','index-etf'], add:['flexi-cap','large-mid','aggressive-hybrid','index-etf'] },
+    h5: { exit:['equity-savings','conservative-hybrid','daaf'], hold:['flexi-cap','large-cap','multi-asset','index-etf'], add:['large-mid','flexi-cap','mid-cap','index-etf'] },
+    h6: { exit:['equity-savings','daaf','large-cap'], hold:['flexi-cap','multi-cap','large-mid','index-etf'], add:['flexi-cap','mid-cap','small-cap','index-etf'] },
   };
-  const EQUITY_LIKE = new Set(['multi-cap','large-cap','large-mid','mid-cap','small-cap','flexi-cap','dividend-yield','value','contra','focused','sectoral','thematic','elss','aggressive-hybrid','balanced-hybrid','daaf','multi-asset','index-etf','life-cycle']);
+  // Must-have goals with a date (house, education). Within 5 years the money can't be at risk
+  // of a deep fall, whatever the person's appetite; 5-7 years stays cautious.
+  const GOAL = {
+    h0: { exit:['liquid','overnight','money-market'], hold:['liquid','overnight','money-market'], add:['liquid','overnight','money-market'] },
+    h1: { exit:['money-market','ultra-short-to-short','ultra-short-term'], hold:['money-market','ultra-short-to-short','ultra-short-term'], add:['money-market','ultra-short-to-short','arbitrage'] },
+    h2: { exit:['short-term','banking-psu','corporate-bond'], hold:['short-term','banking-psu','corporate-bond'], add:['short-term','corporate-bond','banking-psu'] },
+    h3: { exit:['corporate-bond','banking-psu','short-term'], hold:['corporate-bond','banking-psu','conservative-hybrid'], add:['corporate-bond','conservative-hybrid','banking-psu'] },
+    h4: { exit:['conservative-hybrid','equity-savings','corporate-bond'], hold:['equity-savings','conservative-hybrid','daaf'], add:['daaf','aggressive-hybrid','large-cap'] },
+  };
+  const EQUITY_LIKE = new Set(['multi-cap','large-cap','large-mid','mid-cap','small-cap','flexi-cap','dividend-yield','value','contra','focused','sectoral','thematic','elss','aggressive-hybrid','balanced-hybrid','daaf','multi-asset','index-etf','life-cycle','equity-savings','conservative-hybrid']);
   const hi = (h) => HORIZONS.indexOf(h);
 
   function suggest(inp) {
@@ -478,10 +501,16 @@ const RULES = (() => {
       list = TABLE.h0.hold.slice();
       out.reasons.push('r_emergency');
       if (hi(h) >= 3) out.notes.push('n_emergency_long');
+    } else if (inp.purpose === 'goal' && GOAL[h]) {
+      list = GOAL[h][risk].slice();
+      out.reasons.push('r_h_' + h);
+      out.reasons.push(hi(h) <= 3 ? 'r_goal_safe' : 'r_goal_cautious');
+      if (hi(h) >= 2) out.notes.push('n_glide');
+      if (risk === 'add' && hi(h) <= 3) out.teach.push('t_goal_appetite');
     } else {
       list = TABLE[h][risk].slice();
       out.reasons.push('r_h_' + h);
-      if (hi(h) >= 4) out.reasons.push('r_risk_' + risk);
+      if (hi(h) >= 3) out.reasons.push('r_risk_' + risk);
 
       if (inp.purpose === 'tax') {
         if (inp.regime === 'new') {
@@ -492,12 +521,10 @@ const RULES = (() => {
           list = ['elss', ...list.filter((x) => x !== 'elss')];
           out.reasons.unshift(inp.regime === 'unsure' ? 'r_elss_unsure' : 'r_elss');
           if (hi(h) === 3) out.warnings.push('w_elss_3to5');
+          if (risk === 'exit') out.warnings.push('w_elss_nervous');
         }
       }
-      if (inp.purpose === 'goal' && hi(h) >= 4) {
-        list.splice(1, 0, 'life-cycle');
-        out.notes.push('n_lifecycle');
-      }
+      if (inp.purpose === 'goal') { list.splice(1, 0, 'life-cycle'); out.notes.push('n_lifecycle', 'n_glide'); }
       if (risk === 'exit' && hi(h) >= 4) out.teach.push('t_ability_willingness');
       if (risk === 'add' && hi(h) <= 2) out.teach.push('t_short_high_appetite');
     }
@@ -508,76 +535,54 @@ const RULES = (() => {
     const all = [out.primary, ...out.alts];
     if (inp.purpose !== 'emergency' && inp.emergency === 'no' && EQUITY_LIKE.has(out.primary)) out.warnings.push('w_no_emergency');
     if (all.includes('small-cap')) out.notes.push('n_small_cap');
-    if (inp.mode === 'lump' && EQUITY_LIKE.has(out.primary) && out.primary !== 'elss' && Number(inp.amount) >= 100000) out.notes.push('n_stp');
+    if (inp.mode === 'lump' && EQUITY_LIKE.has(out.primary) && out.primary !== 'elss' && Number(inp.amount) >= 100000 && hi(h) >= 4) out.notes.push('n_stp');
     if (inp.mode === 'sip' && Number(inp.amount) > 0 && Number(inp.amount) < 500) out.notes.push('n_min_sip');
     if (inp.mode === 'lump' && Number(inp.amount) > 0 && Number(inp.amount) < 1000) out.notes.push('n_min_lump');
     if (out.primary === 'elss' && inp.mode === 'sip') out.notes.push('n_elss_sip');
     return out;
   }
-  return { suggest, HORIZONS, TABLE };
+  return { suggest, HORIZONS, TABLE, GOAL };
 })();
 /* ============ RULES-END ============ */
 
-/* Explanation text for rule keys (en / ta) */
+
+/* Explanation text for rule keys */
 const EXPLAIN = {
   en: {
-    r_emergency:"Emergency money has to be available within a day and must not fall in value. Liquid funds are built for exactly that.",
-    n_emergency_long:"Even if it sits untouched for years, emergency money stays in liquid-type funds. Its job is to be there, not to grow.",
-    r_h_h0:"Under 3 months, only the shortest, safest debt funds make sense. Anything else can lose money before you need it.",
-    r_h_h1:"For 3 to 12 months, short-maturity debt keeps interest-rate and credit risk small.",
-    r_h_h2:"For 1 to 3 years, equity is too unpredictable. High-quality debt with a 1-3 year duration matches your timeline.",
-    r_h_h3:"At 3 to 5 years, a measured dose of equity can help, but most of the money should still be cushioned.",
-    r_h_h4:"At 5 to 7 years, equity has usually had time to recover from a bad patch, so it can carry most of the load.",
-    r_h_h5:"At 7 to 10 years, equity is the main engine. Short-term falls matter less over this span.",
+    r_emergency:"Emergency money has to reach you within a day and must not lose value. Liquid funds are built for exactly that.",
+    n_emergency_long:"Even if it sits untouched for years, emergency money stays in a liquid-type fund. Its job is to be there when you need it, not to grow.",
+    r_h_h0:"Under 3 months, only the shortest, safest debt funds make sense. Anything else could be down on the day you need the money.",
+    r_h_h1:"For 3 to 12 months, funds that lend only for short periods keep your money steady.",
+    r_h_h2:"For 1 to 3 years, shares are too unpredictable. High-quality debt funds that lend for 1 to 3 years match your timeline.",
+    r_h_h3:"At 3 to 5 years, a small amount of shares can help, but most of the money should stay in steadier investments.",
+    r_h_h4:"At 5 to 7 years, shares have usually had time to recover from a bad patch, so they can do more of the work.",
+    r_h_h5:"At 7 to 10 years, shares are the main engine of growth. Short-term falls matter less over this span.",
     r_h_h6:"At 10+ years, time is on your side. A diversified equity fund can ride out several market cycles.",
-    r_risk_exit:"You said you'd sell after a 20% fall, so the suggestion leans towards funds that fall less.",
-    r_risk_hold:"You'd hold through a fall, so a diversified, steady equity category fits.",
-    r_risk_add:"You'd buy more after a fall, so you can handle categories that swing harder.",
-    r_elss:"You file under the old regime, so ELSS gives a Section 80C deduction of up to Rs 1.5 lakh a year, with a 3-year lock-in.",
-    r_elss_unsure:"ELSS saves tax only under the old regime. Check which regime you file under before choosing it for the deduction.",
+    r_goal_safe:"This is money for a goal that can't move, like a house or college fees. Within 5 years, even a bold investor shouldn't risk a 30% fall just before the deadline.",
+    r_goal_cautious:"This money has a fixed date, so the suggestion stays cautious: some growth, but with a cushion against a bad year near the end.",
+    t_goal_appetite:"You're comfortable with risk, but this goal has a deadline. A market fall right before it could leave you short, and there'd be no time to recover. Keep the goal money safe and take risk with money that has no deadline.",
+    n_glide:"As the goal gets closer, move money step by step into safer funds. Aim to have it all in debt or liquid funds about 2 years before you need it.",
+    r_risk_exit:"You said you'd sell after a 20% fall, so the suggestion picks funds that fall less. A fund you'll stay in beats a better fund you'll panic out of.",
+    r_risk_hold:"You'd hold through a fall, so a diversified, steady equity fund fits.",
+    r_risk_add:"You'd buy more after a fall, so you can handle funds that swing harder in return for more growth.",
+    r_elss:"You file under the old regime, so ELSS gives a Section 80C deduction of up to Rs 1.5 lakh a year. Your money is locked in for 3 years.",
+    r_elss_unsure:"ELSS saves tax only under the old tax regime. Check which regime you file under before choosing it for the deduction.",
     n_tax_new:"The new tax regime has no Section 80C deduction, so ELSS gives no tax benefit there. The suggestion treats this as regular investing.",
-    t_elss_short:"ELSS locks every instalment for 3 years, but you need this money sooner. Tax saving shouldn't lock up money you'll need, so ELSS isn't suggested here.",
-    w_elss_3to5:"With 3 to 5 years, the ELSS lock-in fits, but equity can still be down when the lock-in ends. Be prepared to wait longer.",
-    n_lifecycle:"Life Cycle Funds (new in 2026) are built for dated goals: pick the one whose target year is close to, and not after, your goal year. It moves from equity to debt automatically.",
-    t_ability_willingness:"Your timeline can handle equity, but your comfort level says otherwise. Both matter: the ability to take risk and the willingness to live with it. A hybrid fund is a gentler way to start; you can shift more to equity as you get used to the swings.",
-    t_short_high_appetite:"Your appetite for risk is high, but your time is short. Equity can stay down for 3 years or more, so the timeline wins here.",
-    w_no_emergency:"Build your emergency fund first. Put 3 to 6 months of expenses in a liquid fund, then start this investment. Otherwise a surprise bill could force you to sell at a loss.",
-    n_small_cap:"Small caps are the most volatile category. If you choose one, keep it to a part of your equity money, not all of it.",
-    n_stp:"For a large lumpsum into equity, consider parking it in a liquid fund and moving it in gradually over 6 to 12 months with an STP (Systematic Transfer Plan).",
-    n_min_sip:"Many schemes need at least Rs 500 a month for SIPs (some allow Rs 100). Check the minimum in the scheme's SID.",
-    n_min_lump:"Many schemes need a minimum lumpsum of Rs 1,000 to Rs 5,000. Check the minimum in the scheme's SID.",
-    n_elss_sip:"With an ELSS SIP, each monthly instalment has its own 3-year lock-in. The last instalment unlocks 3 years after it's paid.",
-  },
-  ta: {
-    r_emergency:"Emergency panam oru naalla kidaikkanum, value kuraiya koodaadhu. Liquid funds adhukkaagave irukku.",
-    n_emergency_long:"Varusha kanakka thodaama irundhaalum, emergency panam liquid maadhiri funds-la dhaan irukkanum. Adhoda velai valaradhu illa, thevai padumbodhu irukkuradhu.",
-    r_h_h0:"3 maasathukkulla, romba short-aana, safe-aana debt funds mattum dhaan sari. Mathadhellam thevai padumbodhu nashtathula irukkalaam.",
-    r_h_h1:"3 – 12 maasathukku, short-maturity debt interest-rate risk-aiyum credit risk-aiyum kammiya vekkum.",
-    r_h_h2:"1 – 3 varushathukku equity romba unpredictable. 1-3 varusha duration irukkura nalla quality debt unga timeline-ku match aagum.",
-    r_h_h3:"3 – 5 varushathula, konjam equity udhavum, aana perumbaalum panam cushion-oda irukkanum.",
-    r_h_h4:"5 – 7 varushathula, equity oru mosamaana time-la irundhu recover aaga vazhakkamaa time irukkum.",
-    r_h_h5:"7 – 10 varushathula, equity dhaan main engine. Short-term fall-ku mukkiyathuvam kammi.",
-    r_h_h6:"10+ varushathula, time unga pakkam. Oru diversified equity fund pala market cycles-a thaandum.",
-    r_risk_exit:"20% keezha ponaa vithuduveen nu sonneenga, adhanaala kammiya vizhura funds pakkam suggestion saayudhu.",
-    r_risk_hold:"Fall-la hold pannuveenga, adhanaala diversified, steady equity category set aagum.",
-    r_risk_add:"Fall-la innum vaanguveenga, adhanaala adhigama aadura categories-a ungalaala handle panna mudiyum.",
-    r_elss:"Old regime-la file panreenga, adhanaala ELSS Section 80C-la varushathukku Rs 1.5 lakh varaikkum deduction tharum, 3 varusha lock-in-oda.",
-    r_elss_unsure:"ELSS old regime-la mattum dhaan tax save pannum. Deduction-kkaaga edukkura munnaadi neenga endha regime nu check pannunga.",
-    n_tax_new:"New regime-la Section 80C deduction illa, adhanaala ELSS-ku tax benefit illa. Idha regular investing-aa eduthukkiten.",
-    t_elss_short:"ELSS ovvoru instalment-aiyum 3 varusham lock pannum, aana ungalukku indha panam seekiram thevai. Thevaiyaana panatha tax-kkaaga lock panna koodaadhu, adhanaala ELSS suggest pannala.",
-    w_elss_3to5:"3 – 5 varushathukku ELSS lock-in set aagum, aana lock-in mudiyumbodhu equity keezha irukkalaam. Konjam adhigama wait panna ready-aa irunga.",
-    n_lifecycle:"Life Cycle Funds (2026-la pudhusu) date irukkura goals-kkaaga. Unga goal varushathukku pakkathula, adhukku appuram illaadha target year irukkura fund-a eduthukonga. Adhu thaanaave equity-la irundhu debt-ku maarum.",
-    t_ability_willingness:"Unga timeline equity-a handle pannum, aana unga comfort vera sollidhu. Risk edukka mudiyuradhum, adha thaanga mudiyuradhum rendum mukkiyam. Hybrid fund oru mellisaana start; swings pazhagina appuram equity-a koottalaam.",
-    t_short_high_appetite:"Unga risk appetite adhigam, aana time kammi. Equity 3 varusham mela kooda keezha irukkalaam, adhanaala inga timeline dhaan jeikkum.",
-    w_no_emergency:"Mudhalla emergency fund ready pannunga. 3 – 6 maasa selava liquid fund-la vechitu, appuram indha investment-a start pannunga. Illana oru thideer selavu nashtathula vikka vekkum.",
-    n_small_cap:"Small caps dhaan romba aadura category. Edutha, unga equity panathula oru pagudhi mattum; muzhusum illa.",
-    n_stp:"Periya lumpsum-a equity-la podumbodhu, mudhalla liquid fund-la vechitu 6 – 12 maasathula STP (Systematic Transfer Plan) moolama konjam konjama maathunga.",
-    n_min_sip:"Niraiya schemes-ku SIP minimum Rs 500 (sila Rs 100 allow pannum). Scheme SID-la minimum check pannunga.",
-    n_min_lump:"Niraiya schemes-ku minimum lumpsum Rs 1,000 – Rs 5,000. Scheme SID-la minimum check pannunga.",
-    n_elss_sip:"ELSS SIP-la ovvoru maasa instalment-kkum thani 3 varusha lock-in. Kadaisi instalment kattina 3 varusham kazhichu dhaan unlock aagum.",
+    t_elss_short:"ELSS locks every instalment for 3 years, but you need this money sooner. Don't lock up money you'll need just to save tax, so ELSS isn't suggested here.",
+    w_elss_3to5:"With 3 to 5 years, the ELSS lock-in fits, but shares can still be down when it ends. Be ready to wait a little longer.",
+    w_elss_nervous:"ELSS is a pure equity fund and can fall 20% or more. If that would make you sell, save tax with PPF or a similar option instead, and keep ELSS small.",
+    n_lifecycle:"Life Cycle Funds (new in 2026) are made for dated goals. Pick one whose target year is close to, and not after, your goal year. It shifts from shares to debt by itself as the year approaches.",
+    t_ability_willingness:"Your timeline can handle shares, but your comfort level says otherwise. Both matter: being able to take risk and being willing to live with it. Starting gentler is fine; you can add more equity as you get used to the ups and downs.",
+    t_short_high_appetite:"Your appetite for risk is high, but your time is short. Shares can stay down for 3 years or more, so the timeline wins here.",
+    w_no_emergency:"Build your emergency fund first. Keep 3 to 6 months of expenses in a liquid fund, then start this. Otherwise a surprise bill could force you to sell at a loss.",
+    n_small_cap:"Small caps swing the most of any equity fund. If you choose one, keep it to a part of your equity money, not all of it.",
+    n_stp:"For a large lumpsum into equity, consider parking it in a liquid fund and moving it in gradually over 6 to 12 months (an STP). It softens the risk of investing just before a fall.",
+    n_min_sip:"Many funds need at least Rs 500 a month for a SIP (some allow Rs 100). Check the minimum in the fund's details.",
+    n_min_lump:"Many funds need a minimum lumpsum of Rs 1,000 to Rs 5,000. Check the minimum in the fund's details.",
+    n_elss_sip:"With an ELSS SIP, each monthly instalment is locked for its own 3 years. The last one unlocks 3 years after you pay it.",
   }
 };
-const X = (k) => (EXPLAIN[LANG] && EXPLAIN[LANG][k]) || EXPLAIN.en[k] || k;
+const X = (k) => EXPLAIN.en[k] || k;
 
 /* Why an alternative, in one line */
 const ALT_WHY = {
@@ -586,12 +591,12 @@ const ALT_WHY = {
   'money-market':"A little more return than liquid for money parked 3-12 months.",
   'ultra-short-term':"For money needed in 3 to 6 months.",
   'ultra-short-to-short':"For money needed in 6 to 12 months.",
-  'arbitrage':"Similar low risk, but taxed as equity. Can suit higher tax brackets; watch the short-term exit load.",
-  'short-term':"High-quality debt with a 1-3 year duration.",
-  'banking-psu':"Lends mainly to banks and PSUs. Low credit risk.",
+  'arbitrage':"Similar low risk, but taxed like equity, which can suit higher tax brackets. Check the exit load period.",
+  'short-term':"High-quality lending for 1 to 3 years; modest ups and downs.",
+  'banking-psu':"Lends mainly to banks and government-owned companies, so defaults are rare.",
   'corporate-bond':"Only top-rated companies (AA+ and above).",
   'conservative-hybrid':"Mostly debt with 10-25% equity for a little extra growth.",
-  'equity-savings':"Mostly hedged equity plus debt; only 15-40% truly exposed to the market.",
+  'equity-savings':"Only 15–40% moves with the stock market; the rest is protected or in debt.",
   'daaf':"Shifts between equity and debt by itself as markets get cheaper or dearer.",
   'aggressive-hybrid':"65-80% equity with a debt cushion.",
   'multi-asset':"Equity, debt and gold/silver in one fund.",
@@ -607,19 +612,23 @@ const ALT_WHY = {
 };
 
 
-/* ============ STATE & DATA ============ */
-let CATS = null, SCHEMES = null, SEBI = null;
+
+/* ============ STATE & HELPERS ============ */
+let CATS = null, SCHEMES = null, SEBI = null, schemesPromise = null;
 const catById = (id) => CATS && CATS.categories.find((c) => c.id === id);
 const groupById = (id) => CATS && CATS.groups.find((g) => g.id === id);
 const ACTIVE = () => CATS.categories.filter((c) => c.status !== 'discontinued');
-const collected = () => ACTIVE().filter((c) => G.cards[c.id]).length;
 const RISK_LEVELS = ['Low', 'Low to Moderate', 'Moderate', 'Moderately High', 'High', 'Very High'];
 const riskIndex = (r) => RISK_LEVELS.indexOf(r);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const inr = (n) => Number(n).toLocaleString('en-IN');
 const $ = (s, el = document) => el.querySelector(s);
-const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const pick = (a) => a[Math.floor(Math.random() * a.length)];
+const shuffle = (a, rnd = Math.random) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (a, rnd = Math.random) => a[Math.floor(rnd() * a.length)];
+const seeded = (seed) => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const shortAmc = (n) => n.replace(/\s+Mutual Fund$/i, '');
+const lakh = (n) => n >= 1e7 ? `₹${(n / 1e7).toLocaleString('en-IN', { maximumFractionDigits: 2 })} crore` : n >= 1e5 ? `₹${(n / 1e5).toLocaleString('en-IN', { maximumFractionDigits: 2 })} lakh` : `₹${inr(n)}`;
 
 const ICON = {
   equity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
@@ -635,60 +644,59 @@ const ICON = {
   bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
   target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
   star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>',
+  cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
 };
+const GCOL = { equity: 'var(--eq)', debt: 'var(--debt)', hybrid: 'var(--hyb)', lifecycle: 'var(--life)', other: 'var(--oth)', solution: 'var(--sol)' };
 
 /* ============ GAME STATE (this device only) ============ */
 const LEVELS = [
-  { n: 'Beginner', xp: 0 }, { n: 'Saver', xp: 60 }, { n: 'Learner', xp: 150 }, { n: 'Investor', xp: 300 },
-  { n: 'Smart Investor', xp: 500 }, { n: 'Fund Explorer', xp: 750 }, { n: 'Money Master', xp: 1050 },
+  { n: 'Beginner', xp: 0 }, { n: 'Saver', xp: 60 }, { n: 'Learner', xp: 160 }, { n: 'Investor', xp: 320 },
+  { n: 'Smart Investor', xp: 540 }, { n: 'Fund Explorer', xp: 820 }, { n: 'Money Master', xp: 1200 },
 ];
 const BADGES = [
-  { id: 'first', e: '🌱', n: 'First step', d: 'Finish your first lesson', test: (g) => Object.keys(g.lessons).length >= 1 },
-  { id: 'scholar', e: '🎓', n: 'Scholar', d: 'Finish all 10 lessons', test: (g) => Object.keys(g.lessons).length >= LESSONS.length },
-  { id: 'collector', e: '🃏', n: 'Collector', d: 'Collect 20 fund types', test: () => CATS && collected() >= 20 },
-  { id: 'fullset', e: '👑', n: 'Full set', d: 'Collect all 40 fund types', test: () => CATS && collected() >= ACTIVE().length },
+  { id: 'first', e: '🌱', n: 'First step', d: 'Pass your first lesson check', test: (g) => Object.keys(g.checks).length >= 1 },
+  { id: 'scholar', e: '🎓', n: 'Scholar', d: 'Pass all 11 lesson checks', test: (g) => Object.keys(g.checks).length >= LESSONS.length },
+  { id: 'collector', e: '🃏', n: 'Collector', d: 'Win 20 fund type cards', test: () => CATS && collected() >= 20 },
+  { id: 'fullset', e: '👑', n: 'Full set', d: 'Win all 40 fund type cards', test: () => CATS && collected() >= ACTIVE().length },
   { id: 'sharp', e: '🎯', n: 'Sharp eye', d: 'Score 8+ in Fund Match', test: (g) => g.best >= 8 },
   { id: 'perfect', e: '💯', n: 'Perfect 10', d: 'Score 10/10 in Fund Match', test: (g) => g.best >= 10 },
   { id: 'fit', e: '🧭', n: 'Found my fit', d: 'Complete Find my fit', test: (g) => g.fits >= 1 },
-  { id: 'explorer', e: '🏦', n: 'Explorer', d: 'Look inside 5 fund houses', test: (g) => Object.keys(g.houses).length >= 5 },
-  { id: 'streak3', e: '🔥', n: 'On a roll', d: 'Visit 3 days in a row', test: (g) => g.streak >= 3 },
+  { id: 'compare', e: '🔎', n: 'Comparer', d: 'Compare funds in 3 fund types', test: (g) => Object.keys(g.compared).length >= 3 },
+  { id: 'streak3', e: '🔥', n: 'On a roll', d: 'Daily challenge 3 days in a row', test: (g) => g.streak >= 3 },
+  { id: 'streak7', e: '🏆', n: 'Habit formed', d: 'Daily challenge 7 days in a row', test: (g) => g.streak >= 7 },
 ];
-const GKEY = 'ff-game-v1';
+const GKEY = 'ff-game-v2';
 let G = (() => {
-  const blank = { xp: 0, lessons: {}, checks: {}, cards: {}, houses: {}, badges: {}, best: 0, games: 0, fits: 0, last: '', streak: 0 };
+  const blank = { xp: 0, checks: {}, cards: {}, compared: {}, badges: {}, best: 0, games: 0, fits: 0, daily: '', streak: 0 };
   try { return Object.assign(blank, JSON.parse(localStorage.getItem(GKEY) || '{}')); } catch (e) { return blank; }
 })();
 const save = () => { try { localStorage.setItem(GKEY, JSON.stringify(G)); } catch (e) {} };
 const levelOf = (xp) => { let i = 0; LEVELS.forEach((l, k) => { if (xp >= l.xp) i = k; }); return i; };
+const collected = () => ACTIVE().filter((c) => G.cards[c.id]).length;
 function award(xp, why) {
   const before = levelOf(G.xp);
   G.xp += xp; save();
   toast(`<span class="x">+${xp} XP</span> ${esc(why)}`);
+  checkBadges(); paintPlayer();
   const after = levelOf(G.xp);
-  checkBadges();
-  paintPlayer();
-  if (after > before) setTimeout(() => levelUp(after), 500);
+  if (after > before) setTimeout(() => levelUp(after), 600);
 }
 function checkBadges() {
   for (const b of BADGES) if (!G.badges[b.id] && b.test(G)) {
     G.badges[b.id] = Date.now(); save();
-    setTimeout(() => toast(`<span>${b.e}</span> Badge unlocked: ${esc(b.n)}`), 700);
+    setTimeout(() => toast(`<span>${b.e}</span> Badge: ${esc(b.n)}`), 800);
   }
-}
-function tickStreak() {
-  const today = new Date().toISOString().slice(0, 10);
-  if (G.last === today) return;
-  const y = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-  G.streak = G.last === y ? G.streak + 1 : 1;
-  G.last = today; save(); checkBadges();
 }
 function paintPlayer() {
   const i = levelOf(G.xp), cur = LEVELS[i], nxt = LEVELS[i + 1];
+  $('#player').hidden = G.xp === 0;
   $('#lvl').textContent = i + 1;
   $('#xp').textContent = `${inr(G.xp)} XP`;
   $('#xpbar').style.width = nxt ? `${((G.xp - cur.xp) / (nxt.xp - cur.xp)) * 100}%` : '100%';
-  $('#streak').innerHTML = G.streak ? `${ICON.flame}${G.streak}` : '';
+  const alive = G.streak && (G.daily === today() || G.daily === yesterday());
+  $('#streak').innerHTML = alive && G.streak >= 2 ? `${ICON.flame}${G.streak}` : '';
 }
+const yesterday = () => { const d = new Date(Date.now() - 864e5); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 function toast(html) {
   const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = html;
   const box = $('#toasts'); box.appendChild(t); while (box.children.length > 3) box.firstChild.remove(); setTimeout(() => t.remove(), 2600);
@@ -707,53 +715,48 @@ function levelUp(i) {
   $('#luok').onclick = () => el.classList.remove('on'); $('#luok').focus();
 }
 
-/* ============ DATA LOAD ============ */
+/* ============ DATA ============ */
 async function loadJson(u) { const r = await fetch(u, { cache: 'no-cache' }); if (!r.ok) throw new Error(u); return r.json(); }
 let BY_CAT = {}, AMC_CATS = [];
-function indexSchemes() {
-  BY_CAT = {}; AMC_CATS = [];
-  if (!SCHEMES) return;
-  SCHEMES.amcs.forEach((_, i) => AMC_CATS[i] = new Set());
-  for (const s of SCHEMES.schemes) {
-    if (s.s !== 'O') continue;
-    for (const id of s.c || []) { (BY_CAT[id] ||= []).push(s); AMC_CATS[s.a].add(id); }
-  }
+function ensureSchemes() {
+  if (!schemesPromise) schemesPromise = loadJson('data/schemes.json').then((s) => {
+    SCHEMES = s; BY_CAT = {}; AMC_CATS = [];
+    s.amcs.forEach((_, i) => AMC_CATS[i] = new Set());
+    for (const x of s.schemes) {
+      if (x.s !== 'O') continue;
+      for (const id of x.c || []) { (BY_CAT[id] ||= []).push(x); AMC_CATS[x.a].add(id); }
+    }
+    return s;
+  }).catch(() => null);
+  return schemesPromise;
 }
-const amcsFor = (catId) => {
-  const m = new Map();
-  for (const s of BY_CAT[catId] || []) m.set(s.a, (m.get(s.a) || 0) + 1);
-  return [...m.entries()].map(([a, n]) => ({ a, n, name: SCHEMES.amcs[a].name })).sort((x, y) => x.name.localeCompare(y.name));
-};
-const shortAmc = (n) => n.replace(/\s+Mutual Fund$/i, '').replace(/\s+MUTUAL FUND$/, '');
+const amcCount = (catId) => new Set((BY_CAT[catId] || []).map((s) => s.a)).size;
 
 async function boot() {
-  const [c, s, sb] = await Promise.allSettled([loadJson('data/categories.json'), loadJson('data/schemes.json'), loadJson('data/sebi.json')]);
-  CATS = c.status === 'fulfilled' ? c.value : null;
-  SCHEMES = s.status === 'fulfilled' ? s.value : null;
-  SEBI = sb.status === 'fulfilled' ? sb.value : null;
-  if (!CATS) { $('#main').innerHTML = '<div class="empty"><b>The fund data didn\'t load.</b><p>Open this site from its web address. Browsers block data files when a page is opened straight from your computer.</p></div>'; return; }
+  try { CATS = await loadJson('data/categories.json'); } catch (e) {
+    $('#main').innerHTML = '<div class="empty"><b>The fund data didn\'t load.</b><p>Open this site from its web address. Browsers block data files when a page is opened straight from your computer.</p></div>'; return;
+  }
   CATS.categories.forEach((c, i) => c.no = i + 1);
-  indexSchemes(); tickStreak(); paintPlayer(); applyLang(); route();
+  $('#byline').textContent = [CONFIG.byline, CONFIG.registration].filter(Boolean).join(' ');
+  paintPlayer(); route();
+  // Scheme data (~0.5 MB) loads in the background after the first screen is up.
+  setTimeout(() => ensureSchemes().then(() => { const v = currentView(); if (v === 'home') renderHome(); }), 50);
+  loadJson('data/sebi.json').then((s) => { SEBI = s; }).catch(() => {});
 }
 
 /* ============ ROUTER ============ */
 const VIEWS = { home: renderHome, learn: renderLearn, funds: renderFunds, play: renderPlay, fit: renderFit, houses: renderHouses, me: renderMe };
+const currentView = () => { const v = (location.hash.slice(1) || 'home').split('/')[0]; return VIEWS[v] ? v : 'home'; };
 function route() {
   const [v, arg] = (location.hash.slice(1) || 'home').split('/');
   const view = VIEWS[v] ? v : 'home';
   document.querySelectorAll('.view').forEach((el) => el.classList.toggle('on', el.id === 'v-' + view));
   document.querySelectorAll('.nav a, .tabbar a').forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === '#' + view ? 'page' : 'false'));
   closeSheet();
-  VIEWS[view](arg);
+  VIEWS[view](arg ? decodeURIComponent(arg) : arg);
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
-function applyLang() {
-  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = T(el.dataset.i18n));
-  $('#langbtn').textContent = LANG === 'en' ? 'Tanglish' : 'English';
-  $('#byline').textContent = [CONFIG.byline, CONFIG.registration].filter(Boolean).join(' ');
-}
-$('#langbtn').onclick = () => { LANG = LANG === 'en' ? 'ta' : 'en'; try { localStorage.setItem('ff-lang', LANG); } catch (e) {} applyLang(); route(); };
 
 /* ============ SHARED UI ============ */
 function meterSVG(level, label) {
@@ -775,19 +778,20 @@ function fundCard(c, opts = {}) {
   const got = !!G.cards[c.id];
   const tag = opts.tag || 'button';
   const ri = riskIndex(c.risk);
-  return `<${tag} class="fcard g-${c.group} ${got || opts.show ? '' : 'locked'}" ${tag === 'button' ? `type="button" data-card="${c.id}"` : ''} aria-label="${esc(c.name)}${got ? ', collected' : ''}">
+  return `<${tag} class="fcard g-${c.group} ${got || opts.show ? '' : 'locked'}" ${tag === 'button' ? `type="button" data-card="${c.id}"` : ''} aria-label="${esc(c.name)}${got ? ', won' : ''}">
     <div class="top"><span><span class="ic">${ICON[c.group]}</span>${esc(g.name)}</span><span class="num">#${String(c.no).padStart(2, '0')}</span></div>
     <div class="mid">
       <div class="stat">${esc(c.stat[0])}</div><div class="statl">${esc(c.stat[1])}</div>
       <div class="name">${esc(c.name)}</div>
-      <div class="good">${c.status === 'discontinued' ? '<span class="pill closed">Closed to new money</span>' : `Good for ${esc(c.horizon)}`}${c.status === 'new' ? ' · <span class="pill new">New</span>' : ''}</div>
+      <div class="good">${c.status === 'discontinued' ? '<span class="pill closed">Closed to new investors</span>' : `Time horizon: ${esc(c.horizon)}`}${c.status === 'new' ? ' · <span class="pill new">New</span>' : ''}</div>
       ${ri >= 0 ? meterLine(c.risk) : ''}
     </div>
-    <div class="foot"><span>${ri >= 0 ? esc(c.risk) + ' risk' : ''}</span><span class="lock">Tap to collect</span><span class="got" title="Collected">${ICON.check}</span></div>
+    <div class="foot"><span>${ri >= 0 ? esc(c.risk) + ' risk' : ''}</span><span class="lock">Win this card</span><span class="got" title="Won">${ICON.check}</span></div>
   </${tag}>`;
 }
+
 function openSheet(html, gcls = '') {
-  const sh = $('#sheet'); sh.className = 'sheet ' + gcls; sh.innerHTML = html;
+  const sh = $('#sheet'); sh.className = 'sheet ' + gcls; sh.innerHTML = html; sh.scrollTop = 0;
   $('#scrim').classList.add('on'); document.body.style.overflow = 'hidden';
   sh.querySelector('.close')?.focus();
   sh.querySelector('.close')?.addEventListener('click', closeSheet);
@@ -796,159 +800,201 @@ function closeSheet() { $('#scrim').classList.remove('on'); document.body.style.
 $('#scrim').addEventListener('click', (e) => { if (e.target.id === 'scrim') closeSheet(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
 
+/* ---------- Fund type sheet: learn it, win it, compare its funds ---------- */
 function openFund(id) {
-  const c = catById(id); const g = groupById(c.group);
-  if (!G.cards[id]) { G.cards[id] = 1; save(); award(5, 'New fund type collected'); }
-  const n = SCHEMES ? amcsFor(id).length : 0;
+  const c = catById(id); if (!c) return;
+  const g = groupById(c.group);
+  const open = c.status !== 'discontinued';
   openSheet(`<div class="shead"><button class="close" type="button" aria-label="Close">×</button>
       <div class="pill" style="background:rgba(255,255,255,.2);color:#fff">${esc(g.name)} · #${String(c.no).padStart(2, '0')}</div>
       <h2 style="margin-top:10px">${esc(c.name)}</h2>
-      ${c.was ? `<p style="opacity:.9;margin:6px 0 0">Earlier called ${esc(c.was)}. Some fund names still use it.</p>` : ''}</div>
+      ${c.was ? `<p style="opacity:.92;margin:6px 0 0">Earlier called ${esc(c.was)}. Some fund names still use it.</p>` : ''}</div>
     <div class="sbody">
-      <p style="font-size:1.1rem">${esc(c.what)}</p>
+      <p style="font-size:1.1rem;margin-top:0">${esc(c.what)}</p>
       <div class="facts">
-        <div><small>Good for</small><b>${esc(c.horizon)}</b></div>
+        <div><small>Key rule</small><b>${esc(c.stat[0])}</b> <span class="small muted">${esc(c.stat[1])}</span></div>
+        <div><small>Time horizon</small><b>${esc(c.horizon)}</b></div>
         <div><small>Typical risk</small><b>${esc(c.risk)}</b></div>
-        <div><small>Offered by</small><b>${SCHEMES ? (n ? n + ' fund house' + (n > 1 ? 's' : '') : 'None yet') : '…'}</b></div>
       </div>
-      <p class="small"><b>SEBI's rule:</b> ${esc(c.rule)}</p>
-      ${c.status === 'discontinued' ? '' : `<div id="offerSlot"></div>`}
+      <p class="small muted" style="margin:0"><b>SEBI's rule:</b> ${esc(c.rule)}</p>
+      ${open && !G.cards[id] && c.clue ? '<div class="collect" id="collect"></div>' : ''}
+      ${open ? '<div id="offerSlot" style="margin-top:22px"></div>' : ''}
     </div>`, 'g-' + c.group);
-  if (c.status !== 'discontinued') offerings(id, $('#offerSlot'));
-  const cardEl = document.querySelector(`[data-card="${id}"]`); if (cardEl) cardEl.classList.remove('locked');
+  if (open && !G.cards[id] && c.clue) winCard(c, $('#collect'));
+  if (open) compareFunds(id, $('#offerSlot'));
+}
+function winCard(c, box) {
+  const others = shuffle(ACTIVE().filter((x) => x.group === c.group && x.id !== c.id && x.clue)).slice(0, 3);
+  const q = { kind: 'Win this card', q: `Which of these is true of a ${c.name}?`, answers: [c.clue, ...others.map((x) => x.clue)], right: 0, explain: `${c.name}: ${c.rule}` };
+  quizQuestion(box, q, (ok) => {
+    if (ok) { G.cards[c.id] = 1; save(); award(5, 'Card won'); const el = document.querySelector(`[data-card="${c.id}"]`); if (el) el.classList.remove('locked'); }
+  }, () => { box.remove(); }, 'Done');
+  box.querySelector('.qfoot .btn').addEventListener('click', () => { if (!G.cards[c.id]) toast('Read the card and try again later'); }, { once: true });
 }
 
-function offerings(catId, slot, pre) {
+/* ---------- Compare real funds in a fund type ---------- */
+const KIND_LABEL = { equity: 'Share indices', debt: 'Bond indices', gold: 'Gold', silver: 'Silver', intl: 'International', hybrid: 'Hybrid' };
+async function compareFunds(catId, slot, opts = {}) {
   const c = catById(catId);
-  if (!SCHEMES) { slot.innerHTML = '<p class="dim small">Fund house data is loading or not refreshed yet.</p>'; return; }
-  const list = amcsFor(catId);
-  if (!list.length) { slot.innerHTML = `<div class="empty small">No fund house lists a scheme of this type yet.${c.status === 'new' ? ' It\'s new in 2026, so schemes are still launching.' : ''}</div>`; return; }
-  const many = list.length > 12;
-  slot.innerHTML = `<h3 style="margin-top:18px">${T('whoOffers')}</h3>
-    <p class="small muted">${list.length} fund house${list.length > 1 ? 's' : ''} offer this, listed A to Z. ${T('pickAmc')}${c.sharedLabel ? ' Some fund houses still report sectoral and thematic funds together, so both appear here.' : ''}</p>
-    ${many ? `<div class="amctools"><label class="sr" for="amcq">Search fund houses</label><input class="search" id="amcq" type="search" placeholder="Search ${list.length} fund houses"></div>` : ''}
-    <div class="amcgrid"></div>${many ? `<button class="linkbtn small" type="button" id="amcmore">Show all ${list.length}</button>` : ''}
-    <div class="schemes" aria-live="polite"></div>`;
-  let showAll = !many;
-  const grid = slot.querySelector('.amcgrid');
+  slot.innerHTML = '<p class="dim small">Loading funds…</p>';
+  await ensureSchemes();
+  if (!SCHEMES) { slot.innerHTML = '<p class="dim small">Fund data isn\'t available right now. Try again later.</p>'; return; }
+  const all = (BY_CAT[catId] || []);
+  if (!all.length) { slot.innerHTML = `<div class="empty small">No fund house offers a scheme of this type yet.${c.status === 'new' ? ' It\'s new in 2026, so schemes are still launching.' : ''}</div>`; return; }
+  if (!G.compared[catId]) { G.compared[catId] = 1; save(); checkBadges(); }
+  const kinds = [...new Set(all.map((s) => s.k).filter(Boolean))];
+  const st = { plan: 'D', sort: 'name', q: '', kind: opts.kind && kinds.includes(opts.kind) ? opts.kind : (kinds.includes('equity') ? 'equity' : kinds[0] || ''), all: false, amc: opts.amc };
+  const asOf = (SCHEMES.returnsAsOf || []).map((r) => r.years).join(', ');
+  slot.innerHTML = `<h3>${opts.title || `Compare ${esc(c.name.replace(/ Fund$/, ''))} funds`}</h3>
+    <p class="small muted" style="margin-top:4px">${all.length} fund${all.length > 1 ? 's' : ''} from ${amcCount(catId)} fund house${amcCount(catId) > 1 ? 's' : ''}. Sorted A to Z unless you choose otherwise. Returns are yearly averages worked out from AMFI's published NAVs.</p>
+    ${kinds.length > 1 ? `<div class="kinds" role="group" aria-label="What it tracks" style="margin-top:10px">${kinds.map((k) => `<button class="chip" type="button" data-kind="${k}" aria-pressed="${st.kind === k}">${esc(KIND_LABEL[k] || k)}</button>`).join('')}</div>` : ''}
+    <div class="cmp-tools">
+      <label class="sr" for="cq">Search funds</label><input class="search" id="cq" type="search" placeholder="Search by fund house">
+      <label class="sr" for="cs">Sort by</label><select id="cs"><option value="name">Sort: A to Z</option><option value="ter">Lowest expense ratio</option><option value="r3">Highest 3-year return</option><option value="r5">Highest 5-year return</option><option value="age">Longest track record</option></select>
+      <span class="seg" role="group" aria-label="Plan"><button type="button" data-plan="D" aria-pressed="true">Direct plan</button><button type="button" data-plan="R" aria-pressed="false">Regular plan</button></span>
+    </div>
+    <div class="cmp-wrap"><table class="cmp"><thead><tr><th>Fund</th><th>Expense ratio</th><th>1 year</th><th>3 years</th><th>5 years</th></tr></thead><tbody></tbody></table></div>
+    <button class="linkbtn small" type="button" id="cmore" hidden></button>
+    <div class="note" style="margin-top:14px"><span class="ni">💡</span><div class="small"><b>How to read this.</b> The expense ratio is the yearly cost; lower leaves more for you. Direct plans cost less than Regular plans because no distributor is paid; switch plans above to see the difference. Look at 5-year returns over 1-year ones, and compare with the category average. Past performance may or may not be sustained in future, and FundFit doesn't rank or recommend any fund.</div></div>`;
+  const tb = slot.querySelector('tbody');
+  const val = (s, i) => s.r && s.r[st.plan] ? s.r[st.plan][i] : null;
+  const ter = (s) => s.t ? s.t[st.plan === 'R' ? 0 : 1] : null;
+  const pct = (v, cls = '') => v == null ? '<span class="na">–</span>' : `<span class="${v < 0 ? 'neg' : ''} ${cls}">${v.toFixed(1)}%</span>`;
   const draw = () => {
-    const q = (slot.querySelector('#amcq')?.value || '').toLowerCase();
-    const rows = list.filter((x) => x.name.toLowerCase().includes(q));
-    const shown = showAll || q ? rows : rows.slice(0, 12);
-    grid.innerHTML = shown.map((x) => `<button class="amcbtn" type="button" data-amc="${x.a}" aria-pressed="false"><span>${esc(shortAmc(x.name))}</span>${x.n > 1 ? `<small>${x.n} schemes</small>` : ''}</button>`).join('') || '<p class="dim small">No match.</p>';
-    const more = slot.querySelector('#amcmore'); if (more) more.hidden = showAll || !!q;
+    let rows = all.filter((s) => (!st.kind || s.k === st.kind || !s.k) && (st.amc === undefined || s.a === st.amc) && (!st.q || SCHEMES.amcs[s.a].name.toLowerCase().includes(st.q) || s.n.toLowerCase().includes(st.q)));
+    const key = { ter: (s) => ter(s) ?? 99, r3: (s) => -(val(s, 1) ?? -999), r5: (s) => -(val(s, 2) ?? -999), age: (s) => -(s.y || 0) }[st.sort];
+    rows.sort((a, b) => key ? key(a) - key(b) || a.n.localeCompare(b.n) : a.n.localeCompare(b.n));
+    const avg = (i) => { const v = rows.map((s) => val(s, i)).filter((x) => x != null); return v.length >= 3 ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+    const avgT = (() => { const v = rows.map(ter).filter((x) => x != null); return v.length >= 3 ? v.reduce((a, b) => a + b, 0) / v.length : null; })();
+    const shown = st.all || st.q ? rows : rows.slice(0, 15);
+    tb.innerHTML = (rows.length >= 3 ? `<tr class="avg"><td>Average of these ${rows.length}</td><td data-l="Expense">${avgT == null ? '<span class="na">–</span>' : avgT.toFixed(2) + '%'}</td><td data-l="1 yr">${pct(avg(0))}</td><td data-l="3 yrs">${pct(avg(1))}</td><td data-l="5 yrs">${pct(avg(2))}</td></tr>` : '') +
+      shown.map((s) => `<tr><td><div class="fn">${esc(s.n)}<small>${esc(shortAmc(SCHEMES.amcs[s.a].name))} · ${s.y >= 5 ? '5+ years old' : s.y >= 3 ? '3–5 years old' : s.y >= 1 ? '1–3 years old' : 'Under 1 year old'}${/\bETF\b|\bBeES\b/i.test(s.n) ? ' · Traded on the stock exchange' : s.p === 'R' ? ' · Regular plan only' : s.p === 'D' ? ' · Direct plan only' : ''} · <a href="https://www.google.com/search?q=${encodeURIComponent(s.n + ' factsheet')}" target="_blank" rel="noopener">Factsheet</a></small></div></td>
+        <td data-l="Expense">${ter(s) == null ? '<span class="na">–</span>' : ter(s).toFixed(2) + '%'}</td><td data-l="1 yr">${pct(val(s, 0))}</td><td data-l="3 yrs">${pct(val(s, 1))}</td><td data-l="5 yrs">${pct(val(s, 2))}</td></tr>`).join('') ||
+      '<tr><td colspan="5" class="dim">No fund matches that search.</td></tr>';
+    const more = slot.querySelector('#cmore');
+    more.hidden = st.all || !!st.q || rows.length <= 15; more.textContent = `Show all ${rows.length} funds`;
   };
   draw();
-  slot.querySelector('#amcq')?.addEventListener('input', draw);
-  slot.querySelector('#amcmore')?.addEventListener('click', () => { showAll = true; draw(); });
-  grid.onclick = (e) => {
-    const b = e.target.closest('[data-amc]'); if (!b) return;
-    grid.querySelectorAll('.amcbtn').forEach((x) => x.setAttribute('aria-pressed', x === b));
-    schemesOf(catId, +b.dataset.amc, slot.querySelector('.schemes'));
-    slot.querySelector('.schemes').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  };
-  if (pre !== undefined) slot.querySelector(`[data-amc="${pre}"]`)?.click();
-}
-function schemesOf(catId, amc, box) {
-  const list = (BY_CAT[catId] || []).filter((s) => s.a === amc);
-  const name = SCHEMES.amcs[amc].name;
-  if (!G.houses[amc]) { G.houses[amc] = 1; save(); checkBadges(); }
-  const plans = (p) => p === 'RD' ? 'Direct and Regular plans' : p === 'R' ? 'Regular plan' : 'Direct plan';
-  box.innerHTML = `<h3 style="margin-top:14px">${esc(name)}</h3>
-    ${list.map((s) => `<div class="scheme"><div class="sn">${esc(s.n)}</div>
-      <div class="meta"><span>${plans(s.p)}</span>${s.nav != null ? `<span>NAV Rs ${Number(s.nav).toLocaleString('en-IN', { maximumFractionDigits: 4 })} on ${esc(s.d)}</span>` : ''}</div>
-      <div class="meta"><a href="https://www.google.com/search?q=${encodeURIComponent(s.n + ' ' + name + ' SID KIM')}" target="_blank" rel="noopener">Find its factsheet, SID and KIM</a></div></div>`).join('')}
-    <div class="note" style="margin-top:16px"><span class="ni">🔍</span><div><b>Before you choose, check in the factsheet:</b>
-    <ul class="checklist" style="margin:6px 0 0"><li>Riskometer level</li><li>Expense ratio of your plan</li><li>Exit load and for how long</li><li>Minimum SIP and lumpsum</li><li>Returns vs its benchmark over 5+ years</li><li>Fund manager and how long they've run it</li><li>Top holdings, or credit quality for debt</li><li>Fund size</li></ul></div></div>
-    <p class="tiny">Past performance may or may not be sustained in future. FundFit doesn't rank or recommend schemes.</p>`;
+  slot.querySelector('#cq').oninput = (e) => { st.q = e.target.value.toLowerCase().trim(); draw(); };
+  slot.querySelector('#cs').onchange = (e) => { st.sort = e.target.value; draw(); };
+  slot.querySelector('#cmore').onclick = () => { st.all = true; draw(); };
+  slot.querySelectorAll('[data-plan]').forEach((b) => b.onclick = () => { st.plan = b.dataset.plan; slot.querySelectorAll('[data-plan]').forEach((x) => x.setAttribute('aria-pressed', x === b)); draw(); });
+  slot.querySelectorAll('[data-kind]').forEach((b) => b.onclick = () => { st.kind = b.dataset.kind; slot.querySelectorAll('[data-kind]').forEach((x) => x.setAttribute('aria-pressed', x === b)); draw(); });
 }
 
 /* ============ HOME ============ */
+let TRY_H = 'h4';
 function renderHome() {
   const el = $('#v-home');
-  const nCats = ACTIVE().length, got = collected(), lessons = Object.keys(G.lessons).length;
-  const trio = ['flexi-cap', 'liquid', 'daaf'].map(catById).filter(Boolean);
+  const nCats = ACTIVE().length, won = collected(), passed = Object.keys(G.checks).length;
+  const doneToday = G.daily === today();
   const q = (href, ic, color, title, text, done, total) => `<a class="card quest" href="${href}"><span class="ic" style="background:${color}">${ic}</span><h3>${title}</h3><span class="muted small">${text}</span>${total ? `<div class="row small dim" style="justify-content:space-between"><span>${done} of ${total}</span></div><div class="bar"><b style="width:${(done / total) * 100}%;background:${color}"></b></div>` : ''}</a>`;
   el.innerHTML = `
     <div class="hero">
       <div>
         <h1>Mutual funds,<br><span class="swap">minus the jargon.</span></h1>
-        <p class="lede">Learn in 10 short lessons, play your way through all ${nCats} fund types, and find the kind of fund that suits your money.</p>
-        <div class="row"><a class="btn" href="#fit">Find my fit</a><a class="btn plain" href="#learn">Start lesson 1</a></div>
+        <p class="lede">Understand how mutual funds work, find the type that fits your money, then compare real funds by cost, returns and track record.</p>
+        <div class="row"><a class="btn" href="#fit">Find my fit</a><a class="btn plain" href="#learn">Start learning</a></div>
       </div>
-      <div class="hero-art"><div class="stack">${trio.map((c) => fundCard(c, { tag: 'div', show: true })).join('')}</div></div>
+      <div class="card try" id="try"></div>
     </div>
-    <div class="quests">
-      ${q('#learn', ICON.book, 'var(--brand)', 'Learn the basics', '10 bite-size lessons with a quick check each.', lessons, LESSONS.length)}
-      ${q('#funds', ICON.cards, 'var(--eq)', 'Collect fund types', `Open each card to learn what it's for.`, got, nCats)}
-      ${q('#play', ICON.bolt, 'var(--hyb)', 'Play Fund Match', 'Real-life situations. Pick the right fund.', G.best, 10)}
-      ${q('#fit', ICON.target, 'var(--ok)', 'Find my fit', 'Answer 5 questions, see the fund type for you.', G.fits ? 1 : 0, 1)}
+    <a class="card daily ${doneToday ? 'done' : ''}" href="#play/daily" style="text-decoration:none">
+      <div><h3>${doneToday ? 'Daily challenge done ✓' : 'Today\'s challenge: 3 questions'}</h3><p>${doneToday ? (G.streak >= 2 ? `You're on a ${G.streak}-day streak. Come back tomorrow.` : 'Come back tomorrow for three new questions.') : 'Two minutes a day. Build a streak and learn something new each time.'}</p></div>
+      ${doneToday ? '' : '<span class="btn small">Play today\'s</span>'}
+    </a>
+    <div class="quests" style="margin-top:16px">
+      ${q('#learn', ICON.book, 'var(--brand)', 'Learn the basics', '11 short lessons, each with a quick check.', passed, LESSONS.length)}
+      ${q('#funds', ICON.cards, 'var(--eq)', 'Win all 40 cards', 'Learn each fund type, answer to win its card.', won, nCats)}
+      ${q('#play', ICON.bolt, 'var(--hyb)', 'Play Fund Match', 'Real situations. Pick the right fund.', G.best, 10)}
+      ${q('#fit', ICON.target, 'var(--ok)', 'Find my fit', '5 questions, then compare real funds.', Math.min(G.fits, 1), 1)}
     </div>
-    ${SCHEMES ? `<div class="livebar"><span class="pulse" aria-hidden="true"></span><span>Live from AMFI</span><span><b>${SCHEMES.amcs.length}</b>fund houses</span><span><b>${inr(SCHEMES.schemes.filter((s) => s.s === 'O').length)}</b>open schemes</span><span>NAVs as of <b style="font-size:1.1rem">${esc(SCHEMES.navDate)}</b></span><a href="#houses" class="small">See all fund houses</a></div>` : ''}
-    <div class="twocol">
-      <div class="card pad"><h3>Three things to know first</h3>
-        <ol class="muted" style="padding-left:1.2em;margin:10px 0 0">
-          <li style="margin:.4em 0"><b style="color:var(--ink)">When you need the money matters most.</b> Money for next year and money for 10 years from now belong in very different funds.</li>
-          <li style="margin:.4em 0"><b style="color:var(--ink)">Build an emergency fund before anything else.</b> 3 to 6 months of expenses, somewhere safe and quick to reach.</li>
-          <li style="margin:.4em 0"><b style="color:var(--ink)">No fund guarantees returns.</b> Higher expected growth always comes with bigger ups and downs.</li>
-        </ol></div>
-      ${newsCard(5)}
-    </div>`;
+    <div class="kpis">
+      <div class="card kpi"><b>${nCats}</b><span>fund types SEBI allows</span></div>
+      <div class="card kpi"><b>${SCHEMES ? SCHEMES.amcs.length : '…'}</b><span>fund houses, from AMFI</span></div>
+      <div class="card kpi"><b>${SCHEMES ? inr(SCHEMES.schemes.filter((s) => s.s === 'O').length) : '…'}</b><span>funds you can compare</span></div>
+      <div class="card kpi"><b style="font-size:1.35rem;line-height:1.5">${SCHEMES ? esc(SCHEMES.navDate) : '…'}</b><span>latest NAVs, updated daily</span></div>
+    </div>
+    <div class="card pad" style="margin-top:16px"><h3>Three things to know before anything else</h3>
+      <div class="twocol" style="grid-template-columns:repeat(3,1fr);margin-top:8px">
+        <div><b>When you need the money matters most.</b><p class="muted small">Money for next year and money for 10 years from now belong in very different funds.</p></div>
+        <div><b>Emergency fund first.</b><p class="muted small">Keep 3 to 6 months of expenses somewhere safe and quick to reach before investing for growth.</p></div>
+        <div><b>No fund guarantees returns.</b><p class="muted small">More expected growth always comes with bigger ups and downs along the way.</p></div>
+      </div></div>`;
+  drawTry();
 }
-function newsCard(n) {
-  const items = SEBI && SEBI.items ? SEBI.items.slice(0, n) : [];
-  if (!items.length) return `<div class="card pad"><h3>What's new from SEBI</h3><p class="muted small">New mutual fund rules from SEBI will show up here.</p></div>`;
-  return `<div class="card pad"><h3>What's new from SEBI</h3><div class="news">${items.map((i) => `<a href="${esc(i.link)}" target="_blank" rel="noopener" title="${esc(i.title)}"><span class="tt">${esc(i.title)}</span><div class="tiny">${esc([i.type, i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : ''].filter(Boolean).join(' · '))}</div></a>`).join('')}</div><p class="tiny" style="margin-top:10px">Checked daily on SEBI's website and filtered for mutual fund topics.</p></div>`;
+function drawTry() {
+  const box = $('#try'); if (!box) return;
+  const r = RULES.suggest({ purpose: 'wealth', risk: 'hold', horizon: TRY_H, emergency: 'yes', mode: 'sip', amount: 5000 });
+  const c = catById(r.primary);
+  const mix = { h0: [0, 100, 0], h1: [0, 100, 0], h2: [0, 90, 10], h3: [20, 60, 20], h4: [60, 20, 20], h5: [75, 10, 15], h6: [85, 5, 10] }[TRY_H];
+  const lbl = ['< 3', '3–12', '1–3', '3–5', '5–7', '7–10', '10+'];
+  box.innerHTML = `<h3>Try it: when will you need the money?</h3>
+    <div class="timeline" role="group" aria-label="Time horizon">${RULES.HORIZONS.map((h, i) => `<button type="button" data-h="${h}" aria-pressed="${TRY_H === h}">${lbl[i]}<small>${i < 2 ? 'months' : 'years'}</small></button>`).join('')}</div>
+    <div class="try-out">
+      <div class="small" style="font-weight:800">A rough guide to the mix for this timeline</div>
+      <div class="fam" aria-hidden="true"><i style="width:${mix[0]}%;background:var(--eq)"></i><i style="width:${mix[2]}%;background:var(--hyb)"></i><i style="width:${mix[1]}%;background:var(--debt)"></i></div>
+      <div class="famkey"><span><b style="background:var(--eq)"></b>Shares ${mix[0]}%</span><span><b style="background:var(--hyb)"></b>Mixed ${mix[2]}%</span><span><b style="background:var(--debt)"></b>Debt ${mix[1]}%</span></div>
+      <div class="pick g-${c.group}"><span class="dot"></span><div><span class="small muted">A fund type that fits:</span><br><b>${esc(c.name)}</b><div class="small muted">${esc(X(r.reasons[0]))}</div></div></div>
+      <a href="#fit" class="small" style="font-weight:800">Get your own fit, with your goal and comfort level</a>
+    </div>`;
+  box.querySelector('.timeline').onclick = (e) => { const b = e.target.closest('[data-h]'); if (b) { TRY_H = b.dataset.h; drawTry(); } };
 }
 
 /* ============ LESSONS ============ */
 const LESSONS = [
   { id: 'what', t: 'What a mutual fund is', s: '2 min', b: `
     <p>A mutual fund pools money from lakhs of people and invests it for them in shares, bonds, gold or a mix. A professional team decides what to buy, following a goal written down before the fund starts.</p>
-    <div class="big-idea">You don't buy a separate "mutual fund asset". You buy shares, bonds or gold <i>through</i> a fund, in small pieces called units.</div>
+    <div class="big-idea">You don't buy a separate "mutual fund" asset. You buy shares, bonds or gold <i>through</i> a fund, in small pieces called units.</div>
     <p>If the investments grow, your units are worth more. If they fall, your units are worth less. Everyone else involved, from the fund company to the distributor, only earns a fee.</p>`,
-    q: { q: 'The investments in a mutual fund belong to…', a: ['The investors who hold its units', 'The fund company (AMC)', 'The bank that holds the money', 'SEBI'], r: 0, e: 'The fund is set up as a trust for its investors. The fund company only manages the money for a fee.' } },
+    q: { q: 'The investments in a mutual fund belong to…', a: ['The investors who hold its units', 'The fund company', 'The bank that holds the money', 'SEBI'], r: 0, e: 'The fund is a trust set up for its investors. The fund company only manages the money for a fee.' } },
   { id: 'safe', t: 'Who keeps your money safe', s: '2 min', b: `
     <p>Your money isn't sitting with one company. Several independent parties each have a job:</p>
     <div class="who">
       <div><b>Fund company (AMC)</b><span class="small muted">Decides what to buy and sell</span></div>
-      <div><b>Trustees</b><span class="small muted">Watch the AMC on your behalf</span></div>
+      <div><b>Trustees</b><span class="small muted">Watch the fund company for you</span></div>
       <div><b>Custodian</b><span class="small muted">Holds the actual shares and bonds</span></div>
-      <div><b>Registrar (RTA)</b><span class="small muted">Keeps your records and statements</span></div>
+      <div><b>Registrar</b><span class="small muted">Keeps your records and statements</span></div>
       <div><b>SEBI</b><span class="small muted">The regulator that sets the rules</span></div>
       <div><b>AMFI</b><span class="small muted">Industry body; registers distributors</span></div>
       <div class="you"><b>You</b><span class="small muted">The owner of the units</span></div>
     </div>
-    <p>This split is why a fund company going through trouble doesn't mean your investments disappear. It doesn't protect you from market falls, though.</p>`,
-    q: { q: 'Who regulates mutual funds in India?', a: ['SEBI', 'RBI', 'AMFI', 'The Finance Ministry'], r: 0, e: 'SEBI regulates mutual funds. AMFI is the industry association, not a regulator.' } },
+    <p>Because of this split, trouble at the fund company doesn't make your investments disappear. It doesn't protect you from market falls, though.</p>`,
+    q: { q: 'Who regulates mutual funds in India?', a: ['SEBI', 'RBI', 'AMFI', 'The fund companies themselves'], r: 0, e: 'SEBI regulates mutual funds. AMFI is the industry association, not a regulator.' } },
   { id: 'nav', t: 'NAV: the price of one unit', s: '2 min', b: `
-    <p>NAV (net asset value) is the value of one unit, worked out every business day from the market price of everything the fund holds, minus expenses.</p>
-    <p>You buy and sell units at the NAV. Invest Rs 10,000 when the NAV is Rs 50 and you get 200 units.</p>
+    <p>NAV (net asset value) is the value of one unit, worked out every business day from the market price of everything the fund holds, minus its costs.</p>
+    <p>You buy and sell units at the NAV. Invest ₹10,000 when the NAV is ₹50 and you get 200 units.</p>
     <div class="big-idea">A low NAV doesn't make a fund cheap, and a high NAV doesn't make it expensive. A high NAV usually just means the fund is older and has grown.</div>`,
-    q: { q: 'Fund A has a NAV of Rs 15, Fund B has a NAV of Rs 150. Which is the better deal?', a: ['You can\'t tell from NAV alone', 'Fund A, it\'s cheaper', 'Fund B, it has grown more', 'Fund A, you get more units'], r: 0, e: 'What matters is how the fund\'s investments perform from here, not the NAV. 10% growth is 10% whether the NAV is 15 or 150.' } },
+    q: { q: 'Fund A has a NAV of ₹15 and Fund B a NAV of ₹150. Which is the better buy?', a: ['You can\'t tell from NAV alone', 'Fund A, it\'s cheaper', 'Fund B, it has grown more', 'Fund A, you get more units'], r: 0, e: 'What matters is how the investments perform from here. 10% growth is 10% whether the NAV is 15 or 150.' } },
   { id: 'families', t: 'Equity, debt and hybrid', s: '3 min', b: `
     <dl class="kv">
       <dt style="color:var(--eq)">Equity funds</dt><dd>Own shares of companies. Highest long-term growth, but can fall 30–50% in bad years. Give them 5+ years.</dd>
-      <dt style="color:var(--debt)">Debt funds</dt><dd>Lend to governments, banks and companies for interest. Steadier, lower returns. Good for parking money and goals within a few years.</dd>
+      <dt style="color:var(--debt)">Debt funds</dt><dd>Lend to governments, banks and companies for interest. Steadier, lower returns. Good for parking money and goals a few years away.</dd>
       <dt style="color:var(--hyb)">Hybrid funds</dt><dd>Mix both, and sometimes gold, for a smoother ride than pure equity.</dd>
     </dl>
-    <div class="big-idea">The closer your goal, the less equity your money should hold.</div>
-    <p>SEBI sorts every fund into one of ${'{{N}}'} fund types, so a "large cap fund" means the same thing at every fund house. <a href="#funds">Browse them all</a>.</p>`,
-    q: { q: 'You need money for a trip in 8 months. Which family fits best?', a: ['Debt', 'Equity', 'Hybrid, mostly equity', 'Any of them'], r: 0, e: 'Equity can easily be down in 8 months. Short-term money belongs in short-term debt funds.' } },
+    <div class="big-idea">The closer your goal, the less of your money should be in shares.</div>
+    <p>SEBI sorts every fund into one of {{N}} types, so a "large cap fund" means the same thing at every fund house. <a href="#funds">See them all</a>.</p>`,
+    q: { q: 'You need money for a trip in 8 months. Which family fits best?', a: ['Debt', 'Equity', 'Hybrid, mostly shares', 'Any of them'], r: 0, e: 'Shares can easily be down in 8 months. Short-term money belongs in short-term debt funds.' } },
+  { id: 'debtwords', t: 'Debt funds without the jargon', s: '3 min', b: `
+    <p>Debt funds lend money and earn interest. Two things decide how bumpy the ride is:</p>
+    <dl class="kv">
+      <dt>How long it lends for</dt><dd>Called <b>duration</b>. When interest rates rise, older bonds paying less interest lose value. The longer a fund lends for, the bigger that drop. Short duration means small ups and downs.</dd>
+      <dt>Who it lends to</dt><dd>Called <b>credit quality</b>. Government and top-rated borrowers (AA+ and above) almost always repay. Lower-rated ones pay more interest but may not repay.</dd>
+    </dl>
+    <div class="big-idea">Match duration to when you need the money: a fund lending for 1–3 years suits a goal 1–3 years away.</div>`,
+    q: { q: 'Interest rates rise. Which fund usually falls the most?', a: ['A long duration debt fund', 'A liquid fund', 'An overnight fund', 'A money market fund'], r: 0, e: 'The longer the lending period, the more a fund\'s value drops when rates rise.' } },
   { id: 'risk', t: 'Reading the riskometer', s: '2 min', b: `
-    <div style="max-width:260px;margin:0 auto">${'{{METER}}'}</div>
-    <p>Every scheme shows a riskometer with six levels: Low, Low to Moderate, Moderate, Moderately High, High and Very High. It's updated monthly from what the fund actually holds.</p>
-    <p>Almost all equity funds sit at Very High. That's not a warning to avoid them; it says their value swings a lot, so they need time.</p>
-    <p>Debt funds also show a small grid of interest-rate risk against credit risk (the chance a borrower doesn't repay).</p>`,
+    <div style="max-width:260px;margin:0 auto">{{METER}}</div>
+    <p>Every fund shows a riskometer with six levels: Low, Low to Moderate, Moderate, Moderately High, High and Very High. It's updated every month from what the fund actually holds.</p>
+    <p>Almost all equity funds sit at Very High. That isn't a warning to avoid them; it tells you their value swings a lot, so they need time.</p>`,
     q: { q: 'How many levels does the riskometer have?', a: ['Six', 'Three', 'Five', 'Ten'], r: 0, e: 'Low, Low to Moderate, Moderate, Moderately High, High and Very High.' } },
   { id: 'sip', t: 'SIP, lumpsum, SWP and STP', s: '3 min', b: `
     <dl class="kv">
-      <dt>SIP</dt><dd>Invest a fixed amount every month. When prices fall, the same amount buys more units. It builds discipline and removes the stress of timing.</dd>
+      <dt>SIP</dt><dd>Invest a fixed amount every month. When prices fall, the same amount buys more units. It builds a habit and removes the stress of timing.</dd>
       <dt>Lumpsum</dt><dd>Invest all at once. Fine for debt funds; for equity, spreading it out often feels easier.</dd>
       <dt>STP</dt><dd>Park a lumpsum in a liquid fund and move a fixed amount into equity each month.</dd>
-      <dt>SWP</dt><dd>Withdraw a fixed amount regularly, e.g. as monthly income in retirement.</dd>
+      <dt>SWP</dt><dd>Withdraw a fixed amount regularly, for example as monthly income in retirement.</dd>
     </dl>
-    <p>You can pause, change or stop a SIP whenever you want. Many funds accept SIPs from Rs 100–500 a month.</p>`,
+    <p>You can pause, change or stop a SIP whenever you want. Many funds accept SIPs from ₹100–500 a month.</p>`,
     q: { q: 'Markets fall and your SIP continues. What happens?', a: ['The same amount buys more units', 'The SIP stops automatically', 'You pay a penalty', 'You get fewer units'], r: 0, e: 'Lower prices mean more units for the same money, which helps when markets recover.' } },
   { id: 'options', t: 'Growth or IDCW?', s: '2 min', b: `
     <p><b>Growth option:</b> all gains stay invested and the NAV keeps growing. Best for building wealth.</p>
@@ -956,45 +1002,49 @@ const LESSONS = [
     <div class="big-idea">An IDCW payout isn't a bonus. It's your own money coming back to you, and the NAV drops by the same amount.</div>`,
     q: { q: 'Where does an IDCW payout come from?', a: ['Your own investment\'s value', 'Extra profit on top of your returns', 'The fund company\'s pocket', 'The government'], r: 0, e: 'The NAV falls by the amount paid out. It\'s a withdrawal from your own investment.' } },
   { id: 'plans', t: 'Direct and Regular plans', s: '2 min', b: `
-    <p>Every scheme has two plans that own exactly the same investments:</p>
+    <p>Every fund has two plans that own exactly the same investments:</p>
     <dl class="kv">
-      <dt>Direct plan</dt><dd>Bought directly from the fund house or an execution-only app. Lower yearly cost. You do the research and upkeep yourself.</dd>
-      <dt>Regular plan</dt><dd>Bought through a mutual fund distributor, who is paid from the fund's yearly cost. You get their help choosing, paperwork and reviews.</dd>
+      <dt>Direct plan</dt><dd>Bought directly from the fund house or an investing app. Lower yearly cost. You do the research and upkeep yourself.</dd>
+      <dt>Regular plan</dt><dd>Bought through a mutual fund distributor, who is paid from the fund's yearly cost. You get help choosing, paperwork and reviews.</dd>
     </dl>
-    <p>Small cost differences compound over years. Know which one you're buying and what you get for the difference.</p>`,
-    q: { q: 'Which plan has the lower yearly cost?', a: ['Direct plan', 'Regular plan', 'Both cost the same', 'Depends on the NAV'], r: 0, e: 'Direct plans have no distributor commission built in, so their expense ratio is lower.' } },
+    <p>A difference of 0.5–1% a year adds up over decades. Know which one you're buying and what you get for the difference. The fund comparisons on this site show both.</p>`,
+    q: { q: 'Which plan has the lower yearly cost?', a: ['Direct plan', 'Regular plan', 'Both cost the same', 'It depends on the NAV'], r: 0, e: 'Direct plans have no distributor commission built in, so their expense ratio is lower.' } },
   { id: 'costs', t: 'What a fund costs you', s: '2 min', b: `
     <dl class="kv">
-      <dt>Expense ratio</dt><dd>A yearly cost, a % of your investment, deducted a tiny bit every day. You never get a bill; it's already in the NAV.</dd>
-      <dt>Exit load</dt><dd>A small charge if you sell too soon, e.g. 1% within a year. Check the period before you invest.</dd>
+      <dt>Expense ratio</dt><dd>A yearly cost, as a % of your investment, taken a tiny bit every day. You never get a bill; the NAV is already after costs.</dd>
+      <dt>Exit load</dt><dd>A small charge if you sell too soon, for example 1% within a year. Check the period before you invest.</dd>
       <dt>Entry load</dt><dd>Banned. Nobody may charge you to invest.</dd>
     </dl>
     <p>Index funds usually cost the least because nobody has to pick stocks.</p>`,
-    q: { q: 'How is the expense ratio charged?', a: ['A little every day, already reflected in the NAV', 'Once a year as a separate bill', 'Only when you sell', 'Only on SIPs'], r: 0, e: 'It\'s deducted daily from the fund\'s assets, so the NAV you see is already after costs.' } },
-  { id: 'ready', t: 'Before you invest', s: '3 min', b: `
-    <ul>
-      <li><b>Emergency fund first.</b> 3–6 months of expenses in a liquid fund or savings account.</li>
-      <li><b>Insurance next.</b> Term life and health cover before investing for growth.</li>
-      <li><b>Match the fund to the timeline.</b> That's what <a href="#fit">Find my fit</a> does.</li>
-      <li><b>Read the scheme documents.</b> The KIM is a short summary; the SID has the details.</li>
-      <li><b>Know the tax.</b> Gains are taxed when you sell; equity funds are taxed more gently than debt. ELSS gives a Section 80C deduction only under the old tax regime. Tax rules change with Budgets, so check the current ones.</li>
-      <li><b>Stay invested.</b> Most long-term damage comes from selling in a panic.</li>
-    </ul>`,
-    q: { q: 'What should come before investing in an equity fund?', a: ['An emergency fund', 'A credit card', 'A high NAV fund', 'Nothing, start right away'], r: 0, e: 'Without an emergency fund, a surprise expense could force you to sell equity at a loss.' } },
+    q: { q: 'How is the expense ratio charged?', a: ['A little every day, already in the NAV', 'Once a year as a separate bill', 'Only when you sell', 'Only on SIPs'], r: 0, e: 'It\'s taken daily from the fund\'s assets, so the NAV you see is already after costs.' } },
+  { id: 'start', t: 'How to actually invest', s: '4 min', b: `
+    <ol class="nextsteps">
+      <li><div><b>Get the basics in place.</b> An emergency fund (3–6 months of expenses), term life insurance if anyone depends on you, and health insurance.</div></li>
+      <li><div><b>Complete KYC once.</b> PAN, Aadhaar and a bank account. It's done online in minutes through any fund house, app or distributor, and works for every fund house after that.</div></li>
+      <li><div><b>Choose how you'll buy.</b> <i>Direct</i>: on a fund house's website or an investing app, lower cost, you choose alone. <i>Regular</i>: through an AMFI-registered distributor, who helps you choose and handles paperwork. A SEBI-registered investment adviser can also advise you for a fee.</div></li>
+      <li><div><b>Pick the fund type, then the fund.</b> Use <a href="#fit">Find my fit</a> for the type. Among funds of that type, look at cost, 5-year returns against the category average, how long it has existed and the fund manager.</div></li>
+      <li><div><b>Start the SIP or lumpsum.</b> Choose the Growth option unless you need regular payouts. Set the SIP date a few days after your salary.</div></li>
+      <li><div><b>Track once or twice a year, not every day.</b> Your consolidated account statement (CAS) shows all your funds in one place. Rebalance if your mix drifts far from the plan.</div></li>
+    </ol>
+    <p class="small muted" style="margin-top:14px">Tax: gains are taxed when you sell, equity funds more gently than debt funds. ELSS gives a Section 80C deduction only under the old tax regime. Tax rules change with Budgets, so check the current ones.</p>`,
+    q: { q: 'What do you need to complete before your first mutual fund investment?', a: ['KYC, with PAN, Aadhaar and a bank account', 'A demat account for every fund', 'A letter from your employer', 'Nothing at all'], r: 0, e: 'KYC is a one-time step and then works across all fund houses. A demat account is needed only for ETFs.' } },
 ];
 function renderLearn(arg) {
   const el = $('#v-learn');
   if (arg) return renderLesson(arg);
-  const nextIdx = LESSONS.findIndex((l) => !G.lessons[l.id]);
-  el.innerHTML = `<div class="section-head"><div><h2>Learn the basics</h2><p class="muted">10 short lessons. Finish each with a one-question check for bonus XP.</p></div><div class="pill">${Object.keys(G.lessons).length} of ${LESSONS.length} done</div></div>
-    <div class="path">${LESSONS.map((l, i) => `<button class="node ${G.lessons[l.id] ? 'done' : i === nextIdx ? 'next' : ''}" type="button" data-l="${l.id}">
-      <span class="disc">${G.lessons[l.id] ? ICON.star : i + 1}</span><span><b>${esc(l.t)}</b><span>${l.s}${G.checks[l.id] ? ' · check passed' : ''}</span></span></button>`).join('')}</div>`;
+  const nextIdx = LESSONS.findIndex((l) => !G.checks[l.id]);
+  const news = SEBI && SEBI.items ? SEBI.items.slice(0, 8) : [];
+  el.innerHTML = `<div class="section-head"><div><h2>Learn the basics</h2><p class="muted">11 short lessons. Pass each one's quick check to earn XP and move along the path.</p></div><div class="pill">${Object.keys(G.checks).length} of ${LESSONS.length} passed</div></div>
+    <div class="path">${LESSONS.map((l, i) => `<button class="node ${G.checks[l.id] ? 'done' : i === nextIdx ? 'next' : ''}" type="button" data-l="${l.id}">
+      <span class="disc">${G.checks[l.id] ? ICON.star : i + 1}</span><span><b>${esc(l.t)}</b><span>${l.s}${G.checks[l.id] ? ' · passed' : ''}</span></span></button>`).join('')}</div>
+    ${news.length ? `<details class="more narrow" style="margin:10px auto 0"><summary>Latest mutual fund rule changes from SEBI</summary><div class="news">${news.map((i) => `<a href="${esc(i.link)}" target="_blank" rel="noopener" title="${esc(i.title)}"><span class="tt">${esc(i.title)}</span><div class="tiny">${esc([i.type, i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : ''].filter(Boolean).join(' · '))}</div></a>`).join('')}</div><p class="tiny">Checked daily on SEBI's website. Most are technical; FundFit updates its fund type rules when one changes them.</p></details>` : ''}`;
   el.querySelector('.path').onclick = (e) => { const b = e.target.closest('[data-l]'); if (b) location.hash = 'learn/' + b.dataset.l; };
 }
 function renderLesson(id) {
-  const i = LESSONS.findIndex((l) => l.id === id); if (i < 0) return (location.hash = 'learn');
+  const i = LESSONS.findIndex((l) => l.id === id); if (i < 0) { location.hash = 'learn'; return; }
   const l = LESSONS[i], el = $('#v-learn');
-  const body = l.b.replace('{{N}}', CATS.categories.filter((c) => c.status !== 'discontinued').length).replace('{{METER}}', meterSVG(-1, ''));
+  const body = l.b.replace('{{N}}', ACTIVE().length).replace('{{METER}}', meterSVG(-1, ''));
+  const nextL = LESSONS[i + 1];
   el.innerHTML = `<div class="lesson">
     <p><a href="#learn" class="small">← All lessons</a></p>
     <div class="pill" style="margin-top:6px">Lesson ${i + 1} of ${LESSONS.length} · ${l.s}</div>
@@ -1002,15 +1052,14 @@ function renderLesson(id) {
     <div class="body">${body}</div>
     <div class="card qcard" style="margin-top:26px" id="lcheck"></div>
   </div>`;
-  if (!G.lessons[l.id]) { G.lessons[l.id] = 1; save(); award(10, 'Lesson read'); }
-  quizQuestion($('#lcheck'), { kind: 'Quick check', q: l.q.q, answers: l.q.a, right: l.q.r, explain: l.q.e }, (ok) => {
-    if (ok && !G.checks[l.id]) { G.checks[l.id] = 1; save(); award(15, 'Check passed'); }
-  }, () => { location.hash = i < LESSONS.length - 1 ? 'learn/' + LESSONS[i + 1].id : 'funds'; }, i < LESSONS.length - 1 ? 'Next lesson' : 'Collect fund types');
+  quizQuestion($('#lcheck'), { kind: G.checks[l.id] ? 'Quick check (passed)' : 'Quick check · +20 XP', q: l.q.q, answers: l.q.a, right: l.q.r, explain: l.q.e }, (ok) => {
+    if (ok && !G.checks[l.id]) { G.checks[l.id] = 1; save(); award(20, 'Lesson passed'); }
+  }, () => { location.hash = nextL ? 'learn/' + nextL.id : 'fit'; }, nextL ? 'Next lesson' : 'Find my fit');
 }
 
 /* Shared question renderer. onAnswer(ok) fires once; onNext on continue. */
-function quizQuestion(box, qq, onAnswer, onNext, nextLabel = 'Continue', head = '') {
-  const order = shuffle(qq.answers.map((a, i) => i));
+function quizQuestion(box, qq, onAnswer, onNext, nextLabel = 'Continue', head = '', keepOrder = false) {
+  const order = keepOrder ? qq.answers.map((a, i) => i) : shuffle(qq.answers.map((a, i) => i));
   const two = qq.answers.length === 2;
   box.innerHTML = `${head}<div class="qkind">${esc(qq.kind)}</div><div class="qtext">${esc(qq.q)}</div>
     <div class="answers ${two ? 'two' : ''}">${order.map((k, n) => `<button class="ans" type="button" data-k="${k}"><kbd>${n + 1}</kbd><span>${esc(qq.answers[k])}</span></button>`).join('')}</div>
@@ -1025,27 +1074,28 @@ function quizQuestion(box, qq, onAnswer, onNext, nextLabel = 'Continue', head = 
     if (!ok) b.classList.add('wrong');
     fb.className = 'feedback show ' + (ok ? 'good' : 'bad');
     fb.innerHTML = `<b>${ok ? pick(['Nailed it!', 'Correct!', 'Spot on!', 'Yes!']) : 'Not quite.'}</b>${esc(qq.explain || '')}`;
-    nb.disabled = false; nb.className = 'btn ' + (ok ? 'ok' : ''); nb.focus();
+    nb.disabled = false; nb.className = 'btn ' + (ok ? 'ok' : ''); nb.focus({ preventScroll: true });
     onAnswer(ok);
   };
   box.querySelector('.answers').onclick = (e) => { const b = e.target.closest('.ans'); if (b) choose(b); };
   box.onkeydown = (e) => { const n = +e.key; const bs = box.querySelectorAll('.ans'); if (n >= 1 && n <= bs.length && !done) choose(bs[n - 1]); };
   nb.onclick = onNext;
-  box.querySelector('.ans').focus({ preventScroll: true });
 }
 
 /* ============ FUND TYPES (deck) ============ */
 let DECK_FILTER = 'all', DECK_Q = '';
 function renderFunds(arg) {
   const el = $('#v-funds');
-  const got = collected(), total = ACTIVE().length;
-  el.innerHTML = `<div class="section-head"><div><h2>Every type of mutual fund</h2><p class="muted">SEBI sorts all funds into ${ACTIVE().length} types, so a name means the same thing at every fund house. Open a card to learn what it's for and who offers it.</p></div>
-    <div style="min-width:220px"><div class="row" style="justify-content:space-between"><b>${got} / ${total} collected</b><span class="dim small">+5 XP each</span></div><div class="bar" style="margin-top:6px"><b style="width:${(got / total) * 100}%;background:var(--gold)"></b></div></div></div>
-    <div class="filters" role="group" aria-label="Filter">${[['all', 'All', ''], ...CATS.groups.map((g) => [g.id, g.name, 'g-' + g.id])].map(([id, n, cls]) => `<button class="chip ${cls}" type="button" data-f="${id}" aria-pressed="${DECK_FILTER === id}">${id !== 'all' ? '<i></i>' : ''}${esc(n)}</button>`).join('')}</div>
+  const won = collected(), total = ACTIVE().length;
+  const groups = CATS.groups.filter((g) => g.id !== 'solution');
+  el.innerHTML = `<div class="section-head"><div><h2>Every type of mutual fund</h2><p class="muted">SEBI allows ${total} types of fund, so a name means the same thing at every fund house. Open a card to learn it, win it with one question, and compare the real funds of that type.</p></div>
+    <div style="min-width:220px"><div class="row" style="justify-content:space-between"><b>${won} / ${total} won</b><span class="dim small">+5 XP each</span></div><div class="bar" style="margin-top:6px"><b style="width:${(won / total) * 100}%;background:var(--gold)"></b></div></div></div>
+    <div class="filters" role="group" aria-label="Filter">${[['all', 'All', ''], ...groups.map((g) => [g.id, g.name, 'g-' + g.id])].map(([id, n, cls]) => `<button class="chip ${cls}" type="button" data-f="${id}" aria-pressed="${DECK_FILTER === id}">${id !== 'all' ? '<i></i>' : ''}${esc(n)}</button>`).join('')}</div>
     <label class="sr" for="dq">Search fund types</label><input class="search" id="dq" type="search" placeholder="Search: liquid, gold, tax…" value="${esc(DECK_Q)}">
     <div id="deckbody"></div>
     <div class="grouptitle" style="margin-top:40px"><h3>Other names you'll hear</h3><p>Not separate fund types, but words that come up when you start investing.</p></div>
-    <div class="twocol">${CATS.otherTypes.map((g) => `<div class="card pad"><h3>${esc(g.group)}</h3><dl class="kv">${g.items.map((i) => `<dt>${esc(i.name)}</dt><dd>${esc(i.text)}</dd>`).join('')}</dl></div>`).join('')}</div>`;
+    <div class="twocol">${CATS.otherTypes.map((g) => `<div class="card pad"><h3>${esc(g.group)}</h3><dl class="kv">${g.items.map((i) => `<dt>${esc(i.name)}</dt><dd>${esc(i.text)}</dd>`).join('')}</dl></div>`).join('')}</div>
+    <p class="small muted" style="margin-top:24px">Two more types, Retirement Funds and Children's Funds, stopped taking new money in February 2026. If you already hold one, it continues until SEBI approves its merger into a similar fund.</p>`;
   el.querySelector('.filters').onclick = (e) => { const b = e.target.closest('[data-f]'); if (!b) return; DECK_FILTER = b.dataset.f; renderFunds(); };
   $('#dq').oninput = (e) => { DECK_Q = e.target.value; drawDeck(); };
   drawDeck();
@@ -1054,120 +1104,159 @@ function renderFunds(arg) {
 function drawDeck() {
   const q = DECK_Q.toLowerCase().trim();
   const out = [];
-  for (const g of CATS.groups) {
+  for (const g of CATS.groups.filter((g) => g.id !== 'solution')) {
     if (DECK_FILTER !== 'all' && DECK_FILTER !== g.id) continue;
-    const cs = CATS.categories.filter((c) => c.group === g.id && (!q || `${c.name} ${c.was || ''} ${c.what}`.toLowerCase().includes(q)));
+    const cs = ACTIVE().filter((c) => c.group === g.id && (!q || `${c.name} ${c.was || ''} ${c.what}`.toLowerCase().includes(q)));
     if (!cs.length) continue;
     out.push(`<div class="grouptitle g-${g.id}"><span class="dot"></span><h3>${esc(g.name)}</h3><span class="dim">${cs.length} type${cs.length > 1 ? 's' : ''}</span><p>${esc(g.about)}</p></div><div class="deck">${cs.map((c) => fundCard(c)).join('')}</div>`);
   }
   $('#deckbody').innerHTML = out.join('') || `<div class="empty">Nothing matches "${esc(q)}". Try a shorter word like "gold" or "tax".</div>`;
-  $('#deckbody').onclick = (e) => { const b = e.target.closest('[data-card]'); if (b) openFund(b.dataset.card); };
+  $('#deckbody').onclick = (e) => { const b = e.target.closest('[data-card]'); if (b) location.hash = 'funds/' + b.dataset.card; };
 }
 
-/* ============ PLAY: FUND MATCH ============ */
+/* ============ PLAY ============ */
 const MYTHS = [
-  ['A fund with a lower NAV is cheaper to buy.', false, 'NAV says nothing about value. Growth from here is what counts.'],
+  ['A fund with a lower NAV is cheaper to buy.', false, 'NAV says nothing about value. What counts is how the investments grow from here.'],
   ['Mutual funds guarantee returns.', false, 'No mutual fund can promise returns. Even debt funds can lose money.'],
-  ['Many funds let you start a SIP with Rs 100–500 a month.', true, 'Minimums vary by scheme, but small SIPs are common.'],
-  ['Debt funds can never lose money.', false, 'Bond prices move with interest rates, and borrowers can default.'],
+  ['Many funds let you start a SIP with ₹100–500 a month.', true, 'Minimums vary, but small SIPs are common.'],
+  ['Debt funds can never lose money.', false, 'Bond prices move with interest rates, and borrowers can fail to repay.'],
   ['ELSS gives a tax deduction under the new tax regime.', false, 'The Section 80C deduction exists only in the old regime.'],
   ['Index funds usually cost less than actively managed funds.', true, 'Nobody has to pick stocks, so the expense ratio is lower.'],
   ['IDCW payouts are extra income on top of your returns.', false, 'They come out of your own investment; the NAV drops by the same amount.'],
-  ['A liquid fund is a common place to keep an emergency fund.', true, 'It\'s low risk and money usually reaches you the next working day.'],
+  ['A liquid fund is a common home for an emergency fund.', true, 'Low risk, and money usually reaches you the next working day.'],
   ['Good past returns guarantee good future returns.', false, 'Past performance may or may not be repeated.'],
-  ['You can stop or pause a SIP whenever you want.', true, 'There\'s no penalty for stopping a SIP itself; exit loads apply only if you sell early.'],
+  ['You can stop or pause a SIP whenever you want.', true, 'There\'s no penalty for stopping a SIP; an exit load applies only if you sell early.'],
   ['Direct and Regular plans of a fund own the same investments.', true, 'Same portfolio; only the yearly cost differs.'],
-  ['You should invest in equity before building an emergency fund.', false, 'An emergency fund comes first so you\'re never forced to sell in a fall.'],
+  ['You should invest in equity before building an emergency fund.', false, 'An emergency fund comes first, so you\'re never forced to sell in a fall.'],
+  ['You need a demat account to invest in a regular mutual fund.', false, 'Only ETFs need a demat account. Regular funds can be bought directly from the fund house.'],
+  ['Equity funds are a good place for money you need in 6 months.', false, 'Shares can fall sharply in a few months. Short-term money belongs in short-term debt funds.'],
+  ['A higher expense ratio means a better fund.', false, 'It only means a higher cost. Many low-cost funds do just as well.'],
+  ['Your fund company going bust means your money is lost.', false, 'Your investments are held by a separate custodian for the investors, not by the fund company.'],
+  ['SEBI decides which types of mutual fund can exist.', true, 'SEBI\'s categories mean a "large cap fund" is the same kind of fund everywhere.'],
+  ['Investing through a SIP guarantees you won\'t lose money.', false, 'A SIP spreads out your buying, but the investments can still fall.'],
+  ['Gains from mutual funds are taxed when you sell, not every year.', true, 'Growth option gains are taxed on redemption.'],
+  ['A new fund offer (NFO) at ₹10 is a bargain compared with an old fund.', false, 'The starting NAV of ₹10 doesn\'t make an NFO cheaper or better.'],
+  ['Arbitrage funds are low risk but taxed like equity funds.', true, 'They earn small, steady gains from price gaps and are treated as equity for tax.'],
+  ['Every equity fund has a 3-year lock-in.', false, 'Only ELSS has a lock-in. Other equity funds may have a small exit load if sold early.'],
+  ['The riskometer of a fund can change over time.', true, 'It\'s reviewed every month based on what the fund actually holds.'],
+  ['Checking your fund every day helps you earn more.', false, 'Daily checking tends to cause panic selling. Once or twice a year is enough.'],
 ];
+// Curated situations: the right answer comes from the suggestion rules; the wrong ones are
+// chosen by hand to be plausible but clearly wrong for the situation (tests check both).
 const SCENARIOS = [
-  { t: 'Riya wants to keep 6 months of expenses ready for emergencies.', i: { purpose: 'emergency', horizon: 'h1', risk: 'hold' } },
-  { t: 'Arun needs a car down payment in 2 years and hates seeing losses.', i: { purpose: 'goal', horizon: 'h2', risk: 'exit' } },
-  { t: 'Meena is saving for her daughter\'s college, 12 years away, and stays calm in crashes.', i: { purpose: 'goal', horizon: 'h6', risk: 'hold' } },
-  { t: 'Karthik got a bonus he\'ll use for a home renovation in 8 months.', i: { purpose: 'goal', horizon: 'h1', risk: 'hold' } },
-  { t: 'Farhan wants to build wealth over 15+ years and buys more when markets fall.', i: { purpose: 'wealth', horizon: 'h6', risk: 'add' } },
-  { t: 'Divya needs money for a house down payment in about 4 years.', i: { purpose: 'goal', horizon: 'h3', risk: 'hold' } },
-  { t: 'Suresh has 6 years to invest but sells whenever markets fall.', i: { purpose: 'wealth', horizon: 'h4', risk: 'exit' } },
-  { t: 'Priya files under the old tax regime and wants to save tax while investing for 8 years.', i: { purpose: 'tax', horizon: 'h5', risk: 'hold', regime: 'old' } },
-  { t: 'Vikram wants to park money for 2 months before paying his child\'s school fees.', i: { purpose: 'goal', horizon: 'h0', risk: 'hold' } },
-  { t: 'Lakshmi wants steady growth over 7 years and is okay with some ups and downs.', i: { purpose: 'wealth', horizon: 'h5', risk: 'hold' } },
+  { t: 'Riya wants to keep 6 months of expenses ready for emergencies.', i: { purpose: 'emergency', horizon: 'h1', risk: 'hold' }, w: ['large-cap', 'credit-risk', 'aggressive-hybrid'] },
+  { t: 'Arun needs a car down payment in 2 years and hates seeing losses.', i: { purpose: 'goal', horizon: 'h2', risk: 'exit' }, w: ['flexi-cap', 'long-term', 'credit-risk'] },
+  { t: 'Meena is saving for her daughter\'s college, 12 years away, and stays calm in crashes.', i: { purpose: 'goal', horizon: 'h6', risk: 'hold' }, w: ['liquid', 'short-term', 'small-cap'] },
+  { t: 'Karthik has a bonus he\'ll use for a home renovation in 8 months.', i: { purpose: 'goal', horizon: 'h1', risk: 'hold' }, w: ['mid-cap', 'long-term', 'aggressive-hybrid'] },
+  { t: 'Farhan wants to build wealth over 15+ years and buys more when markets fall.', i: { purpose: 'wealth', horizon: 'h6', risk: 'add' }, w: ['liquid', 'gilt', 'conservative-hybrid'] },
+  { t: 'Divya needs money for a house down payment in about 4 years.', i: { purpose: 'goal', horizon: 'h3', risk: 'hold' }, w: ['small-cap', 'mid-cap', 'thematic'] },
+  { t: 'Suresh has 6 years to invest but sells whenever markets fall.', i: { purpose: 'wealth', horizon: 'h4', risk: 'exit' }, w: ['small-cap', 'sectoral', 'mid-cap'] },
+  { t: 'Priya files under the old tax regime and wants to save tax while investing for 8 years.', i: { purpose: 'tax', horizon: 'h5', risk: 'hold', regime: 'old' }, w: ['liquid', 'gilt', 'arbitrage'] },
+  { t: 'Vikram is parking money for 2 months before paying school fees.', i: { purpose: 'goal', horizon: 'h0', risk: 'hold' }, w: ['large-cap', 'medium-long', 'equity-savings'] },
+  { t: 'Lakshmi wants steady growth over 7 years and is fine with some ups and downs.', i: { purpose: 'wealth', horizon: 'h5', risk: 'hold' }, w: ['overnight', 'sectoral', 'credit-risk'] },
+  { t: 'Rahul will pay his MBA fees in 3 years and can\'t risk any big fall.', i: { purpose: 'goal', horizon: 'h2', risk: 'exit' }, w: ['multi-cap', 'mid-cap', 'thematic'] },
+  { t: 'Anita, 30, is investing for retirement at 60 and ignores market news.', i: { purpose: 'wealth', horizon: 'h6', risk: 'hold' }, w: ['money-market', 'short-term', 'arbitrage'] },
 ];
-function buildRound() {
+const QUIZ_BONUS = [
+  ['Which fund can\'t hold anything that matures later than 91 days?', 'liquid', ['short-term', 'gilt', 'corporate-bond']],
+  ['Which is the only fund type with a 3-year lock-in?', 'elss', ['large-cap', 'focused', 'index-etf']],
+  ['Which fund changes its share and debt mix by itself as markets move?', 'daaf', ['balanced-hybrid', 'aggressive-hybrid', 'conservative-hybrid']],
+  ['Which fund simply copies an index like the Nifty 50?', 'index-etf', ['large-cap', 'focused', 'flexi-cap']],
+  ['Which fund is named after a target year, like 2045?', 'life-cycle', ['elss', 'multi-asset', 'fof']],
+];
+function questionPool(rnd) {
   const qs = [];
-  for (const s of shuffle(SCENARIOS).slice(0, 4)) {
+  for (const s of SCENARIOS) {
     const r = RULES.suggest({ emergency: 'yes', mode: 'sip', amount: 5000, ...s.i });
-    const okSet = new Set([r.primary, ...r.alts]);
-    const primaryGroup = catById(r.primary).group;
-    const wrong = shuffle(ACTIVE().filter((c) => !okSet.has(c.id) && c.group !== primaryGroup && c.id !== 'sectoral-debt')).slice(0, 3);
-    qs.push({ kind: 'Which fund fits?', q: s.t, answers: [catById(r.primary).name, ...wrong.map((c) => c.name)], right: 0, explain: X(r.reasons[0]) });
+    qs.push({ type: 'fit', kind: 'Which fund fits?', q: s.t, answers: [catById(r.primary).name, ...s.w.map((id) => catById(id).name)], right: 0, explain: X(r.reasons[r.reasons.length > 1 && s.i.purpose === 'goal' ? 1 : 0]) });
   }
-  const pool = ACTIVE().filter((c) => !c.what.toLowerCase().includes(c.name.toLowerCase().replace(/ fund.*$/, '').replace(/[–-].*$/, '').trim()));
-  for (const c of shuffle(pool).slice(0, 3)) {
-    const same = shuffle(ACTIVE().filter((x) => x.group === c.group && x.id !== c.id));
-    const others = shuffle(ACTIVE().filter((x) => x.group !== c.group));
-    const d = [...same, ...others].slice(0, 3);
-    qs.push({ kind: 'Name that fund', q: c.what, answers: [c.name, ...d.map((x) => x.name)], right: 0, explain: `${c.name}: ${c.rule}.` });
+  for (const c of ACTIVE().filter((c) => c.clue)) {
+    const same = shuffle(ACTIVE().filter((x) => x.group === c.group && x.id !== c.id), rnd).slice(0, 2);
+    const other = shuffle(ACTIVE().filter((x) => x.group !== c.group), rnd).slice(0, 3 - same.length);
+    qs.push({ type: 'name', kind: 'Name that fund', q: c.clue, answers: [c.name, ...same.map((x) => x.name), ...other.map((x) => x.name)], right: 0, explain: `${c.name}. ${c.what}` });
   }
-  for (const [m, truth, why] of shuffle(MYTHS).slice(0, 3)) qs.push({ kind: 'Myth or fact?', q: m, answers: ['Fact', 'Myth'], right: truth ? 0 : 1, explain: why, fixed: true });
-  return shuffle(qs);
+  for (const [q, id, w] of QUIZ_BONUS) qs.push({ type: 'name', kind: 'Quick fire', q, answers: [catById(id).name, ...w.map((x) => catById(x).name)], right: 0, explain: catById(id).what });
+  const rated = ACTIVE().filter((c) => riskIndex(c.risk) >= 0);
+  for (let i = 0; i < 12; i++) {
+    const a = pick(rated, rnd); const b = pick(rated.filter((x) => Math.abs(riskIndex(x.risk) - riskIndex(a.risk)) >= 2), rnd);
+    if (!b) continue;
+    const hiC = riskIndex(a.risk) > riskIndex(b.risk) ? a : b, loC = hiC === a ? b : a;
+    qs.push({ type: 'risk', kind: 'Which swings more?', q: `Which usually goes up and down more: ${a.name} or ${b.name}?`, answers: [hiC.name, loC.name], right: 0, explain: `${hiC.name} is typically ${hiC.risk} risk; ${loC.name} is typically ${loC.risk}.` });
+  }
+  for (const [m, truth, why] of MYTHS) qs.push({ type: 'myth', kind: 'Myth or fact?', q: m, answers: ['Fact', 'Myth'], right: truth ? 0 : 1, explain: why, fixed: true });
+  return qs;
+}
+function buildRound(n = 10, rnd = Math.random) {
+  const pool = questionPool(rnd);
+  const by = (t) => shuffle(pool.filter((q) => q.type === t), rnd);
+  const mix = n === 10 ? { fit: 3, name: 3, risk: 1, myth: 3 } : { fit: 1, name: 1, myth: 1 };
+  return shuffle(Object.entries(mix).flatMap(([t, k]) => by(t).slice(0, k)), rnd);
 }
 let RUN = null;
-function renderPlay() {
+function renderPlay(arg) {
+  if (arg === 'daily') return startGame(true);
   const el = $('#v-play');
+  const doneToday = G.daily === today();
   el.innerHTML = `<div class="narrow" style="margin:0 auto">
-    <div class="section-head"><div><h2>Fund Match</h2><p class="muted">10 quick questions from real life. Pick the fund that fits, name the fund type, and bust the myths. Streaks earn bonus XP.</p></div></div>
+    <div class="section-head"><div><h2>Play</h2><p class="muted">Every answer comes with the reason, so you learn even when you miss.</p></div></div>
+    <a class="card daily ${doneToday ? 'done' : ''}" href="#play/daily" style="text-decoration:none;margin-bottom:16px"><div><h3>${doneToday ? 'Today\'s challenge is done ✓' : 'Daily challenge'}</h3><p>${doneToday ? 'New questions tomorrow.' : '3 questions, same for everyone today. Keep your streak going.'}</p></div>${doneToday ? '' : '<span class="btn small">Play</span>'}</a>
     <div class="card pad" style="text-align:center">
-      <div class="row" style="justify-content:center;gap:28px;margin:6px 0 18px">
+      <h3 style="font-size:1.5rem">Fund Match</h3>
+      <p class="muted">10 questions: real-life situations, "name that fund", which swings more, and myth or fact.</p>
+      <div class="row" style="justify-content:center;gap:28px;margin:14px 0 18px">
         <div><div class="score-big" style="font-size:2.6rem">${G.best}/10</div><div class="dim small">Best score</div></div>
         <div><div class="score-big" style="font-size:2.6rem">${G.games}</div><div class="dim small">Games played</div></div>
       </div>
-      <button class="btn gold" type="button" id="startGame" style="font-size:1.1rem;padding:16px 34px">Play now</button>
+      <button class="btn gold" type="button" id="startGame" style="font-size:1.1rem;padding:16px 34px">Play Fund Match</button>
     </div></div>`;
-  $('#startGame').onclick = startGame;
+  $('#startGame').onclick = () => startGame(false);
 }
-function startGame() {
-  RUN = { qs: buildRound(), i: 0, score: 0, combo: 0, marks: [], log: [] };
+function startGame(daily) {
+  if (daily && G.daily === today()) { location.hash = 'play'; return; }
+  const rnd = daily ? seeded(+today().replace(/-/g, '')) : Math.random;
+  RUN = { daily, qs: buildRound(daily ? 3 : 10, rnd), i: 0, score: 0, combo: 0, marks: [], log: [], xp: 0 };
   nextQ();
 }
 function nextQ() {
   const el = $('#v-play');
   if (RUN.i >= RUN.qs.length) return endGame();
   const q = RUN.qs[RUN.i];
-  el.innerHTML = `<div class="narrow" style="margin:0 auto"><div class="card qcard" id="qbox"></div></div>`;
-  const head = `<div class="qhead"><button class="linkbtn" type="button" id="quit" aria-label="Quit game">✕</button><div class="bar"><b style="width:${(RUN.i / RUN.qs.length) * 100}%"></b></div><span class="combo">${RUN.combo >= 2 ? '🔥×' + RUN.combo : ''}</span></div>`;
-  const qq = q.fixed ? { ...q } : q;
-  quizQuestion($('#qbox'), qq, (ok) => {
+  el.innerHTML = `<div class="narrow" style="margin:0 auto">${RUN.daily ? '<p class="small" style="font-weight:800;color:var(--brand)">Daily challenge</p>' : ''}<div class="card qcard" id="qbox"></div></div>`;
+  const head = `<div class="qhead"><button class="linkbtn" type="button" id="quit" aria-label="Quit">✕</button><div class="bar"><b style="width:${(RUN.i / RUN.qs.length) * 100}%"></b></div><span class="combo">${RUN.combo >= 2 ? '🔥×' + RUN.combo : ''}</span></div>`;
+  quizQuestion($('#qbox'), q, (ok) => {
     RUN.marks.push(ok); RUN.log.push(q);
-    if (ok) { RUN.score++; RUN.combo++; } else RUN.combo = 0;
-  }, () => { RUN.i++; nextQ(); }, RUN.i === RUN.qs.length - 1 ? 'See score' : 'Next', head);
-  if (q.fixed) { // keep Fact / Myth order stable
-    const box = $('#qbox .answers'); const bs = [...box.children].sort((a, b) => +a.dataset.k - +b.dataset.k);
-    bs.forEach((b, n) => { b.querySelector('kbd').textContent = n + 1; box.appendChild(b); });
-  }
-  $('#quit').onclick = () => { RUN = null; renderPlay(); };
+    if (ok) { RUN.score++; RUN.combo++; RUN.xp += 10 + (RUN.combo >= 3 ? 2 : 0); } else RUN.combo = 0;
+  }, () => { RUN.i++; nextQ(); }, RUN.i === RUN.qs.length - 1 ? 'See score' : 'Next', head, !!q.fixed);
+  $('#quit').onclick = () => { RUN = null; location.hash = 'play'; renderPlay(); };
 }
 function endGame() {
-  const s = RUN.score;
-  G.games++; const newBest = s > G.best; if (newBest) G.best = s; save();
-  const xp = s * 10 + (s === 10 ? 50 : 0);
-  if (xp) award(xp, `Fund Match: ${s}/10`); else checkBadges();
-  if (s >= 8) confetti();
+  const s = RUN.score, n = RUN.qs.length;
+  let xp = RUN.xp;
+  if (RUN.daily) {
+    G.streak = G.daily === yesterday() ? G.streak + 1 : 1; G.daily = today(); xp += 15;
+  } else {
+    G.games++; if (s > G.best) G.best = s; if (s === n) xp += 30;
+  }
+  save();
+  if (xp) award(xp, RUN.daily ? 'Daily challenge' : `Fund Match: ${s}/${n}`); else { checkBadges(); paintPlayer(); }
+  if (s === n) confetti();
   const line = RUN.marks.map((m) => m ? '🟩' : '🟥').join('');
+  const msg = s === n ? 'Perfect!' : s / n >= .8 ? 'Excellent!' : s / n >= .5 ? 'Good going!' : 'Every miss below teaches something.';
   $('#v-play').innerHTML = `<div class="narrow" style="margin:0 auto"><div class="card pad" style="text-align:center">
-    <div class="score-big">${s}<span class="dim" style="font-size:2.4rem">/10</span></div>
-    <h3 style="margin-top:8px">${s === 10 ? 'Perfect game!' : s >= 8 ? 'Excellent!' : s >= 5 ? 'Good going!' : 'Keep learning, you\'ll get there.'}${newBest ? ' New best!' : ''}</h3>
+    <div class="score-big">${s}<span class="dim" style="font-size:2.4rem">/${n}</span></div>
+    <h3 style="margin-top:8px">${msg}${RUN.daily && G.streak >= 2 ? ` ${G.streak}-day streak 🔥` : ''}</h3>
     <div class="dots">${RUN.marks.map((m) => `<i class="${m ? 'r' : 'w'}"></i>`).join('')}</div>
     <div class="row" style="justify-content:center;margin-top:18px">
-      <button class="btn gold" type="button" id="again">Play again</button>
+      ${RUN.daily ? '<a class="btn gold" href="#play">Play Fund Match</a>' : '<button class="btn gold" type="button" id="again">Play again</button>'}
       <button class="btn plain" type="button" id="shareScore">Share score</button>
-      ${s < 7 ? '<a class="btn plain" href="#learn">Review lessons</a>' : ''}
     </div></div>
     <h3 style="margin:26px 0 10px">Your answers</h3>
     <div class="card" style="overflow:hidden">${RUN.log.map((q, k) => `<div style="padding:14px 18px;border-top:${k ? '1px solid var(--line)' : '0'};display:grid;grid-template-columns:28px 1fr;gap:10px">
       <span style="font-size:1.1rem">${RUN.marks[k] ? '✅' : '❌'}</span>
       <div><div class="tiny" style="font-weight:800;color:var(--brand)">${esc(q.kind)}</div><div style="font-weight:700">${esc(q.q)}</div>
-      <div class="small" style="margin-top:4px"><b style="color:var(--ok-dk)">${esc(q.answers[q.right])}</b> <span class="muted">· ${esc(q.explain)}</span></div></div></div>`).join('')}</div></div>`;
-  $('#again').onclick = startGame;
-  $('#shareScore').onclick = () => share(`FundFit · Fund Match ${s}/10\n${line}\nCan you beat me? ${CONFIG.siteUrl}#play`);
+      <div class="small" style="margin-top:4px">Answer: <b style="color:var(--ok-dk)">${esc(q.answers[q.right])}</b></div><div class="small muted">${esc(q.explain)}</div></div></div>`).join('')}</div></div>`;
+  $('#again')?.addEventListener('click', () => startGame(false));
+  $('#shareScore').onclick = () => share(`FundFit ${RUN.daily ? 'daily challenge' : 'Fund Match'} ${s}/${n}\n${line}\n${CONFIG.siteUrl}#play`);
 }
 function share(txt) {
   if (navigator.share && matchMedia('(pointer:coarse)').matches) navigator.share({ text: txt }).catch(() => {});
@@ -1177,6 +1266,8 @@ function share(txt) {
 
 /* ============ FIND MY FIT ============ */
 let ANS = {}, STEP = 0;
+const H_LABEL = { h0: 'within 3 months', h1: 'in 3 to 12 months', h2: 'in 1 to 3 years', h3: 'in 3 to 5 years', h4: 'in 5 to 7 years', h5: 'in 7 to 10 years', h6: 'in 10+ years' };
+const H_YEARS = { h0: .2, h1: .7, h2: 2, h3: 4, h4: 6, h5: 8.5, h6: 12 };
 const steps = () => ['purpose', 'mode', 'horizon', 'risk', ...(ANS.purpose !== 'emergency' ? ['emerg'] : []), ...(ANS.purpose === 'tax' ? ['regime'] : [])];
 const opt = (key, v, emo, title, desc) => `<button class="opt" type="button" data-k="${key}" data-v="${v}" aria-pressed="${ANS[key] === v}"><span class="emo" aria-hidden="true">${emo}</span><div><b>${esc(title)}</b>${desc ? `<span>${esc(desc)}</span>` : ''}</div></button>`;
 function renderFit() {
@@ -1184,19 +1275,19 @@ function renderFit() {
   if (ANS._done) return renderReveal();
   const st = steps(); STEP = Math.min(STEP, st.length - 1); const k = st[STEP];
   let body = '';
-  if (k === 'purpose') body = `<h2>${T('q_purpose')}</h2><p class="muted">${T('q_purpose_h')}</p><div class="opts" style="margin-top:18px">${opt('purpose', 'emergency', '🛟', T('p_emergency'), T('p_emergency_d'))}${opt('purpose', 'goal', '🎯', T('p_goal'), T('p_goal_d'))}${opt('purpose', 'wealth', '🌳', T('p_wealth'), T('p_wealth_d'))}${opt('purpose', 'tax', '🧾', T('p_tax'), T('p_tax_d'))}</div>`;
-  if (k === 'mode') body = `<h2>${T('q_mode')}</h2><div class="opts" style="margin-top:18px">${opt('mode', 'sip', '📅', T('m_sip'), T('m_sip_d'))}${opt('mode', 'lump', '💰', T('m_lump'), T('m_lump_d'))}</div>
-    ${ANS.mode ? `<label class="small" for="amt" style="display:block;margin-top:18px;font-weight:800">${ANS.mode === 'sip' ? T('amt_sip') : T('amt_lump')}</label><div class="amountbox"><span>₹</span><input id="amt" inputmode="numeric" autocomplete="off" value="${ANS.amount ? inr(ANS.amount) : ''}" placeholder="${ANS.mode === 'sip' ? '5,000' : '1,00,000'}"></div>
+  if (k === 'purpose') body = `<h2>What is this money for?</h2><p class="muted">The purpose decides how much risk the money can take.</p><div class="opts" style="margin-top:18px">${opt('purpose', 'emergency', '🛟', 'Emergency fund', 'Money I may need any day')}${opt('purpose', 'goal', '🎯', 'A goal with a date', 'House, education, car, wedding')}${opt('purpose', 'wealth', '🌳', 'Growing my wealth', 'No fixed use or deadline')}${opt('purpose', 'tax', '🧾', 'Saving tax', 'Section 80C deduction')}</div>`;
+  if (k === 'mode') body = `<h2>How will you invest?</h2><div class="opts" style="margin-top:18px">${opt('mode', 'sip', '📅', 'Every month (SIP)', 'A fixed amount each month')}${opt('mode', 'lump', '💰', 'All at once (lumpsum)', 'One amount, one time')}</div>
+    ${ANS.mode ? `<label class="small" for="amt" style="display:block;margin-top:18px;font-weight:800">${ANS.mode === 'sip' ? 'How much each month?' : 'How much in total?'}</label><div class="amountbox"><span>₹</span><input id="amt" inputmode="numeric" autocomplete="off" value="${ANS.amount ? inr(ANS.amount) : ''}" placeholder="${ANS.mode === 'sip' ? '5,000' : '1,00,000'}"></div>
     <div class="quick">${(ANS.mode === 'sip' ? [1000, 5000, 10000, 25000] : [50000, 100000, 500000, 1000000]).map((n) => `<button type="button" data-q="${n}">₹${inr(n)}</button>`).join('')}</div>` : ''}`;
-  if (k === 'horizon') body = `<h2>${T('q_horizon')}</h2><p class="muted">${T('q_horizon_h')}</p><div class="timeline" role="group">${RULES.HORIZONS.map((h, i) => { const lbl = ['< 3', '3–12', '1–3', '3–5', '5–7', '7–10', '10+'][i]; const u = i < 2 ? 'months' : 'years'; return `<button type="button" data-k="horizon" data-v="${h}" aria-pressed="${ANS.horizon === h}" aria-label="${esc(T(h))}">${lbl}<small>${u}</small></button>`; }).join('')}</div>`;
-  if (k === 'risk') body = `<h2>${T('q_risk')}</h2><p class="muted">${T('q_risk_h')}</p><div class="opts one" style="margin-top:18px">${opt('risk', 'exit', '😰', T('r_exit'))}${opt('risk', 'hold', '😌', T('r_hold'))}${opt('risk', 'add', '😎', T('r_add'))}</div>`;
-  if (k === 'emerg') body = `<h2>${T('q_emerg')}</h2><p class="muted">${T('q_emerg_h')}</p><div class="opts" style="margin-top:18px">${opt('emergency', 'yes', '✅', T('e_yes'))}${opt('emergency', 'no', '⏳', T('e_no'))}</div>`;
-  if (k === 'regime') body = `<h2>${T('q_regime')}</h2><p class="muted">${T('q_regime_h')}</p><div class="opts" style="margin-top:18px">${opt('regime', 'old', '📜', T('t_old'))}${opt('regime', 'new', '🆕', T('t_new'))}${opt('regime', 'unsure', '🤷', T('t_unsure'))}</div>`;
+  if (k === 'horizon') body = `<h2>When will you need this money?</h2><p class="muted">This matters more than anything else.</p><div class="timeline" role="group">${RULES.HORIZONS.map((h, i) => { const lbl = ['< 3', '3–12', '1–3', '3–5', '5–7', '7–10', '10+'][i]; return `<button type="button" data-k="horizon" data-v="${h}" aria-pressed="${ANS.horizon === h}" aria-label="${esc(H_LABEL[h])}">${lbl}<small>${i < 2 ? 'months' : 'years'}</small></button>`; }).join('')}</div>`;
+  if (k === 'risk') body = `<h2>Your investment falls 20% in a bad year. What do you do?</h2><p class="muted">Be honest. This is about how you'd really feel.</p><div class="opts one" style="margin-top:18px">${opt('risk', 'exit', '😰', 'Sell. I can\'t watch it fall.')}${opt('risk', 'hold', '😌', 'Hold and wait it out.')}${opt('risk', 'add', '😎', 'Invest more while it\'s cheap.')}</div>`;
+  if (k === 'emerg') body = `<h2>Do you already have an emergency fund?</h2><p class="muted">3 to 6 months of expenses you can reach within a day or two.</p><div class="opts" style="margin-top:18px">${opt('emergency', 'yes', '✅', 'Yes, it\'s sorted')}${opt('emergency', 'no', '⏳', 'Not yet')}</div>`;
+  if (k === 'regime') body = `<h2>Which income tax regime do you file under?</h2><p class="muted">Only the old regime allows the Section 80C deduction.</p><div class="opts" style="margin-top:18px">${opt('regime', 'old', '📜', 'Old regime')}${opt('regime', 'new', '🆕', 'New regime')}${opt('regime', 'unsure', '🤷', 'Not sure')}</div>`;
   const ready = { purpose: ANS.purpose, mode: ANS.mode && ANS.amount > 0, horizon: ANS.horizon, risk: ANS.risk, emerg: ANS.emergency, regime: ANS.regime }[k];
   const last = STEP === st.length - 1;
   el.innerHTML = `<div class="wiz"><div class="step-dots" aria-label="Step ${STEP + 1} of ${st.length}">${st.map((_, i) => `<i class="${i <= STEP ? 'on' : ''}"></i>`).join('')}</div>
     <div class="card pad" style="padding:28px">${body}
-    <div class="wiznav"><button class="btn plain" type="button" id="wback" ${STEP ? '' : 'disabled'}>${T('back')}</button><button class="btn ${last ? 'gold' : ''}" type="button" id="wnext" ${ready ? '' : 'disabled'}>${last ? T('seeResult') : T('next')}</button></div></div>
+    <div class="wiznav"><button class="btn plain" type="button" id="wback" ${STEP ? '' : 'disabled'}>Back</button><button class="btn ${last ? 'gold' : ''}" type="button" id="wnext" ${ready ? '' : 'disabled'}>${last ? 'Show my fit' : 'Next'}</button></div></div>
     <p class="tiny" style="text-align:center;margin-top:14px">Your answers stay on this device.</p></div>`;
   el.querySelector('.card').onclick = (e) => {
     const q = e.target.closest('[data-q]'); if (q) { ANS.amount = +q.dataset.q; renderFit(); return; }
@@ -1213,44 +1304,59 @@ function renderFit() {
 }
 function renderReveal(fresh) {
   const r = RULES.suggest(ANS), c = catById(r.primary), ri = riskIndex(c.risk);
-  if (fresh) { if (!G.fits) award(25, 'Found your fit'); G.fits++; save(); checkBadges(); if (!G.cards[c.id]) { G.cards[c.id] = 1; save(); } }
-  const sum = [T(ANS.horizon), ANS.mode === 'sip' ? `₹${inr(ANS.amount)} a month` : `₹${inr(ANS.amount)} at once`, T('p_' + ANS.purpose)].join(' · ');
+  if (fresh) { const first = !G.fits; G.fits++; save(); if (first) award(25, 'Found your fit'); else checkBadges(); }
+  const yrs = H_YEARS[ANS.horizon];
+  const total = ANS.mode === 'sip' ? ANS.amount * Math.max(1, Math.round(yrs * 12)) : ANS.amount;
   const note = (k, cls = '', ic = '💡') => `<div class="note ${cls}"><span class="ni">${ic}</span><div>${esc(X(k))}</div></div>`;
-  $('#v-fit').innerHTML = `<p class="small muted">${esc(sum)} · <button class="linkbtn" type="button" id="edit">Change answers</button></p>
+  const purposeTxt = { emergency: 'an emergency fund', goal: 'a goal with a date', wealth: 'growing your wealth', tax: 'saving tax' }[ANS.purpose];
+  $('#v-fit').innerHTML = `<p class="small muted">For ${esc(purposeTxt)}, needed ${esc(H_LABEL[ANS.horizon])} · <button class="linkbtn" type="button" id="edit">Change answers</button></p>
     <div class="reveal">
-      <div class="card yourfit g-${c.group}"><div class="top"><div class="small" style="font-weight:800;opacity:.9">${T('yourFit')}</div><h2>${esc(c.name)}</h2></div>
+      <div class="card yourfit g-${c.group}"><div class="top"><div class="small" style="font-weight:800;opacity:.9">Your fit</div><h2>${esc(c.name)}</h2></div>
         <div class="inner"><p style="font-size:1.08rem;margin-top:0">${esc(c.what)}</p>
-        <div class="facts"><div><small>Key rule</small><b>${esc(c.stat[0])}</b> <span class="small muted">${esc(c.stat[1])}</span></div><div><small>Good for</small><b>${esc(c.horizon)}</b></div><div><small>Offered by</small><b>${SCHEMES ? amcsFor(c.id).length + ' fund houses' : '…'}</b></div></div>
-        <p class="small muted" style="margin:0"><b>SEBI's rule:</b> ${esc(c.rule)}</p></div></div>
-      <div class="card meterbox">${meterSVG(ri, c.risk)}<p class="tiny" style="margin-top:6px">${T('typicalRisk')}. ${T('riskNote')}</p></div>
+          <div class="plan">
+            <div><b>${ANS.mode === 'sip' ? `₹${inr(ANS.amount)}` : lakh(ANS.amount)}</b><span>${ANS.mode === 'sip' ? 'every month' : 'invested once'}</span></div>
+            ${ANS.mode === 'sip' && ANS.horizon !== 'h6' ? `<div><b>${lakh(total)}</b><span>your money in, over about ${yrs < 1 ? Math.round(yrs * 12) + ' months' : yrs + ' years'}</span></div>` : ''}
+            <div><b>${esc(c.stat[0])}</b><span>${esc(c.stat[1])}</span></div>
+          </div></div></div>
+      <div class="card meterbox">${meterSVG(ri, c.risk)}<p class="tiny" style="margin-top:6px">Typical risk for this type. Each fund shows its own riskometer.</p></div>
     </div>
     ${r.teach.map((k) => note(k)).join('')}${r.warnings.map((k) => note(k, 'warn', '⚠️')).join('')}
-    <div class="card pad" style="margin-top:14px"><h3>${T('why')}</h3><ul class="reasons">${r.reasons.map((k) => `<li>${esc(X(k))}</li>`).join('')}</ul>${r.notes.map((k) => note(k)).join('')}</div>
-    ${r.alts.length ? `<h3 style="margin:22px 0 8px">${T('alsoConsider')}</h3><div class="alts">${r.alts.map((id) => { const a = catById(id); return `<div class="card alt g-${a.group}"><b>${esc(a.name)}</b><span class="small muted">${esc(ALT_WHY[id] || a.what)}</span><button class="linkbtn small" type="button" data-open="${id}" style="align-self:flex-start;margin-top:auto">See who offers it</button></div>`; }).join('')}</div>` : ''}
+    <div class="card pad" style="margin-top:14px"><h3>Why this type of fund</h3><ul class="reasons">${r.reasons.map((k) => `<li>${esc(X(k))}</li>`).join('')}</ul>${r.notes.map((k) => note(k)).join('')}</div>
+    ${r.alts.length ? `<h3 style="margin:22px 0 8px">Also worth a look</h3><div class="alts">${r.alts.map((id) => { const a = catById(id); return `<div class="card alt g-${a.group}"><b>${esc(a.name)}</b><span class="small muted">${esc(ALT_WHY[id] || a.what)}</span><span class="tiny">${esc(a.risk)} risk</span><button class="linkbtn small" type="button" data-open="${id}" style="align-self:flex-start;margin-top:auto">Compare these funds</button></div>`; }).join('')}</div>` : ''}
     <div class="card pad" style="margin-top:18px" id="fitOffer"></div>
-    <div class="row" style="margin-top:18px"><button class="btn plain" type="button" id="shareFit">Share my fit</button><button class="btn plain" type="button" id="again">${T('restart')}</button></div>
+    <div class="card pad" style="margin-top:18px"><h3>Your next steps</h3>
+      <ol class="nextsteps">
+        ${ANS.emergency === 'no' && ANS.purpose !== 'emergency' ? '<li><div><b>Set up your emergency fund first</b> in a liquid fund.</div></li>' : ''}
+        <li><div><b>Shortlist 2 or 3 funds</b> from the comparison above: low cost, a steady 5-year record against the average, and at least 3–5 years old.</div></li>
+        <li><div><b>Read each one's factsheet</b> for its riskometer, exit load, minimum amount and fund manager.</div></li>
+        <li><div><b>Complete KYC and invest</b>, directly or through a distributor. <a href="#learn/start">How to actually invest</a></div></li>
+        <li><div><b>Review once a year.</b> Move money to safer funds as your goal gets close.</div></li>
+      </ol></div>
+    <div class="row" style="margin-top:18px"><button class="btn plain" type="button" id="shareFit">Share my fit</button><button class="btn plain" type="button" id="again">Start again</button></div>
     <p class="tiny" style="margin-top:14px">This suggests a type of fund from your answers. It isn't personal advice; a full review would also look at your income, loans, dependants, other investments and taxes.</p>`;
   swing($('#v-fit'));
-  offerings(r.primary, $('#fitOffer'));
+  compareFunds(r.primary, $('#fitOffer'), { title: `Compare ${c.name.replace(/ Fund$/, '')} funds` });
   $('#edit').onclick = () => { ANS._done = false; STEP = 0; renderFit(); };
   $('#again').onclick = () => { ANS = {}; STEP = 0; renderFit(); };
-  $('#v-fit').querySelectorAll('[data-open]').forEach((b) => b.onclick = () => openFund(b.dataset.open));
-  $('#shareFit').onclick = () => { const sq = ri < 0 ? '' : ['🟩', '🟩', '🟨', '🟧', '🟥', '🟥'].slice(0, ri + 1).join('') + '⬜'.repeat(5 - ri); share(`FundFit 🎯\n${T(ANS.horizon)} · ${ANS.mode === 'sip' ? 'SIP' : 'Lumpsum'}\nMy fit: ${c.name}\nRisk ${sq} ${c.risk}\nFind yours: ${CONFIG.siteUrl}#fit`); };
+  $('#v-fit').querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { compareFunds(b.dataset.open, $('#fitOffer')); $('#fitOffer').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('#shareFit').onclick = () => { const sq = ri < 0 ? '' : ['🟩', '🟩', '🟨', '🟧', '🟥', '🟥'].slice(0, ri + 1).join('') + '⬜'.repeat(5 - ri); share(`FundFit 🎯\nNeeded ${H_LABEL[ANS.horizon]}\nMy fit: ${c.name}\nRisk ${sq} ${c.risk}\nFind yours: ${CONFIG.siteUrl}#fit`); };
 }
 
 /* ============ FUND HOUSES ============ */
 let HQ = '';
-function renderHouses(arg) {
+async function renderHouses(arg) {
   const el = $('#v-houses');
-  if (!SCHEMES) { el.innerHTML = '<div class="empty">Fund house data appears after the first daily refresh.</div>'; return; }
+  el.innerHTML = '<p class="dim">Loading fund houses…</p>';
+  await ensureSchemes();
+  if (!SCHEMES) { el.innerHTML = '<div class="empty">Fund house data isn\'t available right now.</div>'; return; }
   const total = ACTIVE().length;
-  el.innerHTML = `<div class="section-head"><div><h2>Fund houses</h2><p class="muted">All ${SCHEMES.amcs.length} fund houses (AMCs) in AMFI's daily list, A to Z. The strip shows which of the ${total} fund types each one offers. More isn't better; it just shows their range.</p></div></div>
+  el.innerHTML = `<div class="section-head"><div><h2>Fund houses</h2><p class="muted">All ${SCHEMES.amcs.length} fund houses (AMCs) in AMFI's daily list, A to Z. The strip shows which of the ${total} fund types each one offers. More isn't better; it only shows their range.</p></div></div>
     <label class="sr" for="hq">Search fund houses</label><input class="search" id="hq" type="search" placeholder="Search a fund house" value="${esc(HQ)}" style="margin-bottom:14px">
     <div class="card" style="overflow:hidden"><div class="legend"><b style="color:var(--ink)">Each square is one fund type:</b>${CATS.groups.filter((g) => g.id !== 'solution').map((g) => `<span class="g-${g.id}"><i></i>${esc(g.name)}</span>`).join('')}</div><div id="hlist"></div></div>`;
   const draw = () => {
     const q = HQ.toLowerCase();
     const rows = SCHEMES.amcs.map((a, i) => ({ ...a, i, n: AMC_CATS[i]?.size || 0 })).filter((a) => a.name.toLowerCase().includes(q)).sort((x, y) => x.name.localeCompare(y.name));
-    $('#hlist').innerHTML = rows.map((a) => `<button class="amcrow" type="button" data-h="${a.i}"><span><b>${esc(shortAmc(a.name))}</b><br><span class="tiny">${a.schemes} scheme${a.schemes === 1 ? '' : 's'}${G.houses[a.i] ? ' · visited' : ''}</span></span>
+    $('#hlist').innerHTML = rows.map((a) => `<button class="amcrow" type="button" data-h="${a.i}"><span><b>${esc(shortAmc(a.name))}</b><br><span class="tiny">${a.schemes} fund${a.schemes === 1 ? '' : 's'}</span></span>
       <span class="strip" aria-hidden="true">${ACTIVE().map((c) => `<i class="g-${c.group} ${AMC_CATS[a.i]?.has(c.id) ? 'on' : ''}" title="${esc(c.name)}"></i>`).join('')}</span>
       <span style="text-align:right"><b>${a.n}</b><span class="dim small">/${total}</span></span></button>`).join('') || '<div class="empty">No fund house matches that.</div>';
   };
@@ -1261,19 +1367,18 @@ function renderHouses(arg) {
 }
 function openHouse(i) {
   const a = SCHEMES.amcs[i];
-  if (!G.houses[i]) { G.houses[i] = 1; save(); award(5, 'Fund house explored'); }
-  const byGroup = CATS.groups.map((g) => ({ g, cs: CATS.categories.filter((c) => c.group === g.id && AMC_CATS[i]?.has(c.id)) })).filter((x) => x.cs.length);
-  openSheet(`<div class="shead"><button class="close" type="button" aria-label="Close">×</button><h2>${esc(a.name)}</h2><p style="opacity:.9;margin:6px 0 0">${a.schemes} scheme${a.schemes === 1 ? '' : 's'} across ${AMC_CATS[i]?.size || 0} fund types</p></div>
-    <div class="sbody">${byGroup.map(({ g, cs }) => `<h3 style="margin-top:6px">${esc(g.name)}</h3><div class="catchips">${cs.map((c) => `<button class="catchip g-${c.group}" type="button" data-c="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>`).join('') || '<p class="muted">No open-ended schemes in a SEBI fund type.</p>'}
+  const byGroup = CATS.groups.map((g) => ({ g, cs: ACTIVE().filter((c) => c.group === g.id && AMC_CATS[i]?.has(c.id)) })).filter((x) => x.cs.length);
+  openSheet(`<div class="shead"><button class="close" type="button" aria-label="Close">×</button><h2>${esc(a.name)}</h2><p style="opacity:.92;margin:6px 0 0">${a.schemes} fund${a.schemes === 1 ? '' : 's'} across ${AMC_CATS[i]?.size || 0} fund types. Pick a type to see them.</p></div>
+    <div class="sbody">${byGroup.map(({ g, cs }) => `<h3 style="margin-top:6px">${esc(g.name)}</h3><div class="catchips">${cs.map((c) => `<button class="catchip g-${c.group}" type="button" data-c="${c.id}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>`).join('') || '<p class="muted">No open-ended funds in a SEBI fund type.</p>'}
     <div id="houseSchemes"></div></div>`);
-  $('#sheet').querySelectorAll('[data-c]').forEach((b) => b.onclick = () => {
+  $('#sheet').querySelectorAll('[data-c]').forEach((b) => b.onclick = async () => {
     $('#sheet').querySelectorAll('[data-c]').forEach((x) => x.setAttribute('aria-pressed', x === b));
-    schemesOf(b.dataset.c, i, $('#houseSchemes'));
+    await compareFunds(b.dataset.c, $('#houseSchemes'), { amc: i, title: esc(catById(b.dataset.c).name) });
     $('#houseSchemes').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 }
 
-/* ============ ME (progress) ============ */
+/* ============ ME ============ */
 function renderMe() {
   const i = levelOf(G.xp), nxt = LEVELS[i + 1];
   $('#v-me').innerHTML = `<div class="section-head"><div><h2>Your progress</h2><p class="muted">Saved only in this browser. Clearing your browser data resets it.</p></div></div>
@@ -1282,16 +1387,16 @@ function renderMe() {
       <div style="flex:1;min-width:200px"><h3 style="font-size:1.6rem">${esc(LEVELS[i].n)}</h3><p class="muted small">${inr(G.xp)} XP${nxt ? ` · ${inr(nxt.xp - G.xp)} XP to ${esc(nxt.n)}` : ' · top level reached'}</p>
       <div class="bar" style="margin-top:8px"><b style="width:${nxt ? ((G.xp - LEVELS[i].xp) / (nxt.xp - LEVELS[i].xp)) * 100 : 100}%;background:var(--gold)"></b></div></div>
       <div class="row" style="gap:22px">
-        <div><div class="score-big" style="font-size:2rem">${Object.keys(G.lessons).length}</div><div class="tiny">lessons</div></div>
-        <div><div class="score-big" style="font-size:2rem">${collected()}</div><div class="tiny">fund types</div></div>
+        <div><div class="score-big" style="font-size:2rem">${Object.keys(G.checks).length}</div><div class="tiny">lessons</div></div>
+        <div><div class="score-big" style="font-size:2rem">${collected()}</div><div class="tiny">cards</div></div>
         <div><div class="score-big" style="font-size:2rem">${G.streak}</div><div class="tiny">day streak</div></div>
       </div></div>
     <h3 style="margin:26px 0 12px">Badges</h3>
     <div class="badges">${BADGES.map((b) => `<div class="card bdg ${G.badges[b.id] ? 'on' : ''}"><span class="medal">${b.e}</span><b>${esc(b.n)}</b><span>${esc(b.d)}</span></div>`).join('')}</div>
     <h3 style="margin:26px 0 8px">How to earn XP</h3>
-    <p class="muted small">Read a lesson +10 · Pass its check +15 · Collect a fund type +5 · Fund Match +10 per correct answer (+50 for a perfect game) · Find my fit +25 · Explore a fund house +5</p>
+    <p class="muted small">Pass a lesson check +20 · Win a fund type card +5 · Each correct answer in a game +10 (+2 on a streak of 3) · Perfect Fund Match +30 · Daily challenge +15 · Find my fit +25</p>
     <p style="margin-top:20px"><button class="linkbtn small" type="button" id="reset">Reset my progress</button></p>`;
-  $('#reset').onclick = () => { if (confirm('Reset all XP, badges and collected cards on this device?')) { try { localStorage.removeItem(GKEY); } catch (e) {} location.reload(); } };
+  $('#reset').onclick = () => { if (confirm('Reset all XP, badges and cards on this device?')) { try { localStorage.removeItem(GKEY); } catch (e) {} location.reload(); } };
 }
 
 boot();

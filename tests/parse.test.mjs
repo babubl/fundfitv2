@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseNavAll, parseSebiRss, parseSebiListing, baseName } from '../scripts/lib.mjs';
+import { parseNavAll, parseSebiRss, parseSebiListing, baseName, parseNavHistory, addReturns, cagr, parseTer, addTer, kindOf } from '../scripts/lib.mjs';
 
 const read = (p) => readFile(new URL(p, import.meta.url), 'utf8');
 const { categories, groups } = JSON.parse(await read('../data/categories.json'));
@@ -40,7 +40,7 @@ test('AMFI NAVAll parsing, old 6-column layout', async () => {
   assert.deepEqual(byName['Beta Ultra Short to Short Term Fund'].c, ['ultra-short-to-short']);
   assert.equal(byName['Beta Ultra Short to Short Term Fund'].p, 'D');
   assert.deepEqual(byName['Alpha Dividend Yield Fund'].c, ['dividend-yield']);
-  assert.deepEqual(byName['Beta Banking & Financial Services Fund'].c, ['sectoral', 'thematic']);
+  assert.deepEqual(byName['Beta Banking & Financial Services Fund'].c, ['sectoral'], 'shared sectoral/thematic label split by name');
   assert.deepEqual(byName['Beta Infrastructure Debt Sectoral Fund'].c, ['sectoral-debt'], 'debt "Sectoral Fund" is not equity sectoral');
   assert.deepEqual(byName['Gamma Life Cycle Fund 2045'].c, ['life-cycle']);
   assert.deepEqual(byName['Gamma US Equity Passive FOF'].c, ['fof']);
@@ -96,4 +96,40 @@ test('SEBI circulars listing parsing', async () => {
   assert.equal(items[2].link, 'https://www.sebi.gov.in/legal/circulars/jul-2026/swp-stp-demat_102914.html', 'relative link made absolute');
   assert.equal(items[1].date, '2026-07-21');
   assert.equal(items[1].type, 'Circular');
+});
+
+test('growth codes, NAV history returns and fund age', async () => {
+  const text = await read('fixtures/NAVAll.sample.txt');
+  const r = parseNavAll(text, categories);
+  const kids = r.schemes.find((s) => s.n === "Axis Children's Fund");
+  assert.equal(kids.rc, '135759'); assert.equal(kids.dc, '135762');
+  const hist = parseNavHistory(await read('fixtures/NAVHistory.sample.txt'));
+  assert.equal(hist.navs.get('135759'), 12.925);
+  assert.equal(hist.navs.get('200040'), 9.5, 'semicolon in name');
+  addReturns(r.schemes, parseNavHistory(text).navs, [{ years: 1, navs: new Map() }, { years: 3, navs: hist.navs }, { years: 5, navs: new Map() }]);
+  assert.deepEqual(kids.r.R, [null, cagr(25.8499, 12.925, 3), null]);
+  assert.equal(kids.r.R[1], 26, '3-year CAGR of doubling is about 26%');
+  assert.equal(kids.y, 3);
+});
+
+test('TER parsing keeps the latest date and matches by scheme name', () => {
+  const ter = parseTer([
+    { Scheme_Name: 'Axis Low Duration Fund', TER_Date: '2026-08-01T00:00:00Z', R_TER: '1.0', D_TER: '0.4' },
+    { Scheme_Name: 'Axis Low Duration Fund', TER_Date: '2026-08-26T00:00:00Z', R_TER: '0.95', D_TER: '0.35' },
+  ]);
+  const schemes = [{ n: 'Axis Low Duration Fund', a: 0, s: 'O' }, { n: 'Axis Other Fund', a: 0, s: 'O' }];
+  assert.equal(addTer(schemes, [], new Map([[0, ter]])), 1);
+  assert.deepEqual(schemes[0].t, [0.95, 0.35]);
+  assert.equal(schemes[1].t, undefined);
+});
+
+test('index funds and ETFs are tagged by what they track', () => {
+  const k = (n, l = 'Index Funds - Equity Funds') => kindOf(['index-etf'], n, l);
+  assert.equal(k('Nippon India ETF Gold BeES', 'Other Scheme - Gold ETF'), 'gold');
+  assert.equal(k('Zerodha Silver ETF'), 'silver');
+  assert.equal(k('Bharat Bond ETF April 2030'), 'debt');
+  assert.equal(k('SBI CRISIL IBX Gilt Index Fund', 'Index Funds - Debt Funds'), 'debt');
+  assert.equal(k('Motilal Oswal Nasdaq 100 ETF'), 'intl');
+  assert.equal(k('UTI Nifty 50 Index Fund'), 'equity');
+  assert.equal(kindOf(['large-cap'], 'X', 'Y'), '');
 });

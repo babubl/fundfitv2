@@ -44,6 +44,91 @@ export function mapLabel(group, sub, aliasMap) {
   return [];
 }
 
+// Index funds/ETFs and fund of funds hold very different things under one SEBI category.
+// Tag each with what it actually tracks, so gold ETFs don't sit next to Nifty funds.
+export function kindOf(cats, name, label) {
+  if (!cats.includes('index-etf') && !cats.includes('fof')) return '';
+  const n = String(name).toLowerCase(), l = String(label).toLowerCase();
+  if (/gold/.test(n) || /gold/.test(l)) return 'gold';
+  if (/silver/.test(n) || /silver/.test(l)) return 'silver';
+  if (/overseas|abroad/.test(l) || /nasdaq|s&p 500|\bus\b|u\.s\.|global|international|world|hang seng|japan|china|greater china|taiwan|europe|asia|emerging market|msci|nyse|fang|developed market/.test(n)) return 'intl';
+  if (/debt|income/.test(l) || /gilt|g-?sec|\bsdl\b|bond|crisil|t-?bill|liquid|money market|target maturity|\bibx\b|debt|psu.*(plus|debt)|corporate|treasury|overnight|1d rate|\bbharat bond/.test(n)) return 'debt';
+  if (/hybrid|arbitrage/.test(l) || /hybrid|balanced|multi[\s-]?asset|arbitrage|equity savings|asset allocat/.test(n)) return 'hybrid';
+  return 'equity';
+}
+
+// Many fund houses still file sectoral and thematic funds under one AMFI label.
+// Decide which one each scheme is from its name: a named sector means sectoral, else thematic.
+const SECTOR_RE = /bank|financial|fin serv|pharma|health|technology|\btech\b|\bit\b|digital|\bauto|fmcg|energy|power|metal|realty|oil|chemical|telecom/i;
+export function refineCats(cats, name) {
+  if (cats.length === 2 && cats.includes('sectoral') && cats.includes('thematic')) return [SECTOR_RE.test(name) ? 'sectoral' : 'thematic'];
+  return cats;
+}
+
+// AMFI historical NAV file for one date: "Scheme Code;NAV Name;Plan;Option;...;Net Asset Value;Date"
+export function parseNavHistory(text) {
+  const out = new Map();
+  let navCol = -1, date = '';
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (/^Scheme Code\s*;/i.test(line)) { navCol = line.split(';').map((x) => x.trim().toLowerCase()).findIndex((x) => /net asset value|^nav$/.test(x)); continue; }
+    const f = line.split(';');
+    if (f.length < 6 || !/^\d+$/.test(f[0].trim())) continue;
+    // NAV and date are the last two columns; read from the end so names with ";" don't shift them.
+    const nav = parseFloat(f[f.length - 2]);
+    if (!isNaN(nav) && nav > 0) out.set(f[0].trim(), nav);
+    if (!date) date = f[f.length - 1].trim();
+  }
+  return { date, navs: out, navCol };
+}
+
+// Annualised return between two NAVs over `years`, in % with one decimal. null if unknown.
+export function cagr(now, then, years) {
+  if (!(now > 0) || !(then > 0)) return null;
+  const r = years <= 1 ? now / then - 1 : Math.pow(now / then, 1 / years) - 1;
+  return Math.round(r * 1000) / 10;
+}
+
+// Attach returns: s.r = { R: [1y, 3y, 5y], D: [...] }, s.y = years of history seen (1, 3 or 5+).
+export function addReturns(schemes, current, histories) {
+  // current: Map code -> today's NAV; histories: [{ years, navs: Map }]
+  for (const s of schemes) {
+    for (const [plan, code] of [['R', s.rc], ['D', s.dc]]) {
+      if (!code || !current.has(code)) continue;
+      const vals = histories.map((h) => cagr(current.get(code), h.navs.get(code), h.years));
+      if (vals.some((v) => v !== null)) { (s.r ||= {})[plan] = vals; }
+      const seen = histories.filter((h) => h.navs.has(code)).map((h) => h.years);
+      if (seen.length) s.y = Math.max(s.y || 0, ...seen);
+    }
+  }
+}
+
+// AMFI TER API rows -> Map normName -> { R, D, date } (latest date per scheme)
+export function parseTer(rows) {
+  const out = new Map();
+  for (const r of rows || []) {
+    const k = norm(r.Scheme_Name);
+    const d = String(r.TER_Date || '');
+    const prev = out.get(k);
+    if (prev && prev.date >= d) continue;
+    const R = parseFloat(r.R_TER), D = parseFloat(r.D_TER);
+    out.set(k, { R: isNaN(R) ? null : R, D: isNaN(D) ? null : D, date: d.slice(0, 10) });
+  }
+  return out;
+}
+
+export function addTer(schemes, amcs, terByAmc) {
+  let matched = 0;
+  for (const s of schemes) {
+    if (s.s !== 'O') continue;
+    const map = terByAmc.get(s.a);
+    if (!map) continue;
+    const t = map.get(norm(s.n)) || map.get(norm(s.n.replace(/\s+fund$/i, ''))) || map.get(norm(s.n + ' Fund'));
+    if (t && (t.R !== null || t.D !== null)) { s.t = [t.R, t.D]; matched++; }
+  }
+  return matched;
+}
+
 // Pre-2017 generic labels AMFI still uses for some old schemes. They have no SEBI category.
 export const LEGACY = new Set(['income', 'growth', 'otherdebtscheme', 'fixedtermplan']);
 
@@ -134,10 +219,16 @@ export function parseNavAll(text, categories) {
     const key = amc + '|' + norm(b) + '|' + structure;
     let g = groups.get(key);
     if (!g) {
-      g = { n: b, a: amc, c: cats, l: label, s: structure, p: '', code: code, nav: null, d: '' };
+      g = { n: b, a: amc, c: refineCats(cats, b, label), l: label, s: structure, p: '', code: code, nav: null, d: '' };
+      const k = kindOf(cats, b, label);
+      if (k) g.k = k;
       groups.set(key, g);
     }
     const p = planOf(plan || name);
+    // Growth-option codes for each plan, used to compute returns from NAV history.
+    const growth = /growth/i.test(option || '') || (!option && /growth/i.test(name) && !/idcw|dividend(?!\s+yield)/i.test(name));
+    if (growth && p === 'R' && !g.rc) g.rc = code;
+    if (growth && p === 'D' && !g.dc) g.dc = code;
     if (!g.p.includes(p)) g.p = (g.p + p).split('').sort().reverse().join(''); // "R", "D", "RD"
     // Representative NAV: prefer Regular + Growth
     const isRegGrowth = p === 'R' && /growth/i.test(option || name);

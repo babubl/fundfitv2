@@ -6,25 +6,30 @@ A free, static site on GitHub Pages. No backend, no API keys, no tracking. A Git
 
 ## What's in it
 
-FundFit is for everyday investors who want to understand mutual funds and pick the kind of fund that suits them. It's built like a game.
+FundFit is for everyday investors who want to understand mutual funds and pick a fund that suits them.
 
 | Section | What it does |
 |---|---|
-| Learn | 10 bite-size lessons on a path, each ending with a one-question check. |
-| Fund types | All 40 SEBI fund types as collectible cards, each with its key rule, time horizon and risk. Open a card to see which fund houses offer it and their schemes. |
-| Play | Fund Match: 10 quick questions (real-life situations, "name that fund", myth or fact) with a review of every answer. |
-| Find my fit | Purpose, SIP or lumpsum and amount, horizon, risk comfort, emergency fund and tax regime lead to a suggested fund type, alternatives, warnings, and the fund houses that offer it. |
+| Home | A "try it" widget showing how the timeline changes the right mix, the daily challenge, and progress. |
+| Learn | 11 short lessons on a path, each passed with a one-question check, ending with "How to actually invest". |
+| Fund types | All 40 SEBI fund types as cards with a key rule, time horizon and risk. Win each card by answering a question; each card opens a comparison of real funds of that type. |
+| Play | A daily 3-question challenge (same for everyone that day, builds a streak) and Fund Match (10 questions) with a full answer review. |
+| Find my fit | Purpose, SIP or lumpsum, horizon, risk comfort, emergency fund and tax regime lead to a fund type, alternatives, warnings, next steps, and a comparison of real funds. |
 | Fund houses | Every AMC in AMFI's daily file, with a strip showing which fund types it offers. |
 
-XP, levels, badges and a daily streak are saved only in the visitor's browser. English and Tanglish toggle. Fonts are self-hosted (Bricolage Grotesque and Figtree, SIL Open Font License), so the site makes no third-party requests.
+Fund comparisons show each fund's expense ratio (Direct and Regular) and 1, 3 and 5-year returns worked out from AMFI's published NAVs, with the category average. They're sorted A to Z by default; users can re-sort. No fund is ranked, labelled "best" or recommended.
+
+XP, levels, badges and streaks are saved only in the visitor's browser. Fonts are self-hosted (Bricolage Grotesque and Figtree, SIL Open Font License), so the site makes no third-party requests.
 
 ## How the live data works
 
 ```
 GitHub Action (daily 08:47 IST, and on every push)
-  ├─ node --test            tests the parser and all 2,520 answer combinations
+  ├─ node --test            tests the parser, the quiz content and all 2,520 answer combinations
   ├─ scripts/fetch-data.mjs
   │    ├─ AMFI NAVAll.txt  → data/schemes.json   (AMCs, schemes, category, plans, latest NAV)
+  │    ├─ AMFI NAV history → 1, 3 and 5-year returns and fund age
+  │    ├─ AMFI TER data    → expense ratios for Direct and Regular plans
   │    └─ SEBI RSS feed    → data/sebi.json      (MF-related circulars, rolling 40)
   ├─ commits data/ if it changed
   └─ deploys the site to GitHub Pages
