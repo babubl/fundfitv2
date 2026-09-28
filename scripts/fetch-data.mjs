@@ -48,6 +48,7 @@ async function writeJson(p, obj) {
 const now = new Date().toISOString();
 const { categories } = await readJson('data/categories.json', { categories: [] });
 let problems = [];
+const sources = {};
 
 // ---------- AMFI ----------
 const navText = await getText(AMFI_URLS, 'AMFI');
@@ -65,6 +66,7 @@ if (navText) {
       labels: parsed.labels,
     });
     console.log(`AMFI: ${parsed.amcs.length} AMCs, ${parsed.schemes.length} schemes, NAV date ${parsed.navDate}`);
+    sources.amfi = { ok: true, amcs: parsed.amcs.length, schemes: parsed.schemes.length, navDate: parsed.navDate, unmapped: parsed.unmapped.length };
     if (parsed.unmapped.length) {
       console.log('AMFI labels with no category match (update "amfi" aliases in data/categories.json):');
       for (const u of parsed.unmapped) console.log(`  - ${u.label} (${u.count})`);
@@ -82,14 +84,19 @@ if (navText) {
 // merged with the previous history so older ones don't drop off.
 const fresh = [];
 const rss = await getText(SEBI_RSS, 'SEBI RSS');
-if (rss) fresh.push(...parseSebiRss(rss));
+if (rss) {
+  const items = parseSebiRss(rss);
+  fresh.push(...items);
+  sources.sebiRss = { ok: true, items: items.length, mf: items.filter((i) => i.mf).length };
+} else sources.sebiRss = { ok: false };
 for (const l of SEBI_LISTINGS) {
   const html = await getText([l.url], 'SEBI ' + l.type + 's');
   if (html) {
     const rows = parseSebiListing(html, l.type);
     console.log(`SEBI ${l.type}s: ${rows.length} rows, ${rows.filter((r) => r.mf).length} MF-related`);
     fresh.push(...rows);
-  }
+    sources['sebi' + l.type] = { ok: true, bytes: html.length, rows: rows.length, mf: rows.filter((r) => r.mf).length, sample: html.length && !rows.length ? html.slice(0, 300) : undefined };
+  } else { sources['sebi' + l.type] = { ok: false }; problems.push('SEBI ' + l.type + 's page unreachable'); }
 }
 if (fresh.length) {
   const prev = await readJson('data/sebi.json', { items: [] });
@@ -104,6 +111,5 @@ if (fresh.length) {
   problems.push('SEBI unreachable; kept previous data');
 }
 
-const status = await readJson('data/status.json', {});
-await writeJson('data/status.json', { ...status, lastRun: now, problems });
+await writeJson('data/status.json', { lastRun: now, problems, sources });
 if (problems.length) console.warn('Problems:\n  ' + problems.join('\n  '));
