@@ -272,7 +272,7 @@ footer .warning{font-weight:700;color:var(--ink)}
   <div class="wrap">
     <p class="warning">Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</p>
     <p id="disclosure"></p>
-    <p>FundFit suggests a SEBI scheme category from your answers. It is an educational tool, not investment advice and not a recommendation to buy any scheme. Scheme lists and NAVs come from AMFI's public NAV file; circulars from SEBI's public feed. Category rules are from SEBI's circular of 26 Feb 2026 and the NISM Series V-A workbook. Check the scheme's SID and KIM before investing.</p>
+    <p>FundFit suggests a SEBI scheme category from your answers. It is an educational tool, not investment advice and not a recommendation to buy any scheme. Scheme lists and NAVs come from AMFI's public NAV file; circulars from SEBI's public circulars list and feed. Category rules are from SEBI's circular of 26 Feb 2026 and the NISM Series V-A workbook. Check the scheme's SID and KIM before investing.</p>
     <p class="tiny">No cookies, no analytics, no sign-up. Your answers never leave this page.</p>
   </div>
 </footer>
@@ -661,8 +661,8 @@ function feedHTML(n) {
   if (!SEBI || !SEBI.items || !SEBI.items.length) return '';
   const items = SEBI.items.slice(0, n);
   return `<div class="panel"><h3>Latest from SEBI on mutual funds</h3>
-    <ul class="feed">${items.map((i) => `<li><a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.title)}</a><div class="tiny">${esc(i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : '')}</div></li>`).join('')}</ul>
-    <p class="tiny">From SEBI's public RSS feed, checked daily. New circulars can change category rules; FundFit's rules are updated by hand after review.</p></div>`;
+    <ul class="feed">${items.map((i) => `<li><a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.title)}</a><div class="tiny">${esc([i.type, i.date ? new Date(i.date).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : ''].filter(Boolean).join(', '))}</div></li>`).join('')}</ul>
+    <p class="tiny">From SEBI's circulars list and news feed, checked daily and filtered for mutual fund topics. New circulars can change category rules; FundFit's rules are updated by hand after review.</p></div>`;
 }
 
 /* ============ LEARN ============ */

@@ -1,56 +1,65 @@
-Scheme Code;ISIN Div Payout/ ISIN Growth;ISIN Div Reinvestment;Scheme Name;Net Asset Value;Date
+Scheme Code;ISIN Div Payout/ ISIN Growth;ISIN Div Reinvestment;Scheme Name;Plan;Option;Net Asset Value;Date
 
-Open Ended Schemes(Debt Scheme - Low Duration Fund)
+Open Ended Schemes(Children's Fund - Childrens' Fund)
 
-Alpha Mutual Fund
+Axis Mutual Fund
 
-100001;INF000A01011;-;Alpha Low Duration Fund - Regular Plan - Growth;3210.1234;26-Sep-2026
-100002;INF000A01029;-;Alpha Low Duration Fund - Direct Plan - Growth;3350.5678;26-Sep-2026
-100003;INF000A01037;INF000A01045;Alpha Low Duration Fund - Regular Plan - Daily IDCW;1008.1;26-Sep-2026
+135762;INF846K01WO1;-;Axis Children's Fund;Direct Plan;Growth Option;29.6905;25-Sep-2026
+135765;INF846K01WP8;-;Axis Children's Fund;Direct Plan;IDCW Option;27.3503;25-Sep-2026
+135759;INF846K01WJ1;-;Axis Children's Fund;Regular Plan;Growth Option;25.8499;25-Sep-2026
+135760;INF846K01WK9;-;Axis Children's Fund;Regular Plan;IDCW Option;23.8486;25-Sep-2026
 
-Beta Mutual Fund
+Open Ended Schemes(Income/Debt Oriented Schemes - Ultra Short to Short Term Fund)
 
-100010;INF000B01011;-;Beta Ultra Short to Short Term Fund Direct Growth;15.12;25-Sep-2026
+Axis Mutual Fund
 
-Open Ended Schemes(Equity Scheme - Dividend Yield Fund)
+200001;INF000X01011;-;Axis Low Duration Fund;Regular Plan;Growth Option;3100.5;25-Sep-2026
+200002;INF000X01029;-;Axis Low Duration Fund;Direct Plan;Growth Option;3200.5;25-Sep-2026
 
-Alpha Mutual Fund
+Open Ended Schemes(Hybrid Schemes - Balanced Advantage Fund/ Dynamic Asset Allocation)
 
-100020;INF000A02011;-;Alpha Dividend Yield Fund - Regular - Growth;45.10;26-Sep-2026
-100021;INF000A02029;INF000A02037;Alpha Dividend Yield Fund - Direct - IDCW;30.00;26-Sep-2026
+Axis Mutual Fund
 
-Open Ended Schemes(Equity Scheme - Sectoral/ Thematic)
+200010;INF000X02011;-;Axis Balanced Advantage Fund;Regular Plan;Growth Option;21.4;25-Sep-2026
 
-Beta Mutual Fund
+Open Ended Schemes(Index Funds - Equity Funds)
 
-100030;INF000B02011;-;Beta Banking & Financial Services Fund-Growth Option-Direct Plan;22.5;26-Sep-2026
+Zerodha Mutual Fund
 
-Open Ended Schemes(Debt Scheme - Sectoral Fund)
+200020;INF000Z01011;-;Zerodha Nifty LargeMidcap 250 Index Fund;Direct Plan;Growth Option;13.2;25-Sep-2026
 
-Beta Mutual Fund
+Open Ended Schemes(Exchange Traded Funds (ETFs) - Silver ETF)
 
-100040;INF000B03011;-;Beta Infrastructure Debt Sectoral Fund - Regular Plan - Growth;10.05;26-Sep-2026
+Zerodha Mutual Fund
 
-Open Ended Schemes(Life Cycle Fund - Life Cycle Fund 2045)
+200030;INF000Z02011;-;Zerodha Silver ETF;Regular Plan;Growth Option;98.1;25-Sep-2026
 
-Gamma Mutual Fund
+Open Ended Schemes(Income/Debt Oriented Schemes - Sectoral Fund)
 
-100050;INF000G01011;-;Gamma Life Cycle Fund 2045 - Direct Plan - Growth;10.2;26-Sep-2026
+Zerodha Mutual Fund
 
-Open Ended Schemes(Other Scheme - FoF Overseas)
+200040;INF000Z03011;-;Zerodha Financial Services Debt Fund; Series A;Regular Plan;Growth Option;10.02;25-Sep-2026
 
-Gamma Mutual Fund
+Open Ended Schemes(Equity Schemes - Thematic Fund)
 
-100060;INF000G02011;-;Gamma US Equity Passive FOF - Regular Plan - Growth;18.7;26-Sep-2026
+Zerodha Mutual Fund
 
-Open Ended Schemes(Other Scheme - Brand New Label)
+200050;INF000Z04011;-;Zerodha Business Cycles Fund;Direct Plan;Growth Option;11.5;24-Sep-2026
 
-Gamma Mutual Fund
+Open Ended Schemes(Income)
 
-100070;INF000G03011;-;Gamma Mystery Fund - Regular Plan - Growth;11.0;26-Sep-2026
+Axis Mutual Fund
 
-Close Ended Schemes(Income)
+200060;INF000X03011;-;Axis Old Income Plan;Regular Plan;Growth Option;55.1;25-Sep-2026
 
-Alpha Mutual Fund
+Open Ended Schemes(Gilt)
 
-100080;INF000A03011;-;Alpha Fixed Term Plan Series 12 - Regular Plan - Growth;12.3;26-Sep-2026
+Axis Mutual Fund
+
+200070;INF000X04011;-;Axis Old Gilt Plan;Regular Plan;Growth Option;44.4;25-Sep-2026
+
+Open Ended Schemes(Life Cycle Funds - Life Cycle Fund with Maturity of 10 Years)
+
+Axis Mutual Fund
+
+200080;INF000X05011;-;Axis Life Cycle Fund 2035;Regular Plan;Growth Option;10.1;25-Sep-2026

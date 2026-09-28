@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseNavAll, parseSebiRss, baseName } from '../scripts/lib.mjs';
+import { parseNavAll, parseSebiRss, parseSebiListing, baseName } from '../scripts/lib.mjs';
 
 const read = (p) => readFile(new URL(p, import.meta.url), 'utf8');
 const { categories, groups } = JSON.parse(await read('../data/categories.json'));
@@ -27,8 +27,8 @@ test('base names strip plan and option suffixes', () => {
   assert.equal(baseName('Nippon India ETF Nifty 50 BeES'), 'Nippon India ETF Nifty 50 BeES');
 });
 
-test('AMFI NAVAll parsing', async () => {
-  const r = parseNavAll(await read('fixtures/NAVAll.sample.txt'), categories);
+test('AMFI NAVAll parsing, old 6-column layout', async () => {
+  const r = parseNavAll(await read('fixtures/NAVAll.old6.sample.txt'), categories);
   assert.deepEqual(r.amcs.map((a) => a.name), ['Alpha Mutual Fund', 'Beta Mutual Fund', 'Gamma Mutual Fund']);
   const byName = Object.fromEntries(r.schemes.map((s) => [s.n, s]));
 
@@ -51,9 +51,48 @@ test('AMFI NAVAll parsing', async () => {
   assert.equal(r.schemes.length, 9);
 });
 
-test('SEBI RSS parsing flags MF items', async () => {
+test('AMFI NAVAll parsing, current 8-column layout with Plan and Option', async () => {
+  const r = parseNavAll(await read('fixtures/NAVAll.sample.txt'), categories);
+  assert.deepEqual(r.amcs.map((a) => a.name), ['Axis Mutual Fund', 'Zerodha Mutual Fund']);
+  const by = Object.fromEntries(r.schemes.map((s) => [s.n, s]));
+
+  const kids = by["Axis Children's Fund"];
+  assert.deepEqual(kids.c, ['children'], 'curly-apostrophe label maps');
+  assert.equal(kids.p, 'RD', 'plan read from the Plan column');
+  assert.equal(kids.nav, 25.8499, 'representative NAV is Regular + Growth');
+  assert.equal(kids.d, '25-Sep-2026');
+
+  assert.deepEqual(by['Axis Low Duration Fund'].c, ['ultra-short-to-short'], 'new-style debt label');
+  assert.deepEqual(by['Axis Balanced Advantage Fund'].c, ['daaf']);
+  assert.deepEqual(by['Zerodha Nifty LargeMidcap 250 Index Fund'].c, ['index-etf'], 'index group label');
+  assert.equal(by['Zerodha Nifty LargeMidcap 250 Index Fund'].p, 'D');
+  assert.deepEqual(by['Zerodha Silver ETF'].c, ['index-etf'], 'ETF group label');
+  assert.deepEqual(by['Zerodha Financial Services Debt Fund; Series A'].c, ['sectoral-debt'], 'semicolon in name');
+  assert.equal(by['Zerodha Financial Services Debt Fund; Series A'].nav, 10.02, 'semicolon in name does not shift NAV');
+  assert.deepEqual(by['Zerodha Business Cycles Fund'].c, ['thematic']);
+  assert.deepEqual(by['Axis Old Gilt Plan'].c, ['gilt'], 'legacy "Gilt" label');
+  assert.deepEqual(by['Axis Old Income Plan'].c, [], 'legacy "Income" has no category');
+  assert.deepEqual(by['Axis Life Cycle Fund 2035'].c, ['life-cycle']);
+
+  assert.deepEqual(r.unmapped, [], 'legacy labels are not reported as unmapped');
+  assert.equal(r.navDate, '25-Sep-2026', 'most common date, not the latest stray one');
+});
+
+test('SEBI RSS parsing flags MF items and normalises dates', async () => {
   const items = parseSebiRss(await read('fixtures/sebi.sample.xml'));
   assert.equal(items.length, 3);
   assert.deepEqual(items.map((i) => i.mf), [true, false, true]);
   assert.equal(items[0].title, 'Categorization and Rationalization of Mutual Fund Schemes');
+  assert.equal(items[0].date, '2026-02-26');
+  assert.equal(items[1].date, '2026-09-25');
+});
+
+test('SEBI circulars listing parsing', async () => {
+  const items = parseSebiListing(await read('fixtures/sebi.listing.sample.html'));
+  assert.equal(items.length, 3);
+  assert.deepEqual(items.map((i) => i.mf), [false, true, true]);
+  assert.equal(items[0].title.startsWith('Review of Position Limits for Clients and Penalty'), true, 'full title from title attribute');
+  assert.equal(items[2].link, 'https://www.sebi.gov.in/legal/circulars/jul-2026/swp-stp-demat_102914.html', 'relative link made absolute');
+  assert.equal(items[1].date, '2026-07-21');
+  assert.equal(items[1].type, 'Circular');
 });

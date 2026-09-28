@@ -4,7 +4,7 @@
 // so the live site never goes blank.
 
 import { readFile, writeFile } from 'node:fs/promises';
-import { parseNavAll, parseSebiRss } from './lib.mjs';
+import { parseNavAll, parseSebiRss, parseSebiListing } from './lib.mjs';
 
 const ROOT = new URL('..', import.meta.url);
 const path = (p) => new URL(p, ROOT);
@@ -13,8 +13,9 @@ const AMFI_URLS = [
   'https://www.amfiindia.com/spages/NAVAll.txt',
   'https://portal.amfiindia.com/spages/NAVAll.txt',
 ];
-const SEBI_URLS = [
-  'https://www.sebi.gov.in/sebirss.xml',
+const SEBI_RSS = ['https://www.sebi.gov.in/sebirss.xml'];
+const SEBI_LISTINGS = [
+  { type: 'Circular', url: 'https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0' },
 ];
 const UA = 'Mozilla/5.0 (compatible; FundFit-data-refresh/2.0; +https://github.com/babubl)';
 
@@ -76,22 +77,29 @@ if (navText) {
 }
 
 // ---------- SEBI ----------
-const rss = await getText(SEBI_URLS, 'SEBI');
-if (rss) {
-  const items = parseSebiRss(rss);
-  if (items.length) {
-    const prev = await readJson('data/sebi.json', { items: [] });
-    // Keep a rolling history of MF-related items so older circulars don't vanish from the feed.
-    const seen = new Set();
-    const merged = [...items.filter((i) => i.mf), ...(prev.items || [])]
-      .filter((i) => { const k = i.link || i.title; if (seen.has(k)) return false; seen.add(k); return true; })
-      .sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
-      .slice(0, 40);
-    await writeJson('data/sebi.json', { updatedAt: now, source: 'SEBI RSS', sourceUrl: SEBI_URLS[0], items: merged });
-    console.log(`SEBI: ${items.length} items in feed, ${merged.length} MF-related kept`);
-  } else {
-    problems.push('SEBI feed had no items; kept previous data');
+// Two sources: the RSS feed (latest ~30 items of all kinds, mostly enforcement orders) and the
+// circulars listing (last 25). Only mutual-fund-related items are kept,
+// merged with the previous history so older ones don't drop off.
+const fresh = [];
+const rss = await getText(SEBI_RSS, 'SEBI RSS');
+if (rss) fresh.push(...parseSebiRss(rss));
+for (const l of SEBI_LISTINGS) {
+  const html = await getText([l.url], 'SEBI ' + l.type + 's');
+  if (html) {
+    const rows = parseSebiListing(html, l.type);
+    console.log(`SEBI ${l.type}s: ${rows.length} rows, ${rows.filter((r) => r.mf).length} MF-related`);
+    fresh.push(...rows);
   }
+}
+if (fresh.length) {
+  const prev = await readJson('data/sebi.json', { items: [] });
+  const seen = new Set();
+  const merged = [...fresh.filter((i) => i.mf), ...(prev.items || [])]
+    .filter((i) => { const k = i.link || i.title; if (seen.has(k)) return false; seen.add(k); return true; })
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+    .slice(0, 60);
+  await writeJson('data/sebi.json', { updatedAt: now, sources: [...SEBI_RSS, ...SEBI_LISTINGS.map((l) => l.url)], items: merged });
+  console.log(`SEBI: ${fresh.length} items fetched, ${merged.length} MF-related kept`);
 } else {
   problems.push('SEBI unreachable; kept previous data');
 }
